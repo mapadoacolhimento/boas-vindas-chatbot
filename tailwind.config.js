@@ -5,6 +5,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  "tailwindCSS.experimental.configFile": ".config/tailwind.config.js",
+  "tailwindCSS.experimental.configFile": {
+    "themes/simple/tailwind.config.js": "themes/simple/**",
+    "themes/neon/tailwind.config.js": "themes/neon/**"
+  },
   theme: {
     extend: {
       backgroundImage: {
