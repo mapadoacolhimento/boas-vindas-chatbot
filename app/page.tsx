@@ -3,7 +3,7 @@ import { Chat } from "../components/Chat";
 
 function Home() {
   return (
-    <Page className="flex flex-col gap-12">
+    <Page className="flex flex-col gap-12" style={{ padding: "0 150px" }}>
       <section className="flex flex-col gap-6">
         <Text variant="h1">OpenAI GPT-3 text model usage example</Text>
         <Text className="text-zinc-600">

@@ -11,7 +11,7 @@ const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 export const initialMessages: ChatGPTMessage[] = [
   {
     role: "assistant",
-    content: "Hi! I am a friendly AI assistant. Ask me anything!",
+    content: "Olá! Meu nome é IAna, no que posso te ajudar?",
   },
 ];
 
@@ -125,7 +125,7 @@ export function Chat() {
 
       {messages.length < 2 && (
         <span className="mx-auto flex flex-grow text-gray-600 clear-both">
-          Type a message to start the conversation
+          Digite uma mensagem para começar a conversar:
         </span>
       )}
       <InputMessage
