@@ -40,6 +40,11 @@ You can clone & create this repo with the following command
 ```bash
 npx create-next-app nextjs-flask --example "https://github.com/vercel/examples/tree/main/python/nextjs-flask"
 ```
+## Flask version
+
+Python 3.8.10
+Flask 2.2.2
+Werkzeug 2.2.2
 
 ## Getting Started
 
@@ -51,6 +56,12 @@ npm install
 yarn
 # or
 pnpm install
+```
+
+Adding credentials from `.env.example` from `.env`:
+
+```bash
+$ cp .env.example .env
 ```
 
 Then, run the development server:
@@ -76,3 +87,4 @@ To learn more about Next.js, take a look at the following resources:
 - [Flask Documentation](https://flask.palletsprojects.com/en/1.1.x/) - learn about Flask features and API.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
