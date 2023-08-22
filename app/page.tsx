@@ -1,11 +1,15 @@
+'use client';
+
 import { Text, Page } from "@vercel/examples-ui";
 import { Chat } from "../components/Chat";
+import { Spinner } from '@chakra-ui/react'
 
 function Home() {
   return (
     <Page className="flex flex-col gap-12">
       <section className="flex flex-col gap-6">
         <Text variant="h1">OpenAI GPT-3 text model usage example</Text>
+        <Spinner />
         <Text className="text-zinc-600">
           In this example, a simple chat bot is implemented using Next.js, API
           Routes, and OpenAI API.
