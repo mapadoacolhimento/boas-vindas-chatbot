@@ -33,8 +33,5 @@
     "react-dom": "18.2.0",
     "react-wrap-balancer": "^0.1.5",
     "typescript": "5.0.4"
-  },
-  "devDependencies": {
-    "@svgr/webpack": "^8.1.0"
   }
 }
