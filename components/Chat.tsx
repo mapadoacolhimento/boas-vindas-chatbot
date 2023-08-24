@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button } from "./Button";
-import { type ChatGPTMessage, ChatLine, LoadingChatLine } from "./ChatLine";
+import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
 import { useCookies } from "react-cookie";
+import { Button } from "@chakra-ui/react";
 
 const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 
@@ -46,7 +46,7 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
   </div>
 );
 
-export function Chat() {
+export default function Chat() {
   const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
