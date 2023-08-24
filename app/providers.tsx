@@ -1,8 +1,7 @@
 'use client'
 
 import { CacheProvider } from '@chakra-ui/next-js'
-import { ChakraProvider } from '@chakra-ui/react'
-import '@fontsource/nunito/400.css'
+import { ChakraProvider } from "@chakra-ui/react";
 import theme from './theme'
 
 export function Providers({ 
