@@ -54,8 +54,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      # - name: Run tests
-      #   run: yarn run test:ci
+      - name: Run tests
+        run: pnpm run test:ci
 
       - name: Build
         run: pnpm run build
