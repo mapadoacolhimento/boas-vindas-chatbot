@@ -42,16 +42,19 @@ const convertNewLines = (text: string) =>
     </span>
   ))
 
-export function ChatLine({ role = 'assistant', content }: ChatGPTMessage) {
+export default function ChatLine({
+  role = "assistant",
+  content,
+}: ChatGPTMessage) {
   if (!content) {
-    return null
+    return null;
   }
-  const formatteMessage = convertNewLines(content)
+  const formatteMessage = convertNewLines(content);
 
   return (
     <div
       className={
-        role != 'assistant' ? 'float-right clear-both' : 'float-left clear-both'
+        role != "assistant" ? "float-right clear-both" : "float-left clear-both"
       }
     >
       <BalancerWrapper>
@@ -60,13 +63,13 @@ export function ChatLine({ role = 'assistant', content }: ChatGPTMessage) {
             <div className="flex-1 gap-4">
               <p className="font-large text-xxl text-gray-900">
                 <a href="#" className="hover:underline">
-                  {role == 'assistant' ? 'AI' : 'You'}
+                  {role == "assistant" ? "AI" : "You"}
                 </a>
               </p>
               <p
                 className={clsx(
-                  'text ',
-                  role == 'assistant' ? 'font-semibold font- ' : 'text-gray-400'
+                  "text ",
+                  role == "assistant" ? "font-semibold font- " : "text-gray-400"
                 )}
               >
                 {formatteMessage}
@@ -76,5 +79,5 @@ export function ChatLine({ role = 'assistant', content }: ChatGPTMessage) {
         </div>
       </BalancerWrapper>
     </div>
-  )
+  );
 }
