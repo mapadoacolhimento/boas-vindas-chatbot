@@ -47,7 +47,12 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
      as="button"
     >
       <Button
+        p="10px 24px"
+        borderRadius="10px"
         bg="purple.default"
+        color="white"
+        fontSize="16px"
+        fontWeight="400"
         _hover={{
           bg: "purple.light"
         }}
