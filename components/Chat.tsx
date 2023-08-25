@@ -43,9 +43,6 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
           }}
       />
     </Box>
-    <Box 
-     as="button"
-    >
       <Button
         p="10px 24px"
         borderRadius="10px"
@@ -67,7 +64,6 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
       >
         Enviar
       </Button>
-    </Box>
   </HStack>
 );
 
