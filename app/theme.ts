@@ -1,7 +1,7 @@
 import { extendTheme } from "@chakra-ui/react";
-import { Nunito } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 
-const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700"] });
+const nunito = Nunito_Sans({ subsets: ["latin"], weight: ["400", "700"]});
 
 const theme = extendTheme({
   fonts: {

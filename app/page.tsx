@@ -15,12 +15,14 @@ function Home() {
           bg="#FFF"
           border="1px solid #C4C4C4"
           borderRadius="0.625rem"
+          boxShadow="0px 4px 4px 0px #00000040"
         >
           <Flex
             pb="0.72rem"
             pt="1.31rem"
             pl="1.56rem"
             borderBottom="1px solid #EFEFEF"
+            gap="1rem"
           >
             <Box p="6px" borderRadius="3px" bg="#FFDBDB">
               <Image
@@ -31,7 +33,14 @@ function Home() {
               />
             </Box>
             <Box>
-              <Text variant="h2">Fale com a IAna</Text>
+              <Text
+                variant="h2"
+                color='#622565'
+                fontSize="15px"
+                fontWeight="700"
+              >
+                Fale com a IAna
+              </Text>
             </Box>
           </Flex>
           <Box>
