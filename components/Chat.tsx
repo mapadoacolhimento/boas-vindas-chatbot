@@ -53,7 +53,6 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
         }}
         _active={{
           bg: "purple.dark",
-          transform: 'scale(0.98)',
         }}
         type="submit"
         onClick={() => {
