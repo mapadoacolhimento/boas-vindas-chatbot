@@ -45,6 +45,10 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
     </Box>
     <Box gap="10">
       <Button
+        fontFamily="fugazOne"
+        fontSize="16px"
+        fontWeight="400"
+        textTransform="uppercase"
         p= "10px 24px"
         bg="#622565"
         color="#FFF"
