@@ -43,8 +43,12 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
           }}
       />
     </Box>
-    <Box>
+    <Box gap="10">
       <Button
+        p= "10px 24px"
+        bg="#622565"
+        color="#FFF"
+        borderRadius="10px"
         type="submit"
         onClick={() => {
           sendMessage(input);
