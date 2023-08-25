@@ -8,6 +8,11 @@ const theme = extendTheme({
     heading: nunito.style.fontFamily,
     body: nunito.style.fontFamily,
   },
+  colorsPurple: {
+    lightPurple: "#732E76",
+    purple: "#622565",
+    darkPurple: "#57215A"
+    },
 });
 
 export default theme;
