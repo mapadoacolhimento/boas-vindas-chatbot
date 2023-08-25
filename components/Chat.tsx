@@ -43,9 +43,18 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
           }}
       />
     </Box>
-    <Box>
+    <Box 
+     as="button"
+    >
       <Button
-        bg='purple.default'
+        bg="purple.default"
+        _hover={{
+          bg: "purple.light"
+        }}
+        _active={{
+          bg: "purple.dark",
+          transform: 'scale(0.98)',
+        }}
         type="submit"
         onClick={() => {
           sendMessage(input);
