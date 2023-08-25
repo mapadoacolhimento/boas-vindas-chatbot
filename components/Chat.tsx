@@ -45,6 +45,7 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
     </Box>
     <Box>
       <Button
+        bg='purple.default'
         type="submit"
         onClick={() => {
           sendMessage(input);
