@@ -46,15 +46,15 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
       <Button
         p="10px 24px"
         borderRadius="10px"
-        bg="purple.default"
+        bg="brand.default"
         color="white"
         fontSize="16px"
         fontWeight="400"
         _hover={{
-          bg: "purple.light"
+          bg: "brand.light"
         }}
         _active={{
-          bg: "purple.dark",
+          bg: "brand.dark",
         }}
         type="submit"
         onClick={() => {
