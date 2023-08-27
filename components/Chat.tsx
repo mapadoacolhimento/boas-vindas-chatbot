@@ -35,7 +35,7 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
           fontsize: "13px",
           fontWeight: "400"}}  
         borderRadius="7px"
-        border="1px solid #C68CB9"
+        border="1px solid #E0E0E0"
         type="text"
         aria-label="chat input"
         required
