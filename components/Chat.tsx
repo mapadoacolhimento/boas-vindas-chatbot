@@ -33,7 +33,8 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
           color: '#AAA',
           size: "md",
           fontsize: "13px",
-          fontWeight: "400"}}  
+          fontWeight: "400"
+        }}  
         borderRadius="7px"
         border="1px solid #E0E0E0"
         type="text"
