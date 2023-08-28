@@ -10,6 +10,14 @@ const theme = extendTheme({
     body: nunito.style.fontFamily,
     fugazOne: fugazOne.style.fontFamily
   },
+  colors: {
+    brand: {
+      magenta: "#C68CB9",
+      light: "#732E76",
+      default: "#622565",
+      dark: "#57215A"
+    },   
+  }
 });
 
 export default theme;

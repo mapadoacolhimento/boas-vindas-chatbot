@@ -19,15 +19,28 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
   <HStack spacing="16px" px="25px">
     <Box flex="1">
       <Input
-        placeholder='Envie sua pergunta ou dúvida e a aIAna vai te ajudar'
+        _hover={{
+          borderWidth: "1px",
+          borderStyle: "solid",
+          borderColor: "brand.magenta",
+          boxShadow: "0px 3px 10px 0px #0000001a",
+        }}
+        _focus={{
+          borderWidth: "1px",
+          borderStyle: "solid",
+          borderColor: "brand.magenta",
+          boxShadow: "0px 3px 10px 0px #0000001a",
+        }}
+        placeholder="Envie sua pergunta ou dúvida e a aIAna vai te ajudar"
         _placeholder={{
           opacity: 1,
-          color: '#AAA',
+          color: "#AAA",
           size: "md",
           fontsize: "13px",
-          fontWeight: "400"}}  
+          fontWeight: "400",
+        }}
         borderRadius="7px"
-        border="1px solid #C68CB9"
+        border="1px solid #E0E0E0"
         type="text"
         aria-label="chat input"
         required
@@ -38,30 +51,32 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
             setInput("");
           }
         }}
-          onChange={(e) => {
+        onChange={(e) => {
           setInput(e.target.value);
-          }}
+        }}
       />
     </Box>
-    <Box gap="10">
-      <Button
-        fontFamily="fugazOne"
-        fontSize="16px"
-        fontWeight="400"
-        textTransform="uppercase"
-        p= "10px 24px"
-        bg="#622565"
-        color="#FFF"
-        borderRadius="10px"
-        type="submit"
-        onClick={() => {
-          sendMessage(input);
-          setInput("");
-        }}
-      >
-        Enviar
-      </Button>
-    </Box>
+    <Button
+      p="10px 24px"
+      borderRadius="10px"
+      bg="brand.default"
+      color="white"
+      fontSize="16px"
+      fontWeight="400"
+      _hover={{
+        bg: "brand.light",
+      }}
+      _active={{
+        bg: "brand.dark",
+      }}
+      type="submit"
+      onClick={() => {
+        sendMessage(input);
+        setInput("");
+      }}
+    >
+      Enviar
+    </Button>
   </HStack>
 );
 
