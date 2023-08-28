@@ -8,6 +8,13 @@ const theme = extendTheme({
     heading: nunito.style.fontFamily,
     body: nunito.style.fontFamily,
   },
+  colors: {
+    brand: {
+      light: "#732E76",
+      default: "#622565",
+      dark: "#57215A"
+    },   
+  }
 });
 
 export default theme;

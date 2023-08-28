@@ -43,12 +43,19 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
           }}
       />
     </Box>
-    <Box gap="10">
       <Button
-        p= "10px 24px"
-        bg="#622565"
-        color="#FFF"
+        p="10px 24px"
         borderRadius="10px"
+        bg="brand.default"
+        color="white"
+        fontSize="16px"
+        fontWeight="400"
+        _hover={{
+          bg: "brand.light"
+        }}
+        _active={{
+          bg: "brand.dark",
+        }}
         type="submit"
         onClick={() => {
           sendMessage(input);
@@ -57,7 +64,6 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
       >
         Enviar
       </Button>
-    </Box>
   </HStack>
 );
 
