@@ -20,12 +20,16 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
     <Box flex="1">
       <Input
         _hover={{ 
-          border:"1px solid #C68CB9",
-          boxShadow:"0px 3px 10px 0px rgba(0, 0, 0, 0.10)"
+          borderWidth:"1px",
+          borderStyle:"solid",
+          borderColor:"brand.magenta",
+          boxShadow:"0px 3px 10px 0px #0000001a"
         }}
         _focus={{
-          border:"1px solid #C68CB9",
-          boxShadow:"0px 3px 10px 0px rgba(0, 0, 0, 0.10)"
+          borderWidth:"1px",
+          borderStyle:"solid",
+          borderColor:"brand.magenta",
+          boxShadow:"0px 3px 10px 0px #0000001a"
         }}
         placeholder='Envie sua pergunta ou dúvida e a aIAna vai te ajudar'
         _placeholder={{
