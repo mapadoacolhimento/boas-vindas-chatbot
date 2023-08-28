@@ -19,15 +19,24 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
   <HStack spacing="16px" px="25px">
     <Box flex="1">
       <Input
+        _hover={{ 
+          border:"1px solid #C68CB9",
+          boxShadow:"0px 3px 10px 0px rgba(0, 0, 0, 0.10)"
+        }}
+        _focus={{
+          border:"1px solid #C68CB9",
+          boxShadow:"0px 3px 10px 0px rgba(0, 0, 0, 0.10)"
+        }}
         placeholder='Envie sua pergunta ou dúvida e a aIAna vai te ajudar'
         _placeholder={{
           opacity: 1,
           color: '#AAA',
           size: "md",
           fontsize: "13px",
-          fontWeight: "400"}}  
+          fontWeight: "400"
+        }}
         borderRadius="7px"
-        border="1px solid #C68CB9"
+        border="1px solid #E0E0E0"
         type="text"
         aria-label="chat input"
         required
