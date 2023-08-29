@@ -112,4 +112,4 @@ jobs:
         run: sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy API
-        run: sls deploy
+        run: pnpm --filter api run deploy
