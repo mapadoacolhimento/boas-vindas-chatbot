@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
 import { useCookies } from "react-cookie";
-import { Button, Input, HStack, Box } from "@chakra-ui/react";
+import { Button, Input, HStack, Box, VStack } from "@chakra-ui/react";
 
 const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 
@@ -16,28 +16,28 @@ export const initialMessages: ChatGPTMessage[] = [
 ];
 
 const InputMessage = ({ input, setInput, sendMessage }: any) => (
-  <HStack spacing="16px" px="25px">
+  <HStack spacing="16px" px="25px" w={"full"}>
     <Box flex="1">
       <Input
-        _hover={{ 
-          borderWidth:"1px",
-          borderStyle:"solid",
-          borderColor:"brand.magenta",
-          boxShadow:"0px 3px 10px 0px #0000001a"
+        _hover={{
+          borderWidth: "1px",
+          borderStyle: "solid",
+          borderColor: "brand.magenta",
+          boxShadow: "0px 3px 10px 0px #0000001a",
         }}
         _focus={{
-          borderWidth:"1px",
-          borderStyle:"solid",
-          borderColor:"brand.magenta",
-          boxShadow:"0px 3px 10px 0px #0000001a"
+          borderWidth: "1px",
+          borderStyle: "solid",
+          borderColor: "brand.magenta",
+          boxShadow: "0px 3px 10px 0px #0000001a",
         }}
-        placeholder='Envie sua pergunta ou dúvida e a aIAna vai te ajudar'
+        placeholder="Envie sua pergunta ou dúvida e a aIAna vai te ajudar"
         _placeholder={{
           opacity: 1,
-          color: '#AAA',
+          color: "#AAA",
           size: "md",
           fontsize: "13px",
-          fontWeight: "400"
+          fontWeight: "400",
         }}
         borderRadius="7px"
         border="1px solid #E0E0E0"
@@ -51,32 +51,32 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
             setInput("");
           }
         }}
-          onChange={(e) => {
+        onChange={(e) => {
           setInput(e.target.value);
-          }}
+        }}
       />
     </Box>
-      <Button
-        p="10px 24px"
-        borderRadius="10px"
-        bg="brand.default"
-        color="white"
-        fontSize="16px"
-        fontWeight="400"
-        _hover={{
-          bg: "brand.light"
-        }}
-        _active={{
-          bg: "brand.dark",
-        }}
-        type="submit"
-        onClick={() => {
-          sendMessage(input);
-          setInput("");
-        }}
-      >
-        Enviar
-      </Button>
+    <Button
+      p="10px 24px"
+      borderRadius="10px"
+      bg="brand.default"
+      color="white"
+      fontSize="16px"
+      fontWeight="400"
+      _hover={{
+        bg: "brand.light",
+      }}
+      _active={{
+        bg: "brand.dark",
+      }}
+      type="submit"
+      onClick={() => {
+        sendMessage(input);
+        setInput("");
+      }}
+    >
+      Enviar
+    </Button>
   </HStack>
 );
 
@@ -150,23 +150,23 @@ export default function Chat() {
   };
 
   return (
-    <div className="rounded-2xl border-zinc-100  lg:border lg:p-6">
-      {messages.map(({ content, role }, index) => (
-        <ChatLine key={index} role={role} content={content} />
-      ))}
+    <VStack boxSize={"full"} align={"flex-start"} justify={"flex-end"}>
+      <Box overflowY={"auto"} maxH={"550px"} w={"full"}>
+        {messages.map(({ content, role }, index) => (
+          <ChatLine key={index} role={role} content={content} />
+        ))}
+      </Box>
 
       {loading && <LoadingChatLine />}
 
       {messages.length < 2 && (
-        <span className="mx-auto flex flex-grow text-gray-600 clear-both">
-          Type a message to start the conversation
-        </span>
+        <span>Type a message to start the conversation</span>
       )}
       <InputMessage
         input={input}
         setInput={setInput}
         sendMessage={sendMessage}
       />
-    </div>
+    </VStack>
   );
 }
