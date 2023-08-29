@@ -148,7 +148,7 @@ export default function Chat() {
 
   return (
     <VStack boxSize={"full"} align={"flex-start"} justify={"flex-end"}>
-      <Box overflowY={"auto"} maxH={"lg"} w={"full"}>
+      <Box overflowY={"auto"} maxH={"lg"} w={"full"} minH={56}>
         {messages.map(({ content, role }, index) => (
           <ChatLine key={index} role={role} content={content} />
         ))}
