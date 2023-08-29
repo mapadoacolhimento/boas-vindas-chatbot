@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
 import { useCookies } from "react-cookie";
-import { Button, Input, HStack, Box } from "@chakra-ui/react";
+import { Button, Input, HStack, Box, VStack } from "@chakra-ui/react";
 
 const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 
@@ -16,7 +16,7 @@ export const initialMessages: ChatGPTMessage[] = [
 ];
 
 const InputMessage = ({ input, setInput, sendMessage }: any) => (
-  <HStack spacing="16px" px="25px">
+  <HStack spacing={4} px={6} w={"full"}>
     <Box flex="1">
       <Input
         _hover={{
@@ -57,12 +57,9 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
       />
     </Box>
     <Button
-      p="10px 24px"
-      borderRadius="10px"
+      textTransform={"uppercase"}
       bg="brand.default"
       color="white"
-      fontSize="16px"
-      fontWeight="400"
       _hover={{
         bg: "brand.light",
       }}
@@ -150,23 +147,23 @@ export default function Chat() {
   };
 
   return (
-    <div className="rounded-2xl border-zinc-100  lg:border lg:p-6">
-      {messages.map(({ content, role }, index) => (
-        <ChatLine key={index} role={role} content={content} />
-      ))}
+    <VStack boxSize={"full"} align={"flex-start"} justify={"flex-end"}>
+      <Box overflowY={"auto"} maxH={"lg"} w={"full"} minH={56}>
+        {messages.map(({ content, role }, index) => (
+          <ChatLine key={index} role={role} content={content} />
+        ))}
+      </Box>
 
       {loading && <LoadingChatLine />}
 
       {messages.length < 2 && (
-        <span className="mx-auto flex flex-grow text-gray-600 clear-both">
-          Type a message to start the conversation
-        </span>
+        <span>Type a message to start the conversation</span>
       )}
       <InputMessage
         input={input}
         setInput={setInput}
         sendMessage={sendMessage}
       />
-    </div>
+    </VStack>
   );
 }
