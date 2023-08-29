@@ -156,9 +156,12 @@ export default function Chat() {
 
       {loading && <LoadingChatLine />}
 
-      {messages.length < 2 && (
-        <Text>Não sabe como começar? Temos algumas sugestões de conteúdo:</Text>
-      )}
+      <Box
+      >
+        {messages.length < 2 && (
+          <Text>Não sabe como começar? Temos algumas sugestões de conteúdo:</Text>
+        )}
+      </Box>
       <InputMessage
         input={input}
         setInput={setInput}
