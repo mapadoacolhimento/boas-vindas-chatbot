@@ -32,8 +32,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
         with:
           version: 7
           run_install: false
@@ -43,8 +43,8 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: Setup pnpm cache
+        uses: actions/cache@v3  
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -60,13 +60,13 @@ jobs:
       - name: Build
         run: pnpm run build
 
-  deployment:
+  ui-deployment:
     runs-on: ubuntu-latest
     needs:
       - integration
     if: always() && needs.integration.result == 'success'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
@@ -85,3 +85,40 @@ jobs:
             args="--prod"
           fi
           cd packages/ui && vercel deploy $args --token=${{ secrets.VERCEL_TOKEN }}
+
+  api-deployment:
+    runs-on: ubuntu-latest
+    needs:
+      - integration
+    if: always() && needs.integration.result == 'success'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm and modules
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: true
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install serverless globally
+        run: pnpm add serverless --global
+
+      - name: Serverless AWS authentication
+        run: sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Deploy API
+        run: sls deploy
