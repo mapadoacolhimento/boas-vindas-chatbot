@@ -1,53 +1,35 @@
 {
-  "name": "next-flask",
-  "version": "0.1.0",
-  "private": true,
+  "name": "boas-vindas-chatbot",
+  "version": "0.0.1",
   "scripts": {
-    "flask-dev": "FLASK_DEBUG=1 pip3 install -r requirements.txt && python3 -m flask --app api/index --debug run -p 5328",
-    "next-dev": "next dev",
-    "dev": "concurrently \"pnpm run next-dev\" \"pnpm run flask-dev\"",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test:stage": "jest --findRelatedTests --passWithNoTests",
-    "test:ci": "jest --ci",
-    "test": "jest --watch",
-    "prepare": "husky install"
+    "test": "pnpm -r test",
+    "test:ci": "pnpm -r test:ci",
+    "test:stage": "pnpm -r test:stage",
+    "prepare": "husky install",
+    "lint": "pnpm -r lint",
+    "build": "pnpm -r build",
+    "pre-commit": "pnpm -r pre-commit",
+    "dev": "pnpm -r dev"
   },
-  "dependencies": {
-    "@chakra-ui/icons": "^2.1.0",
-    "@chakra-ui/next-js": "^2.1.5",
-    "@chakra-ui/react": "^2.8.0",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@types/node": "20.1.4",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
-    "@vercel/examples-ui": "^1.0.5",
-    "autoprefixer": "10.4.14",
-    "clsx": "^1.2.1",
-    "eventsource-parser": "^0.1.0",
-    "framer-motion": "^10.16.1",
-    "next": "13.4.3",
-    "react": "18.2.0",
-    "react-cookie": "^4.1.1",
-    "react-dom": "18.2.0",
-    "typescript": "5.0.4"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.1.2",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^14.4.3",
-    "concurrently": "^8.0.1",
     "eslint": "8.40.0",
-    "eslint-config-next": "13.4.2",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-jest-dom": "^5.0.2",
-    "eslint-plugin-testing-library": "^6.0.1",
     "husky": "^8.0.3",
     "jest": "^29.6.4",
-    "jest-environment-jsdom": "^29.6.4",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapadoacolhimento/boas-vindas-chatbot.git"
+  },
+  "author": "Mapa do Acolhimento",
+  "bugs": {
+    "url": "https://github.com/mapadoacolhimento/boas-vindas-chatbot/issues"
+  },
+  "homepage": "https://github.com/mapadoacolhimento/boas-vindas-chatbot#readme",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=7"
   }
 }
