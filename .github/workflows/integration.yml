@@ -75,8 +75,8 @@ jobs:
           env="preview"
           if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
             env="production"
-          fi 
-          vercel pull --yes --environment=$env --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+          cd packages/ui && vercel pull --yes --environment=$env --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
         run: |
@@ -84,4 +84,4 @@ jobs:
           if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
             args="--prod"
           fi
-          vercel deploy $args --token=${{ secrets.VERCEL_TOKEN }}
+          cd packages/ui && vercel deploy $args --token=${{ secrets.VERCEL_TOKEN }}
