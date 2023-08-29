@@ -16,7 +16,7 @@ export const initialMessages: ChatGPTMessage[] = [
 ];
 
 const InputMessage = ({ input, setInput, sendMessage }: any) => (
-  <HStack spacing="16px" px="25px" w={"full"}>
+  <HStack spacing={4} px={6} w={"full"}>
     <Box flex="1">
       <Input
         _hover={{
@@ -57,12 +57,9 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
       />
     </Box>
     <Button
-      p="10px 24px"
-      borderRadius="10px"
+      textTransform={"uppercase"}
       bg="brand.default"
       color="white"
-      fontSize="16px"
-      fontWeight="400"
       _hover={{
         bg: "brand.light",
       }}
@@ -151,7 +148,7 @@ export default function Chat() {
 
   return (
     <VStack boxSize={"full"} align={"flex-start"} justify={"flex-end"}>
-      <Box overflowY={"auto"} maxH={"550px"} w={"full"}>
+      <Box overflowY={"auto"} maxH={"lg"} w={"full"}>
         {messages.map(({ content, role }, index) => (
           <ChatLine key={index} role={role} content={content} />
         ))}

@@ -1,33 +1,22 @@
 "use client";
 
-import { Chat } from "../components";
-import { Text, Box, HStack, VStack, Heading } from "@chakra-ui/react";
-import Image from "next/image";
+import { HStack, VStack, Heading, Center } from "@chakra-ui/react";
+import { Chat, ChatIcon } from "../components";
 
 function ChatHeader() {
   return (
     <HStack
       w={"full"}
-      minH={"60px"}
+      minH={16}
       borderBottom="1px solid #EFEFEF"
-      gap="1rem"
+      gap={4}
       align={"center"}
-      pl={"32px"}
+      pl={8}
     >
-      <Box p="6px" borderRadius="3px" bg="#FFDBDB">
-        <Image
-          src="/icons/icon-good-msg.svg"
-          alt="Icon de mensagem"
-          height={13.69}
-          width={13.69}
-        />
-      </Box>
-      <Heading
-        as={"h2"}
-        color="brand.default"
-        fontSize="15px"
-        fontWeight="bold"
-      >
+      <Center boxSize={7} borderRadius={"base"} bg="#FFDBDB">
+        <ChatIcon boxSize={3.5} aria-label="Icon de mensagem" />
+      </Center>
+      <Heading as={"h2"} color="brand.default" size={"sm"}>
         Fale com a IAna
       </Heading>
     </HStack>
@@ -40,12 +29,12 @@ function Home() {
       <Heading>Exemplo de chat</Heading>
       <VStack
         w={{ base: "full", lg: "80%" }}
-        maxH={"686px"}
+        maxH={"3xl"}
         bg="white"
         border="1px solid #C4C4C4"
         borderRadius="0.625rem"
-        boxShadow="0px 4px 4px 0px #00000040"
-        pb={"36px"}
+        boxShadow={"0px 2px 2px 0px rgba(0, 0, 0, 0.10)"}
+        pb={9}
       >
         <ChatHeader />
         <Chat />
