@@ -159,6 +159,9 @@ export default function Chat() {
       <Box
         pl="1.5rem"
         pb="3rem"
+        fontSize="1rem"
+        fontWeight="600"
+        color="brand.default"
       >
         {messages.length < 2 && (
           <Text>Não sabe como começar? Temos algumas sugestões de conteúdo:</Text>
