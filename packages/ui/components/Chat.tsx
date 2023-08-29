@@ -58,7 +58,7 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
     </Box>
     <Button
       textTransform={"uppercase"}
-      bg="brand.default"
+      bg="brand.mainGray"
       color="white"
       _hover={{
         bg: "brand.light",
