@@ -1,4 +1,4 @@
-import { Box, Text, Stack, Button } from "@chakra-ui/react";
+import { Box, Text, Stack, Button, Wrap } from "@chakra-ui/react";
 
 const suggestions = [
   {
@@ -29,6 +29,7 @@ const ChatSuggestions = ({}: any) => (
     <Text>Não sabe como começar? Temos algumas sugestões de conteúdo:</Text>
     <Stack
       direction="row"
+      wrap="wrap"
       pt="1rem"
 
     >
