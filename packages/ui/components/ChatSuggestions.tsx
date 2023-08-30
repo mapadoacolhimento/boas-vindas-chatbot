@@ -43,10 +43,10 @@ const ChatSuggestions = ({}: any) => (
           fontSize="0.689rem"
           size="sm"
           _hover={{
-            bg:"#EFEFEF"
+            bg:".brand.lightGray"
           }}
           _active={{
-            bg:"#EFEFEF"
+            bg:"brand.lightGray"
           }}
         >
           {text}
