@@ -1,0 +1,16 @@
+{
+  "name": "api",
+  "version": "0.0.1",
+  "devDependencies": {
+    "serverless": "^3.34.0"
+  },
+  "dependencies": {
+    "serverless-python-requirements": "^6.0.0",
+    "serverless-wsgi": "^3.0.2"
+  },
+  "scripts": {
+    "deploy": "sls deploy",
+    "dev": "serverless wsgi serve",
+    "prepare": "python3 -m venv ./venv && source ./venv/bin/activate && pip install -r requirements.txt"
+  }
+}
