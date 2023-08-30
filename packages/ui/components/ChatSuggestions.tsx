@@ -1,4 +1,22 @@
-import { Box, Text, Flex, Button } from "@chakra-ui/react"
+import { Box, Text, Stack, Button } from "@chakra-ui/react";
+
+const suggestions = [
+  {
+    text: "Tipos de serviço público"
+  },
+  {
+    text: "Mapa de serviços públicos"
+  },
+  {
+    text: "Como identificar se precisa de encaminhamento"
+  },
+  {
+    text: "Como denunciar?"
+  },
+  {
+    text: "Como fazer a articulação?"
+  }
+]
 
 const ChatSuggestions = ({}: any) => (
   <Box
@@ -9,23 +27,32 @@ const ChatSuggestions = ({}: any) => (
     color="brand.default"
   >
     <Text>Não sabe como começar? Temos algumas sugestões de conteúdo:</Text>
-    <Flex
+    <Stack
       direction="row"
       pt="1rem"
+
     >
-      <Button
-        p="0.312 0.437 0.37 0.437"
-        border="1px solid #E0E0E0"
-        borderRadius="0.5rem"
-        color="brand.darkGray"
-        bg="#FFFFF"
-        fontSize="0.687rem"
-        _hover={{
-          bg:"#EFEFEF"
-        }}
-      >
-        Tipos de serviço público</Button>
-    </Flex>
+      {suggestions.map(({ text }, index) => (
+        <Button
+          key={index}
+          p="0.312rem 0.437rem 0.37rem 0.437rem"
+          border="1px solid #E0E0E0"
+          borderRadius="0.5rem"
+          color="brand.darkGray"
+          bg="white"
+          fontSize="0.687rem"
+          size="xs"
+          _hover={{
+            bg:"#EFEFEF"
+          }}
+          _active={{
+            bg:"#EFEFEF"
+          }}
+        >
+          {text}
+        </Button>       
+      ))}
+    </Stack>
   </Box>
 )
 
