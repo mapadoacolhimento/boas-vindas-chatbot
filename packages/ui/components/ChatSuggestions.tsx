@@ -36,7 +36,8 @@ const ChatSuggestions = ({}: any) => (
       {suggestions.map(({ text }, index) => (
         <Button
           key={index}
-          border="1px solid #E0E0E0"
+          border="1px solid"
+          borderColor="brand.lightGray"
           borderRadius="0.5rem"
           color="brand.darkGray"
           bg="white"

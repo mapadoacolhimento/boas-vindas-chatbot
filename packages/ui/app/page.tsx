@@ -8,7 +8,8 @@ function ChatHeader() {
     <HStack
       w={"full"}
       minH={16}
-      borderBottom="1px solid brand.lightGray"
+      borderBottom="1px solid"
+      borderColor="brand.lightGray"
       gap={4}
       align={"center"}
       pl={8}
