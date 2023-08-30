@@ -132,4 +132,9 @@ jobs:
         run: sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy API
-        run: pnpm --filter api run deploy
+        run: |
+          args=""
+          if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
+            args="--stage production"
+          fi
+          pnpm --filter api run deploy --region ${{ secrets.AWS_REGION }} $args
