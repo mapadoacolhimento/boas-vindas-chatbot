@@ -33,7 +33,7 @@ function Home() {
         bg="white"
         border="1px solid #C4C4C4"
         borderRadius="0.625rem"
-        boxShadow={"0px 2px 2px 0px rgba(0, 0, 0, 0.10)"}
+        boxShadow={"0px 4px 4px 0px rgba(0, 0, 0, 0.10)"}
         pb={9}
       >
         <ChatHeader />

@@ -17,6 +17,7 @@ const theme = extendTheme({
       default: "#622565",
       dark: "#57215A",
       mainGray: "#AAAAAA",
+      darkGray: "#565656",
     },   
   }
 });
