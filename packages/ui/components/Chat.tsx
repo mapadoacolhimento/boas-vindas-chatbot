@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
 import { useCookies } from "react-cookie";
-import { Button, Input, HStack, Box, VStack, Text } from "@chakra-ui/react";
+import { Button, Input, HStack, Box, VStack } from "@chakra-ui/react";
+
+import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
+import ChatSuggestions from "@/components/ChatSuggestions";
 
 const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 
@@ -156,17 +158,9 @@ export default function Chat() {
 
       {loading && <LoadingChatLine />}
 
-      <Box
-        pl="1.5rem"
-        pb="3rem"
-        fontSize="1rem"
-        fontWeight="600"
-        color="brand.default"
-      >
-        {messages.length < 2 && (
-          <Text>Não sabe como começar? Temos algumas sugestões de conteúdo:</Text>
-        )}
-      </Box>
+      {messages.length < 2 && (
+        <ChatSuggestions />
+      )}
       <InputMessage
         input={input}
         setInput={setInput}
