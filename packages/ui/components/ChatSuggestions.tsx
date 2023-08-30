@@ -39,7 +39,7 @@ const ChatSuggestions = ({}: any) => (
           borderRadius="0.5rem"
           color="brand.darkGray"
           bg="white"
-          fontSize="0.687rem"
+          fontSize="0.689rem"
           size="sm"
           _hover={{
             bg:"#EFEFEF"
