@@ -1,3 +1,8 @@
+try:
+    import unzip_requirements
+except ImportError:
+    pass
+
 from flask import Flask, request, jsonify, make_response
 import os
 import openai
