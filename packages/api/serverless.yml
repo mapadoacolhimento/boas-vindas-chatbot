@@ -35,32 +35,6 @@ functions:
     environment:
       OPENAI_API_KEY: ${env:OPENAI_API_KEY}
 
-resources:
-  Resources:
-    ChatbotBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        AccessControl: PublicRead
-        BucketName: ${self:custom.bucketName}
-        OwnershipControls:
-          Rules:
-            - ObjectOwnership: ObjectWriter
-        PublicAccessBlockConfiguration:
-          BlockPublicAcls: false
-    ChatbotBucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        Bucket:
-          Ref: ChatbotBucket
-        PolicyDocument:
-          Statement:
-            - Action:
-                - s3:GetObject
-                - s3:PutObject
-              Effect: Allow
-              Principal: "*"
-              Resource: arn:aws:s3:::${self:custom.bucketName}/*
-
 plugins:
   - serverless-wsgi
   - serverless-python-requirements
