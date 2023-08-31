@@ -12,10 +12,11 @@ const theme = extendTheme({
   },
   colors: {
     brand: {
-      magenta: "#C68CB9",
       light: "#732E76",
+      mediumPurple: "#C68CB9",
       default: "#622565",
       dark: "#57215A",
+      lightGray: "#EFEFEF",
       mainGray: "#AAAAAA",
       darkGray: "#565656",
     },   

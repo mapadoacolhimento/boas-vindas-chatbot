@@ -36,17 +36,18 @@ const ChatSuggestions = ({}: any) => (
       {suggestions.map(({ text }, index) => (
         <Button
           key={index}
-          border="1px solid #E0E0E0"
+          border="1px solid"
+          borderColor="brand.lightGray"
           borderRadius="0.5rem"
           color="brand.darkGray"
           bg="white"
           fontSize="0.689rem"
           size="sm"
           _hover={{
-            bg:"#EFEFEF"
+            bg:".brand.lightGray"
           }}
-          _active={{
-            bg:"#EFEFEF"
+          _focus={{
+            bg:"brand.lightGray"
           }}
         >
           {text}
