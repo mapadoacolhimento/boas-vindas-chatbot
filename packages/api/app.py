@@ -4,6 +4,13 @@ except ImportError:
     pass
 
 from flask import Flask, jsonify, make_response
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+for name, value in os.environ.items():
+    print("{0}: {1}".format(name, value))
 
 app = Flask(__name__)
 

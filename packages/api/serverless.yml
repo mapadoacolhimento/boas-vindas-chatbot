@@ -26,6 +26,9 @@ functions:
     handler: wsgi_handler.handler
     events:
       - httpApi: '*'
+    environment:
+      OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+      AWS_S3_BUCKET: ${env:AWS_S3_BUCKET}
 
 plugins:
   - serverless-wsgi
