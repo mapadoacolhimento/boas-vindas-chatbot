@@ -30,8 +30,9 @@ def load_index_from_s3():
         secret=os.environ["AWS_SECRET_ACCESS_KEY"],
         endpoint_url="https://s3.sa-east-1.amazonaws.com",
     )
+    dir = os.environ["AWS_S3_BUCKET_NAME"] + '/index'
     sc = StorageContext.from_defaults(
-        persist_dir=os.environ["AWS_S3_BUCKET_NAME"] + '/index', fs=s3
+        persist_dir=dir, fs=s3
     )
     return load_index_from_storage(sc, 'doc_summary_index')
 
