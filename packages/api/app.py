@@ -7,6 +7,7 @@ from flask import Flask, request, jsonify, make_response
 import os
 import openai
 import s3fs
+from dotenv import load_dotenv
 
 from llama_index import ServiceContext, set_global_service_context, StorageContext, load_index_from_storage
 from llama_index.prompts import Prompt
@@ -16,7 +17,7 @@ from constants import IANA_PROMPT
 app = Flask(__name__)
 
 def set_open_ai_api_key():
-    openai.api_key = os.environ["OPENAI_API_KEY"]
+    openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def configure_llm():
     #Change this to GPT-4 once we have access
@@ -26,9 +27,9 @@ def configure_llm():
 
 def load_index_from_s3():
     s3 = s3fs.S3FileSystem(
-        key=os.environ["AWS_ACCESS_KEY_ID"],
-        secret=os.environ["AWS_SECRET_ACCESS_KEY"],
-        endpoint_url=os.environ["AWS_S3_BUCKET"],
+        key=os.getenv("AWS_ACCESS_KEY_ID"),
+        secret=os.getenv("AWS_SECRET_ACCESS_KEY"),
+        endpoint_url=os.getenv("AWS_S3_BUCKET"),
     )
     sc = StorageContext.from_defaults(
         persist_dir='boas-vindas-chatbot-context/index', fs=s3
@@ -41,6 +42,7 @@ def create_chat_engine():
         chat_mode="openai"
     )
 
+load_dotenv()
 set_open_ai_api_key()
 configure_llm()
 
