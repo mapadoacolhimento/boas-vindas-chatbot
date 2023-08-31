@@ -8,6 +8,8 @@ import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
 import ChatSuggestions from "@/components/ChatSuggestions";
 
 const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
+const REST_API =
+  process.env.NEXT_PUBLIC_AWS_REST_API || "http://localhost:5000";
 
 // default first message to display in UI (not necessary to define the prompt)
 export const initialMessages: ChatGPTMessage[] = [
@@ -104,7 +106,7 @@ export default function Chat() {
     setMessages(newMessages);
     // const last10messages = newMessages.slice(-10); // remember last 10 messages
 
-    const response = await fetch("/api/chat", {
+    const response = await fetch(`${REST_API}/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -159,9 +161,7 @@ export default function Chat() {
 
       {loading && <LoadingChatLine />}
 
-      {messages.length < 2 && (
-        <ChatSuggestions />
-      )}
+      {messages.length < 2 && <ChatSuggestions />}
       <InputMessage
         input={input}
         setInput={setInput}
