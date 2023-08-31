@@ -1,20 +1,42 @@
-service: aws-python-flask-api
+service: aws-python-chatbot-api
 
 frameworkVersion: '3'
+useDotenv: true
+
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
 
 custom:
   wsgi:
     app: app.app
+    pythonBin: python3
+  pythonRequirements:
+    zip: true
+    slim: true
+  bucketName: ${env:AWS_S3_BUCKET_NAME}
 
 provider:
   name: aws
   runtime: python3.9
+  region: ${env:AWS_REGION}
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - s3:*
+    Resource: "arn:aws:s3:::${self:custom.bucketName}/*"
 
 functions:
   api:
     handler: wsgi_handler.handler
     events:
       - httpApi: '*'
+    environment:
+      OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+      AWS_S3_BUCKET_NAME: ${env:AWS_S3_BUCKET_NAME}
+      AWS_ROOT_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
+      AWS_ROOT_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
 
 plugins:
   - serverless-wsgi
