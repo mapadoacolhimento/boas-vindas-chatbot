@@ -14,7 +14,12 @@ from llama_index.prompts import Prompt
 from llama_index.llms import OpenAI
 from constants import IANA_PROMPT
 
+load_dotenv()
+
 app = Flask(__name__)
+
+for name, value in os.environ.items():
+    print("{0}: {1}".format(name, value))
 
 def set_open_ai_api_key():
     openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -42,7 +47,6 @@ def create_chat_engine():
         chat_mode="openai"
     )
 
-load_dotenv()
 set_open_ai_api_key()
 configure_llm()
 
