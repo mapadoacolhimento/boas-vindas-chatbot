@@ -125,17 +125,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install --ignore-scripts
 
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-          envkey_OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          envkey_AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          envkey_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          envkey_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          envkey_AWS_REGION: ${{ secrets.AWS_REGION }}
-          directory: packages/api
-          file_name: .env
-          fail_on_empty: false
+      - name: Create env file
+        run: |
+          cat << EOF > .env
+          OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+          AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION=${{ secrets.AWS_REGION }}
+          EOF
+
+      - name: Copy .env file to api package
+        run: find packages/api -type d -exec cp .env {} \;
 
       - name: Install serverless globally
         run: pnpm add serverless --global
