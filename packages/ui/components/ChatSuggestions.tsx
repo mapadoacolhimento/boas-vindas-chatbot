@@ -46,7 +46,7 @@ const ChatSuggestions = ({}: any) => (
           _hover={{
             bg:".brand.lightGray"
           }}
-          _active={{
+          _focus={{
             bg:"brand.lightGray"
           }}
         >
