@@ -1,4 +1,4 @@
-service: aws-python-flask-api
+service: aws-python-chatbot-api
 
 frameworkVersion: '3'
 useDotenv: true
@@ -15,17 +15,13 @@ custom:
   pythonRequirements:
     zip: true
     slim: true
-  bucket: ${env:AWS_S3_BUCKET_NAME}
+  bucketName: ${env:AWS_S3_BUCKET_NAME}
+  lambdaRoleArn: arn:aws:iam::${AWS::AccountId}:role/aws-python-chatbot-api-${sls:stage}-${env:AWS_REGION}-lambdaRole
 
 provider:
   name: aws
   runtime: python3.9
   region: ${env:AWS_REGION}
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:*
-      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
 
 functions:
   api:
@@ -34,7 +30,32 @@ functions:
       - httpApi: '*'
     environment:
       OPENAI_API_KEY: ${env:OPENAI_API_KEY}
-      AWS_S3_BUCKET: ${env:AWS_S3_BUCKET}
+
+resources:
+  Resources:
+    ChatbotBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: PublicRead
+        BucketName: ${self:custom.bucketName}
+    ChatbotBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref ChatbotBucket
+        PolicyDocument:
+          Statement:
+            - Action:
+                - s3:GetObject
+              Effect: Allow
+              Principal: "*"
+              Resource: !Sub arn:aws:s3:::${ChatbotBucket}/*
+            - Action:
+                - s3:PutObject
+              Effect: Allow
+              Principal:
+                AWS:
+                  - !Sub ${self:custom.lambdaRoleArn}
+              Resource: !Sub arn:aws:s3:::${ChatbotBucket}/*
 
 plugins:
   - serverless-wsgi
