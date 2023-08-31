@@ -3,12 +3,18 @@ service: aws-python-flask-api
 frameworkVersion: '3'
 useDotenv: true
 
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
+
 custom:
   wsgi:
     app: app.app
     pythonBin: python3
   pythonRequirements:
     zip: true
+    slim: true
 
 provider:
   name: aws
