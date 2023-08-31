@@ -34,7 +34,6 @@ function Home() {
       pb={6}
       pt={6}
     >
-      <Heading>Exemplo de chat</Heading>
       <VStack
         w={{ base: "full", lg: "80%" }}
         maxH={"3xl"}
