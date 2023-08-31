@@ -26,8 +26,8 @@ def configure_llm():
 
 def load_index_from_s3():
     s3 = s3fs.S3FileSystem(
-        key=os.environ["AWS_ACCESS_KEY_ID"],
-        secret=os.environ["AWS_SECRET_ACCESS_KEY"],
+        key=os.environ["AWS_ROOT_ACCESS_KEY_ID"],
+        secret=os.environ["AWS_ROOT_SECRET_ACCESS_KEY"],
         endpoint_url="https://s3.sa-east-1.amazonaws.com",
     )
     dir = os.environ["AWS_S3_BUCKET_NAME"] + '/index'
