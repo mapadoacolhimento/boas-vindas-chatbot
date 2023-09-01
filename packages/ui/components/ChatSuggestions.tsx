@@ -31,7 +31,7 @@ const ChatSuggestions = ({}: any) => (
     >
       Não sabe como começar? Temos algumas sugestões de conteúdo:
     </Text>
-    <Text 
+    <Text
       display={{ base: 'initial', sm: 'none' }}
     >
       Sugestões de conteúdo:
@@ -40,7 +40,6 @@ const ChatSuggestions = ({}: any) => (
       direction="row"
       wrap="wrap"
       pt="1rem"
-
     >
       {suggestions.map(({ text }, index) => (
         <Button
