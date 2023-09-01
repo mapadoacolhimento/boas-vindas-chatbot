@@ -26,16 +26,16 @@ const ChatSuggestions = ({}: any) => (
     fontWeight="600"
     color="brand.default"
   >
-    <Show above='sm'>
-      <Box>
-        <Text>Não sabe como começar? Temos algumas sugestões de conteúdo:</Text>
-      </Box>
-    </Show>
-    <Hide above='sm'>
-      <Box>
-        <Text>Sugestões de conteúdo:</Text>
-      </Box>
-    </Hide>
+    <Text
+      display={{ base: 'none', sm: 'initial' }}
+    >
+      Não sabe como começar? Temos algumas sugestões de conteúdo:
+    </Text>
+    <Text 
+      display={{ base: 'initial', sm: 'none' }}
+    >
+      Sugestões de conteúdo:
+    </Text>
     <Stack
       direction="row"
       wrap="wrap"
