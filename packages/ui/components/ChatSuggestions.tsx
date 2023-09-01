@@ -28,8 +28,9 @@ const ChatSuggestions = ({}: any) => (
   >
     <Text>Não sabe como começar? Temos algumas sugestões de conteúdo:</Text>
     <Stack
-      direction="row"
+      direction={[ "column", "row" ]}
       wrap="wrap"
+      alignContent="flex-start"
       pt="1rem"
 
     >
@@ -43,6 +44,7 @@ const ChatSuggestions = ({}: any) => (
           bg="white"
           fontSize="0.689rem"
           size="sm"
+          
           _hover={{
             bg:".brand.lightGray"
           }}
