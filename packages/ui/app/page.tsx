@@ -29,10 +29,8 @@ function Home() {
     <VStack 
       spacing="10em" 
       justify={"center"}
-      pl={4}
-      pr={4}
-      pb={6}
-      pt={6}
+      px={4}
+      py={6}
     >
       <VStack
         w={{ base: "full", lg: "80%" }}
