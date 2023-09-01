@@ -19,42 +19,18 @@ const suggestions = [
 ]
 
 const ChatSuggestions = ({}: any) => (
-  <Box
-    pl="1.5rem"
-    pb="1rem"
-    fontSize="1rem"
-    fontWeight="600"
-    color="brand.default"
-  >
-    <Text>Não sabe como começar? Temos algumas sugestões de conteúdo:</Text>
-    <Stack
-      direction="row"
-      wrap="wrap"
-      pt="1rem"
-
-    >
+  <Box px={6} pb={4}>
+    <Text fontSize="sm" fontWeight="semibold" color="brand.primary">
+      Não sabe como começar? Temos algumas sugestões de conteúdo:
+    </Text>
+    <Stack direction="row" wrap="wrap" pt="1rem">
       {suggestions.map(({ text }, index) => (
-        <Button
-          key={index}
-          border="1px solid"
-          borderColor="brand.lightGray"
-          borderRadius="0.5rem"
-          color="brand.darkGray"
-          bg="white"
-          fontSize="0.689rem"
-          size="sm"
-          _hover={{
-            bg:".brand.lightGray"
-          }}
-          _focus={{
-            bg:"brand.lightGray"
-          }}
-        >
+        <Button key={index} variant={"option"} size={"sm"}>
           {text}
-        </Button>       
+        </Button>
       ))}
     </Stack>
   </Box>
-)
+);
 
 export default ChatSuggestions;
