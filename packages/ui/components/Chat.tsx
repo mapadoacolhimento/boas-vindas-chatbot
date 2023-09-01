@@ -104,7 +104,7 @@ export default function Chat() {
     setMessages(newMessages);
     // const last10messages = newMessages.slice(-10); // remember last 10 messages
 
-    const response = await fetch("/api/chat", {
+    const response = await fetch(`/api`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -159,9 +159,7 @@ export default function Chat() {
 
       {loading && <LoadingChatLine />}
 
-      {messages.length < 2 && (
-        <ChatSuggestions />
-      )}
+      {messages.length < 2 && <ChatSuggestions />}
       <InputMessage
         input={input}
         setInput={setInput}
