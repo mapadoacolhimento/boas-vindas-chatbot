@@ -9,7 +9,6 @@ const InputMessage = ({
   setInput: (msg: string) => void;
   sendMessage: (msg: string) => void;
 }) => {
-  console.log({ input });
   return (
     <HStack spacing={4} px={6} w={"full"}>
       <Box flex="1">
