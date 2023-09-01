@@ -26,8 +26,12 @@ function ChatHeader() {
 
 function Home() {
   return (
-    <VStack spacing="10em" justify={"center"}>
-      <Heading>Exemplo de chat</Heading>
+    <VStack 
+      spacing="10em" 
+      justify={"center"}
+      px={4}
+      py={6}
+    >
       <VStack
         w={{ base: "full", lg: "80%" }}
         maxH={"3xl"}
