@@ -1,14 +1,15 @@
-import clsx from 'clsx'
-// import Balancer from 'react-wrap-balancer'
+import { Box, Divider, HStack, Text, VStack } from "@chakra-ui/react";
+import UserQueryIcon from "./UserQueryIcon";
+import ChatIcon from "./ChatIcon";
 
 // wrap Balancer to remove type errors :( - @TODO - fix this ugly hack
 // const BalancerWrapper = (props: any) => <Balancer {...props} />
 
-type ChatGPTAgent = 'user' | 'system' | 'assistant'
+type ChatGPTAgent = "user" | "system" | "assistant";
 
 export interface ChatGPTMessage {
-  role: ChatGPTAgent
-  content: string
+  role: ChatGPTAgent;
+  content: string;
 }
 
 // loading placeholder animation for the chat line
@@ -31,16 +32,16 @@ export const LoadingChatLine = () => (
       </div>
     </div>
   </div>
-)
+);
 
 // util helper to convert new lines to <br /> tags
 const convertNewLines = (text: string) =>
-  text.split('\n').map((line, i) => (
+  text.split("\n").map((line, i) => (
     <span key={i}>
       {line}
       <br />
     </span>
-  ))
+  ));
 
 export default function ChatLine({
   role = "assistant",
@@ -49,33 +50,30 @@ export default function ChatLine({
   if (!content) {
     return null;
   }
+
   const formatteMessage = convertNewLines(content);
 
   return (
-    <div
-      className={
-        role != "assistant" ? "float-right clear-both" : "float-left clear-both"
-      }
-    >
-      <div className="float-right mb-5 rounded-lg bg-white px-4 py-5 shadow-lg ring-1 ring-zinc-100 sm:px-6">
-        <div className="flex space-x-3">
-          <div className="flex-1 gap-4">
-            <p className="font-large text-xxl text-gray-900">
-              <a href="#" className="hover:underline">
-                {role == "assistant" ? "AI" : "You"}
-              </a>
-            </p>
-            <p
-              className={clsx(
-                "text ",
-                role == "assistant" ? "font-semibold font- " : "text-gray-400"
-              )}
-            >
-              {formatteMessage}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <VStack spacing={0} align={"flex-start"} justify={"flex-start"}>
+      <Box
+        bgColor={role === "assistant" ? "chatBackground" : "white"}
+        py={"15px"}
+        px={8}
+      >
+        <HStack spacing={"10px"}>
+          {role === "assistant" ? (
+            <ChatIcon boxSize={"14px"} />
+          ) : (
+            <UserQueryIcon boxSize={"14px"} />
+          )}
+          <Text color={"text"} fontSize={"sm"}>
+            {formatteMessage}
+          </Text>
+        </HStack>
+      </Box>
+      <Box px={8} w={"full"}>
+        <Divider height={"1px"} bgColor={"#eee"} w={"full"} />
+      </Box>
+    </VStack>
   );
 }
