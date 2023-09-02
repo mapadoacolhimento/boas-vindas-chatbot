@@ -83,7 +83,7 @@ const InputMessage = ({
             placeholder="Envie sua pergunta ou dúvida"
             _placeholder={{
               opacity: 1,
-              color: "brand.mainGray",
+              color: "placeholder",
               size: "md",
               fontsize: "13px",
               fontWeight: "400",
