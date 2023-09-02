@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { Button, Input, HStack, Box, VStack, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 
 import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
-import ChatSuggestions from "@/components/ChatSuggestions";
-import SendMessageIcon from "@/components/SendMessageIcon";
+import { ChatSuggestions, InputMessage } from "@/components";
 
 const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 
@@ -14,117 +13,10 @@ const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 export const initialMessages: ChatGPTMessage[] = [
   {
     role: "assistant",
-    content: "Hi! I am a friendly AI assistant. Ask me anything!",
+    content:
+      "Oie Ângela, Eu sou a aIAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
   },
 ];
-
-const InputMessage = ({ input, setInput, sendMessage }: any) => (
-  <>
-    <HStack
-      display={{ base: "none", md: "flex" }}
-      spacing={4} px={6} w={"full"}
-    >
-        <Box flex="1">
-          <Input
-            _hover={{
-              borderWidth: "1px",
-              borderStyle: "solid",
-              borderColor: "brand.mediumPurple",
-              boxShadow: "0px 3px 10px 0px #0000001a",
-            }}
-            _focus={{
-              borderWidth: "1px",
-              borderStyle: "solid",
-              borderColor: "brand.mediumPurple",
-              boxShadow: "0px 3px 10px 0px #0000001a",
-            }}
-            placeholder="Envie sua pergunta ou dúvida e a aIAna vai te ajudar"
-            _placeholder={{
-              opacity: 1,
-              color: "#AAA",
-              size: "md",
-              fontsize: "13px",
-              fontWeight: "400",
-            }}
-            borderRadius="7px"
-            border="1px solid"
-            borderColor="brand.lightGray"
-            type="text"
-            aria-label="chat input"
-            required
-            value={input}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                sendMessage(input);
-                setInput("");
-              }
-            }}
-            onChange={(e) => {
-              setInput(e.target.value);
-            }}
-          />
-        </Box>
-        <Button
-          textTransform={"uppercase"}
-          bg="brand.mainGray"
-          color="white"
-          _hover={{
-            bg: "brand.light",
-          }}
-          _active={{
-            bg: "brand.dark",
-          }}
-          type="submit"
-          onClick={() => {
-            sendMessage(input);
-            setInput("");
-          }}
-        >
-          Enviar
-        </Button>
-    </HStack>
-    <HStack
-        display={{base: "flex", md: "none"}}
-        spacing={4} px={6} w={"full"}>
-        <InputGroup size='lg'>
-          <Input
-            type={'text'}
-            aria-label="input chat"
-            placeholder="Envie sua pergunta ou dúvida"
-            _placeholder={{
-              opacity: 1,
-              color: "brand.mainGray",
-              size: "md",
-              fontsize: "13px",
-              fontWeight: "400",
-            }}
-            borderRadius="7px"
-            border="1px solid"
-            borderColor="brand.lightGray"
-            _hover={{
-              borderWidth: "1px",
-              borderStyle: "solid",
-              borderColor: "brand.mediumPurple",
-              boxShadow: "0px 3px 10px 0px #0000001a",
-            }}
-            _focus={{
-              borderWidth: "1px",
-              borderStyle: "solid",
-              borderColor: "brand.mediumPurple",
-              boxShadow: "0px 3px 10px 0px #0000001a",
-            }}
-          />
-          <InputRightElement px={"16px"} py={"16px"}>
-            <Button size='lg' bg="transparent">
-              <SendMessageIcon />
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-      </HStack>
-  </>
-  
-);
-
 export default function Chat() {
   const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages);
   const [input, setInput] = useState("");
@@ -149,7 +41,7 @@ export default function Chat() {
     setMessages(newMessages);
     // const last10messages = newMessages.slice(-10); // remember last 10 messages
 
-    const response = await fetch("/api/chat", {
+    const response = await fetch(`/api`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -204,9 +96,7 @@ export default function Chat() {
 
       {loading && <LoadingChatLine />}
 
-      {messages.length < 2 && (
-        <ChatSuggestions />
-      )}
+      {messages.length < 2 && <ChatSuggestions />}
       <InputMessage
         input={input}
         setInput={setInput}
