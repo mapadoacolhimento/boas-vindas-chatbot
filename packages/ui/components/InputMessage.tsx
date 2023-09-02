@@ -76,7 +76,7 @@ const InputMessage = ({
         display={{base: "flex", md: "none"}}
         spacing={4} px={6} w={"full"}
       >
-        <InputGroup size='lg'>
+        <InputGroup size='md'>
           <Input
             type={'text'}
             aria-label="input chat"
