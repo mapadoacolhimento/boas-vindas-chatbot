@@ -39,6 +39,7 @@ const theme = extendTheme({
       brand: {
         primary: "#622565",
         primaryLight: "#732E76",
+        mediumPrimary: "#C68CB9",
         primaryDark: "#57215A",
         primaryMedium: "#C68CB9",
         secondary: "#E8B638",
