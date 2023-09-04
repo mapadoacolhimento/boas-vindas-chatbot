@@ -8,7 +8,7 @@ const suggestions = [
     text: "Mapa de serviços públicos",
   },
   {
-    text: "Como identificar se precisa de encaminhamento",
+    text: "Como fazer para encaminhar?",
   },
   {
     text: "Como denunciar?",
