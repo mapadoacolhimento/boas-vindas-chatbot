@@ -39,17 +39,11 @@ const ChatSuggestions = () => (
     <Stack
       direction={["column", "row"]}
       wrap="wrap"
-      alignContent="flex-start"
+      alignItems="flex-start"
       pt={4}
     >
       {suggestions.map(({ text }, index) => (
-        <Button
-          key={index}
-          variant={"option"}
-          size={"sm"}
-          w={"full"}
-          fontSize={"xs"}
-        >
+        <Button key={index} variant={"option"} size={"sm"} fontSize={"xs"}>
           {text}
         </Button>
       ))}
