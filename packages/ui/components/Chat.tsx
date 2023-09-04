@@ -17,7 +17,6 @@ export const initialMessages: ChatGPTMessage[] = [
       "Oie Ângela, Eu sou a aIAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
   },
 ];
-
 export default function Chat() {
   const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages);
   const [input, setInput] = useState("");

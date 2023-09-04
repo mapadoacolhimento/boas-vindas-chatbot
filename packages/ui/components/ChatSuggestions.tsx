@@ -1,4 +1,4 @@
-import { Box, Stack, Button, Show, Hide, Text } from "@chakra-ui/react";
+import { Box, Stack, Button, Text } from "@chakra-ui/react";
 
 const suggestions = [
   {
@@ -19,7 +19,10 @@ const suggestions = [
 ];
 
 const ChatSuggestions = ({}: any) => (
-  <Box px={6} pb={4}>
+  <Box
+    px={6}
+    pb={4}
+  >
     <Text
       display={{ base: "none", sm: "initial" }}
       fontSize="sm"
@@ -36,9 +39,18 @@ const ChatSuggestions = ({}: any) => (
     >
       Sugestões de conteúdo:
     </Text>
-    <Stack direction="row" wrap="wrap" pt="1rem">
+    <Stack
+      direction={[ "column", "row" ]}
+      wrap="wrap"
+      alignContent="flex-start"
+      pt="1rem"
+    >
       {suggestions.map(({ text }, index) => (
-        <Button key={index} variant={"option"} size={"sm"}>
+        <Button
+          key={index}
+          variant={"option"}
+          size={"sm"}
+        >
           {text}
         </Button>
       ))}
