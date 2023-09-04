@@ -42,7 +42,7 @@ const ChatSuggestions = ({}: any) => (
     <Stack
       direction={[ "column", "row" ]}
       wrap="wrap"
-      alignContent="flex-start"
+      alignItems="flex-start"
       pt="1rem"
     >
       {suggestions.map(({ text }, index) => (
