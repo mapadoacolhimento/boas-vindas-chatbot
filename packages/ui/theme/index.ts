@@ -40,6 +40,7 @@ const theme = extendTheme({
         primary: "#622565",
         primaryLight: "#732E76",
         primaryDark: "#57215A",
+        primaryMedium: "#C68CB9",
         secondary: "#E8B638",
         primaryGray: "#AAAAAA",
         lightGray: "#EFEFEF",
