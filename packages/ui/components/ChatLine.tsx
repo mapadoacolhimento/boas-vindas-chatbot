@@ -59,6 +59,7 @@ export default function ChatLine({
         bgColor={role === "assistant" ? "chatBackground" : "white"}
         py={"15px"}
         px={8}
+        width={"full"}
       >
         <HStack spacing={"10px"}>
           {role === "assistant" ? (
@@ -66,7 +67,12 @@ export default function ChatLine({
           ) : (
             <UserQueryIcon boxSize={"14px"} />
           )}
-          <Text color={"text"} fontSize={"sm"}>
+          <Text
+            color={"text"}
+            fontSize={"sm"}
+            height={"fit-content"}
+            w={"full"}
+          >
             {formatteMessage}
           </Text>
         </HStack>

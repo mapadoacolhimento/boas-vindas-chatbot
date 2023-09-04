@@ -97,6 +97,7 @@ export default function Chat() {
       {loading && <LoadingChatLine />}
 
       {messages.length < 2 && <ChatSuggestions />}
+
       <InputMessage
         input={input}
         setInput={setInput}
