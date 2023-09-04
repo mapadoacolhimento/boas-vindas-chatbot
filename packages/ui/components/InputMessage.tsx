@@ -26,13 +26,13 @@ const InputMessage = ({
             _hover={{
               borderWidth: "1px",
               borderStyle: "solid",
-              borderColor: "brand.primaryLight",
+              borderColor: "brand.mediumPrimary",
               boxShadow: "0px 3px 10px 0px #0000001a",
             }}
             _focus={{
               borderWidth: "1px",
               borderStyle: "solid",
-              borderColor: "brand.primaryLight",
+              borderColor: "brand.mediumPrimary",
               boxShadow: "0px 3px 10px 0px #0000001a",
             }}
             placeholder="Envie sua pergunta ou dúvida e a aIAna vai te ajudar"
@@ -94,13 +94,13 @@ const InputMessage = ({
             _hover={{
               borderWidth: "1px",
               borderStyle: "solid",
-              borderColor: "brand.mediumPurple",
+              borderColor: "brand.mediumPrimary",
               boxShadow: "0px 3px 10px 0px #0000001a",
             }}
             _focus={{
               borderWidth: "1px",
               borderStyle: "solid",
-              borderColor: "brand.mediumPurple",
+              borderColor: "brand.mediumPrimary",
               boxShadow: "0px 3px 10px 0px #0000001a",
             }}
           />
