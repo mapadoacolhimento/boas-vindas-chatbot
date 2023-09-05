@@ -26,7 +26,7 @@ const ChatSuggestions = ({}: any) => (
     <Text
       display={{ base: "none", sm: "initial" }}
       fontSize="sm"
-      fontWeight="semibold"
+      fontWeight="700"
       color="brand.primary"
     >
       Não sabe como começar? Temos algumas sugestões de conteúdo:
@@ -34,7 +34,7 @@ const ChatSuggestions = ({}: any) => (
     <Text
       display={{ base: "initial", sm: "none" }}
       fontSize="sm"
-      fontWeight="semibold"
+      fontWeight="700"
       color="brand.primary"
     >
       Sugestões de conteúdo:
