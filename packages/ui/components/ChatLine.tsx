@@ -54,7 +54,11 @@ export default function ChatLine({
   const formatteMessage = convertNewLines(content);
 
   return (
-    <VStack spacing={0} align={"flex-start"} justify={"flex-start"}>
+    <VStack 
+      spacing={0} 
+      align={"flex-start"} 
+      justify={"flex-start"}
+    >
       <Box
         bgColor={role === "assistant" ? "chatBackground" : "white"}
         py={"15px"}
