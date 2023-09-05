@@ -60,7 +60,10 @@ export default function ChatLine({
         py={"15px"}
         px={8}
       >
-        <HStack spacing={"10px"}>
+        <HStack
+          alignItems="flex-start" 
+          spacing={"10px"}
+        >
           {role === "assistant" ? (
             <ChatIcon boxSize={"14px"} />
           ) : (
