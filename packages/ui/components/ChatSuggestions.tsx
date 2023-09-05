@@ -50,6 +50,7 @@ const ChatSuggestions = ({}: any) => (
           key={index}
           variant={"option"}
           size={"sm"}
+          fontWeight="400"
         >
           {text}
         </Button>
