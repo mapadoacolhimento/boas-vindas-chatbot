@@ -18,7 +18,11 @@ const suggestions = [
   },
 ];
 
-const ChatSuggestions = () => (
+const ChatSuggestions = ({
+  handleClick,
+}: {
+  handleClick: (text: string) => void;
+}) => (
   <Box px={6} pb={4} w={"full"}>
     <Text
       display={{ base: "none", sm: "initial" }}
@@ -43,7 +47,13 @@ const ChatSuggestions = () => (
       pt={4}
     >
       {suggestions.map(({ text }, index) => (
-        <Button key={index} variant={"option"} size={"sm"} fontWeight="400">
+        <Button
+          key={index}
+          variant={"option"}
+          size={"sm"}
+          fontWeight="400"
+          onClick={() => handleClick(text)}
+        >
           {text}
         </Button>
       ))}

@@ -86,6 +86,10 @@ export default function Chat() {
     }
   };
 
+  function handleClick(text: string) {
+    setInput(text);
+  }
+
   return (
     <VStack boxSize={"full"} align={"flex-start"} justify={"flex-end"}>
       <Box overflowY={"auto"} maxH={"lg"} w={"full"} minH={56}>
@@ -96,8 +100,7 @@ export default function Chat() {
 
       {loading && <LoadingChatLine />}
 
-      {messages.length < 2 && <ChatSuggestions />}
-
+      {messages.length < 2 && <ChatSuggestions handleClick={handleClick} />}
       <InputMessage
         input={input}
         setInput={setInput}
