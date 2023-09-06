@@ -14,10 +14,22 @@ function ChatHeader() {
       align={"center"}
       pl={8}
     >
-      <Center boxSize={7} borderRadius={"base"} bg="#FFDBDB">
-        <ChatIcon boxSize={3.5} aria-label="Icon de mensagem" />
+      <Center 
+        boxSize={7} 
+        borderRadius={"base"} 
+        bg="#FFDBDB"
+      >
+        <ChatIcon 
+          boxSize={3.5} 
+          aria-label="Icon de mensagem" 
+        />
       </Center>
-      <Heading as={"h2"} color="brand.primary" size={"sm"}>
+      <Heading 
+        as={"h2"} 
+        color="brand.primary" 
+        size={"sm"} 
+        fontWeight="700"
+      >
         Fale com a IAna
       </Heading>
     </HStack>

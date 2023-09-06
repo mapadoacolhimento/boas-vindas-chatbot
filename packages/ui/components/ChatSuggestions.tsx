@@ -8,7 +8,7 @@ const suggestions = [
     text: "Mapa de serviços públicos",
   },
   {
-    text: "Como identificar se precisa de encaminhamento",
+    text: "Como fazer para encaminhar?",
   },
   {
     text: "Como denunciar?",
@@ -23,7 +23,7 @@ const ChatSuggestions = () => (
     <Text
       display={{ base: "none", sm: "initial" }}
       fontSize="sm"
-      fontWeight="semibold"
+      fontWeight="700"
       color="brand.primary"
     >
       Não sabe como começar? Temos algumas sugestões de conteúdo:
@@ -31,7 +31,7 @@ const ChatSuggestions = () => (
     <Text
       display={{ base: "initial", sm: "none" }}
       fontSize="sm"
-      fontWeight="semibold"
+      fontWeight="700"
       color="brand.primary"
     >
       Sugestões de conteúdo:
@@ -43,7 +43,7 @@ const ChatSuggestions = () => (
       pt={4}
     >
       {suggestions.map(({ text }, index) => (
-        <Button key={index} variant={"option"} size={"sm"} fontSize={"xs"}>
+        <Button key={index} variant={"option"} size={"sm"} fontWeight="400">
           {text}
         </Button>
       ))}

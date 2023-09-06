@@ -2,7 +2,11 @@ import { extendTheme } from "@chakra-ui/react";
 import { Fugaz_One, Nunito_Sans } from "next/font/google";
 import ButtonCustomization from "./ButtonCustomization";
 
-const nunito = Nunito_Sans({ subsets: ["latin"], weight: ["400", "700"] });
+const nunito = Nunito_Sans({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700"],
+  display: "swap"
+});
 const fugazOne = Fugaz_One({ subsets: ["latin"], weight: ["400"] });
 
 const theme = extendTheme({

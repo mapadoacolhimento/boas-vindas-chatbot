@@ -54,14 +54,21 @@ export default function ChatLine({
   const formatteMessage = convertNewLines(content);
 
   return (
-    <VStack spacing={0} align={"flex-start"} justify={"flex-start"}>
+    <VStack 
+      spacing={0} 
+      align={"flex-start"} 
+      justify={"flex-start"}
+    >
       <Box
         bgColor={role === "assistant" ? "chatBackground" : "white"}
         py={"15px"}
         px={8}
         width={"full"}
       >
-        <HStack spacing={"10px"}>
+        <HStack
+          alignItems="flex-start" 
+          spacing={"10px"}
+        >
           {role === "assistant" ? (
             <ChatIcon boxSize={"14px"} />
           ) : (
