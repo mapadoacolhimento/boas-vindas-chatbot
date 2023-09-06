@@ -18,11 +18,8 @@ const suggestions = [
   },
 ];
 
-const ChatSuggestions = ({}: any) => (
-  <Box
-    px={6}
-    pb={4}
-  >
+const ChatSuggestions = () => (
+  <Box px={6} pb={4} w={"full"}>
     <Text
       display={{ base: "none", sm: "initial" }}
       fontSize="sm"
@@ -40,18 +37,13 @@ const ChatSuggestions = ({}: any) => (
       Sugestões de conteúdo:
     </Text>
     <Stack
-      direction={[ "column", "row" ]}
+      direction={["column", "row"]}
       wrap="wrap"
       alignItems="flex-start"
-      pt="1rem"
+      pt={4}
     >
       {suggestions.map(({ text }, index) => (
-        <Button
-          key={index}
-          variant={"option"}
-          size={"sm"}
-          fontWeight="400"
-        >
+        <Button key={index} variant={"option"} size={"sm"} fontWeight="400">
           {text}
         </Button>
       ))}
