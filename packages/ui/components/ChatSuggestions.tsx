@@ -23,7 +23,7 @@ const ChatSuggestions = ({
 }: {
   handleClick: (text: string) => void;
 }) => (
-  <Box px={6} pb={4}>
+  <Box px={6} pb={4} w={"full"}>
     <Text
       display={{ base: "none", sm: "initial" }}
       fontSize="sm"
@@ -44,7 +44,7 @@ const ChatSuggestions = ({
       direction={["column", "row"]}
       wrap="wrap"
       alignItems="flex-start"
-      pt="1rem"
+      pt={4}
     >
       {suggestions.map(({ text }, index) => (
         <Button

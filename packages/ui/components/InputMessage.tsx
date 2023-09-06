@@ -1,4 +1,12 @@
-import { Button, Input, HStack, Box, InputGroup, InputRightElement } from "@chakra-ui/react";
+import {
+  Button,
+  Input,
+  Box,
+  IconButton,
+  InputGroup,
+  InputRightElement,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import SendMessageIcon from "./SendMessageIcon";
 
 const InputMessage = ({
@@ -10,115 +18,87 @@ const InputMessage = ({
   setInput: (msg: string) => void;
   sendMessage: (msg: string) => void;
 }) => {
+  const [isLargerThanMd] = useMediaQuery("(min-width: 768px)");
+  const placeholder = isLargerThanMd
+    ? "Envie sua pergunta ou dúvida e a aIAna vai te ajudar"
+    : "Envie sua pergunta ou dúvida";
+
   return (
-    <>
-      <HStack 
-        spacing={4} 
-        px={6} 
-        w={"full"}
-        display={{ base: "none", md: "flex" }}
-      >
-        <Box 
-          flex="1"
-        >
-          <Input
-            size="md"
-            _hover={{
-              borderWidth: "1px",
-              borderStyle: "solid",
-              borderColor: "brand.mediumPrimary",
-              boxShadow: "0px 3px 10px 0px #0000001a",
+    <Box px={6} w={"full"}>
+      <InputGroup gap={{ base: 0, md: 4 }}>
+        <Input
+          _hover={{
+            borderWidth: "1px",
+            borderStyle: "solid",
+            borderColor: "brand.primaryMedium",
+            boxShadow: "0px 3px 10px 0px #0000001a",
+          }}
+          _focus={{
+            borderWidth: "1px",
+            borderStyle: "solid",
+            borderColor: "brand.primaryMedium",
+            boxShadow: "0px 3px 10px 0px #0000001a",
+          }}
+          placeholder={placeholder}
+          _placeholder={{
+            opacity: 1,
+            color: "placeholder",
+            size: "md",
+            fontsize: "13px",
+            fontWeight: "400",
+          }}
+          borderRadius="md"
+          border="1px solid"
+          borderColor="brand.lightGray"
+          type="text"
+          aria-label="Campo de envio de mensagem"
+          required
+          value={input}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              sendMessage(input);
+              setInput("");
+            }
+          }}
+          onChange={(e) => {
+            setInput(e.target.value);
+          }}
+        />
+
+        <InputRightElement display={{ base: "flex", md: "none" }}>
+          <IconButton
+            size={"xs"}
+            color={"white"}
+            icon={<SendMessageIcon boxSize={4} />}
+            aria-label="Enviar mensagem"
+            type="submit"
+            onClick={() => {
+              sendMessage(input);
+              setInput("");
             }}
-            _focus={{
-              borderWidth: "1px",
-              borderStyle: "solid",
-              borderColor: "brand.mediumPrimary",
-              boxShadow: "0px 3px 10px 0px #0000001a",
-            }}
-            placeholder="Envie sua pergunta ou dúvida e a aIAna vai te ajudar"
-            _placeholder={{
-              opacity: 1,
-              color: "placeholder",
-              size: "md",
-              fontsize: "13px",
-              fontWeight: "400",
-            }}
-            borderRadius="md"
-            border="1px solid"
-            borderColor="brand.lightGray"
-            type="text"
-            aria-label="chat input"
-            required
-            value={input}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                sendMessage(input);
-                setInput("");
-              }
-            }}
-            onChange={(e) => {
-              setInput(e.target.value);
+            isDisabled={input === ""}
+            _disabled={{
+              bgColor: "transparent",
+              color: "brand.primaryGray",
             }}
           />
-        </Box>
+        </InputRightElement>
+
         <Button
+          display={{ base: "none", md: "initial" }}
           type="submit"
           onClick={() => {
             sendMessage(input);
             setInput("");
           }}
           isDisabled={input === ""}
+          minW={"90px"}
         >
           Enviar
         </Button>
-      </HStack>
-      <HStack
-        display={{base: "flex", md: "none"}}
-        spacing={4} px={6} w={"full"}
-      >
-        <InputGroup size='md'>
-          <Input
-            type={'text'}
-            aria-label="input chat"
-            placeholder="Envie sua pergunta ou dúvida"
-            _placeholder={{
-              opacity: 1,
-              color: "placeholder",
-              size: "md",
-              fontsize: "13px",
-              fontWeight: "400",
-            }}
-            borderRadius="7px"
-            border="1px solid"
-            borderColor="brand.lightGray"
-            _hover={{
-              borderWidth: "1px",
-              borderStyle: "solid",
-              borderColor: "brand.mediumPrimary",
-              boxShadow: "0px 3px 10px 0px #0000001a",
-            }}
-            _focus={{
-              borderWidth: "1px",
-              borderStyle: "solid",
-              borderColor: "brand.mediumPrimary",
-              boxShadow: "0px 3px 10px 0px #0000001a",
-            }}
-          />
-          <InputRightElement
-            px={"16px"}
-            py={"16px"}
-          >
-            <Button
-              size="lg"
-              bg="transparent"
-            >
-              <SendMessageIcon />
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-      </HStack>
-    </>
-  ); 
+      </InputGroup>
+    </Box>
+  );
 };
 
 export default InputMessage;
