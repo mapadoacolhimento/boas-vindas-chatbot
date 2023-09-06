@@ -18,11 +18,12 @@ const suggestions = [
   },
 ];
 
-const ChatSuggestions = ({}: any) => (
-  <Box
-    px={6}
-    pb={4}
-  >
+const ChatSuggestions = ({
+  handleClick,
+}: {
+  handleClick: (text: string) => void;
+}) => (
+  <Box px={6} pb={4}>
     <Text
       display={{ base: "none", sm: "initial" }}
       fontSize="sm"
@@ -40,7 +41,7 @@ const ChatSuggestions = ({}: any) => (
       Sugestões de conteúdo:
     </Text>
     <Stack
-      direction={[ "column", "row" ]}
+      direction={["column", "row"]}
       wrap="wrap"
       alignItems="flex-start"
       pt="1rem"
@@ -51,6 +52,7 @@ const ChatSuggestions = ({}: any) => (
           variant={"option"}
           size={"sm"}
           fontWeight="400"
+          onClick={() => handleClick(text)}
         >
           {text}
         </Button>
