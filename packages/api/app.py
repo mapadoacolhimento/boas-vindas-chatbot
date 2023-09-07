@@ -72,7 +72,12 @@ def fetch_res_chat():
         return jsonify({"error": "Invalid request format"}), 400
     
     messages = data["messages"]["content"]
-    return Response(chat_res(messages=messages), mimetype='text/event-stream')
+
+    # Create an SSE response with the correct Content-Type header
+    response = Response(chat_res(messages=messages), mimetype='text/event-stream')
+    response.headers['Cache-Control'] = 'no-cache'  # Optional: Prevent caching
+
+    return response
 
 @app.route("/")
 def hello_from_root():
