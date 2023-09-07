@@ -44,6 +44,7 @@ importers:
       eslint-config-prettier: ^9.0.0
       eslint-plugin-jest-dom: ^5.0.2
       eslint-plugin-testing-library: ^6.0.1
+      eventsource-parser: ^1.0.0
       framer-motion: ^10.16.1
       jest-environment-jsdom: ^29.6.4
       next: 13.4.3
@@ -61,6 +62,7 @@ importers:
       '@types/react': 18.2.6
       '@types/react-dom': 18.2.4
       '@vercel/examples-ui': 1.0.5_o6dt4yn4syzkhlixdxt4y57rzi
+      eventsource-parser: 1.0.0
       framer-motion: 10.16.1_biqbaboplfbrettd7655fr4n2y
       next: 13.4.3_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
@@ -4478,6 +4480,11 @@ packages:
     resolution: {integrity: sha512-kEcvvCBByWXGnZy6JUlgAp2gBIUjfCAV6P6TgT1/aaQKcmuAEC4OZTV1I4EWQLz2gxZw76atuVyvHhTxvi0Flw==}
     engines: {node: '>=0.4.x'}
     dev: true
+
+  /eventsource-parser/1.0.0:
+    resolution: {integrity: sha512-9jgfSCa3dmEme2ES3mPByGXfgZ87VbP97tng1G2nWwWx6bV2nYxm2AWCrbQjXToSe+yYlqaZNtxffR9IeQr95g==}
+    engines: {node: '>=14.18'}
+    dev: false
 
   /execa/5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
