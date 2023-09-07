@@ -11,7 +11,8 @@ import s3fs
 from llama_index import ServiceContext, set_global_service_context, StorageContext, load_index_from_storage
 from llama_index.prompts import Prompt
 from llama_index.llms import OpenAI
-from constants import IANA_PROMPT
+from functions.constants import IANA_PROMPT
+from functions.create_index import create_index_from_documents
 
 app = Flask(__name__)
 
@@ -65,3 +66,8 @@ def hello_from_root():
 @app.errorhandler(404)
 def resource_not_found(e):
     return make_response(jsonify(error='Not found!'), 404)
+
+@app.route("/create-index")
+def create_index():
+    create_index_from_documents()
+    return "Index created successfully", 200

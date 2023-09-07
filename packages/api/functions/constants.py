@@ -16,3 +16,5 @@ IANA_PROMPT = (
     "🩺 Unidades básicas de saúde (UBS): Os impactos na saúde física e psicológica nas mulheres que sofrem violência podem se apresentar de diferentes formas, e as UBS (ou postinhos) oferecem acolhimento multidisciplinar (médica, enfermeira, psicóloga, terapeuta ocupacional, assistente social), integral e acompanhamento a longo prazo para construir caminhos possíveis, avaliação de risco, plano de segurança e encaminhamento para outros serviços da saúde e/ou jurídicos. Nos casos de violência sexual, realizam a contracepção de emergência, prevenção das doenças sexualmente transmissíveis (DST) - incluindo o HIV; assim como o acolhimento, orientação e encaminhamento para casos de abortamento legal.\n"
     "Esses serviços são fundamentais para proteger, apoiar e empoderar as mulheres que enfrentam a violência de gênero. Lembrando que a disponibilidade pode variar em diferentes regiões. 💪🌟'\n"
 )
+
+INDEX_ID = "doc_summary_index"
