@@ -3,8 +3,8 @@ import os
 from llama_index import download_loader
 from llama_index.indices.document_summary import DocumentSummaryIndex
 
-from .common_functions import set_open_ai_api_key, create_service_context, create_s3_client
-from .constants import INDEX_ID
+from common_functions import set_open_ai_api_key, create_service_context, create_s3_client
+from constants import INDEX_ID
 
 
 def read_s3_documents():
@@ -12,7 +12,7 @@ def read_s3_documents():
 
   loader = S3Reader(
     bucket=os.environ["AWS_S3_BUCKET_NAME"],
-    key='documents/',
+    prefix='documents/',
     aws_access_id=os.environ["AWS_ROOT_ACCESS_KEY_ID"],
     aws_access_secret=os.environ["AWS_ROOT_SECRET_ACCESS_KEY"],
     s3_endpoint_url="https://s3.sa-east-1.amazonaws.com")
