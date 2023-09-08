@@ -21,4 +21,3 @@ def create_s3_client():
         endpoint_url="https://s3.sa-east-1.amazonaws.com",
     )
     return s3
-    

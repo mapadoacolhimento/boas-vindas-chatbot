@@ -3,8 +3,8 @@ import os
 from llama_index import download_loader
 from llama_index.indices.document_summary import DocumentSummaryIndex
 
-from common_functions import set_open_ai_api_key, create_service_context, create_s3_client
-from constants import INDEX_ID
+from functions.common_functions import set_open_ai_api_key, create_service_context, create_s3_client
+from functions.constants import INDEX_ID
 
 
 def read_s3_documents():
