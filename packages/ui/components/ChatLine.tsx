@@ -21,8 +21,7 @@ export const LoadingChatLine = () => (
       <Box className={styles.tidot}></Box>
       <Box className={styles.tidot}></Box>
       <Box className={styles.tidot}></Box>
-    </Box>
-    
+    </Box> 
   </Box>
 );
 
