@@ -21,6 +21,9 @@ provider:
   name: aws
   runtime: python3.9
   region: ${env:AWS_REGION}
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
   iamRoleStatements:
   - Effect: Allow
     Action:
