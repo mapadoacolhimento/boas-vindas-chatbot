@@ -20,7 +20,7 @@ def set_open_ai_api_key():
 
 def configure_llm():
     #Change this to GPT-4 once we have access
-    llm = OpenAI(temperature=0.1, model="gpt-3.5-turbo")
+    llm = OpenAI(temperature=0, model="gpt-3.5-turbo")
     service_context = ServiceContext.from_defaults(llm=llm)
     set_global_service_context(service_context)
 
@@ -48,6 +48,7 @@ configure_llm()
 doc_summary_index = load_index_from_s3()
 
 chat_engine = create_chat_engine()
+chat_engine.reset()
 
 def send_messages(messages):
     return chat_engine.chat(messages)
