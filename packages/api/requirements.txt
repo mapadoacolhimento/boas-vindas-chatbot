@@ -3,3 +3,4 @@ llama-index==0.8.3
 s3fs==2023.6.0
 pydantic==1.*
 nltk==3.8.1 
+pypdf==3.15.5
