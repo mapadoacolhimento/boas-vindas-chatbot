@@ -8,3 +8,5 @@ IANA_PROMPT = (
     "Ao responder uma pergunta, você deve se ater às informações encontradas pela query engine tool."
     "Responda exatamente as informações encontradas pela query engine tool. Não adicione nenhuma informação. Apenas reescreva para soar mais amigável. Use emojis. \n"
 )
+
+INDEX_ID = "doc_summary_index"

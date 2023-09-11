@@ -12,9 +12,9 @@ const UserQueryIcon = createIcon({
     <path
       key={"user-query-icon-2"}
       fill="#622565"
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="m1.865 7.785.004.006a2.52 2.52 0 0 1 .208 2.133h3.491a4.613 4.613 0 0 0 4.654-4.456A4.515 4.515 0 0 0 3.34 1.565 4.519 4.519 0 0 0 1.863 7.78l.003.005Zm9.25-2.297a5.506 5.506 0 0 1-5.555 5.33H1.604a.592.592 0 0 1-.51-.893c.313-.515.315-1.16.007-1.678A5.412 5.412 0 0 1 2.871.804a5.407 5.407 0 0 1 8.244 4.684Z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     />,
     <path
       key={"user-query-icon-3"}

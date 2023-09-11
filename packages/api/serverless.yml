@@ -21,6 +21,9 @@ provider:
   name: aws
   runtime: python3.9
   region: ${env:AWS_REGION}
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
   iamRoleStatements:
   - Effect: Allow
     Action:
@@ -37,6 +40,7 @@ functions:
       AWS_S3_BUCKET_NAME: ${env:AWS_S3_BUCKET_NAME}
       AWS_ROOT_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
       AWS_ROOT_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
+    timeout: 120
 
 plugins:
   - serverless-wsgi

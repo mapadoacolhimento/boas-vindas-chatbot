@@ -1,24 +1,17 @@
-import { NextResponse } from "next/server";
-
-const REST_API =
-  process.env.NEXT_PUBLIC_AWS_REST_API || "http://127.0.0.1:5000";
+import { LlamaIndexStream } from "../../utils/LlamaIndexStream";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    const stream = await LlamaIndexStream(body);
 
-    const res = await fetch(`${REST_API}/chat`, {
-      method: "POST",
+    return new Response(stream, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "text/event-stream",
       },
-      body: JSON.stringify(body),
     });
-
-    const data = await res.text();
-
-    return NextResponse.json(data);
   } catch (e) {
     console.log("req failed", e);
+    return new Response("Internal Server Error", { status: 500 });
   }
 }

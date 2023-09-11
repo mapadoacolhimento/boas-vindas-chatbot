@@ -3,15 +3,17 @@ try:
 except ImportError:
     pass
 
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, Response
 import os
 import openai
 import s3fs
+import asyncio
 
 from llama_index import ServiceContext, set_global_service_context, StorageContext, load_index_from_storage
 from llama_index.prompts import Prompt
 from llama_index.llms import OpenAI
-from constants import IANA_PROMPT
+from functions.constants import IANA_PROMPT
+from functions.create_index import create_index_from_documents
 
 app = Flask(__name__)
 
@@ -50,14 +52,34 @@ doc_summary_index = load_index_from_s3()
 chat_engine = create_chat_engine()
 chat_engine.reset()
 
-def send_messages(messages):
-    return chat_engine.chat(messages)
+def chat_res(messages):
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+        streaming_response = chat_engine.stream_chat(messages)
+        if streaming_response._is_done:
+            yield f'data: "[DONE]"\n\n'
+        for token in streaming_response.response_gen:
+            yield f'data: {token}\n\n'
+
+    except Exception as e:
+        app.logger.error(f"Error in chat_res: {e}")
 
 @app.route("/chat", methods = ['POST'])
 def fetch_res_chat():
     data = request.json
-    res = send_messages(messages=data["messages"]["content"])
-    return str(res), 200
+
+    if not data or "messages" not in data or "content" not in data["messages"]:
+        return jsonify({"error": "Invalid request format"}), 400
+    
+    messages = data["messages"]["content"]
+
+    # Create an SSE response with the correct Content-Type header
+    response = Response(chat_res(messages=messages), mimetype='text/event-stream')
+    response.headers['Cache-Control'] = 'no-cache'  # Optional: Prevent caching
+
+    return response
 
 @app.route("/")
 def hello_from_root():
@@ -66,3 +88,8 @@ def hello_from_root():
 @app.errorhandler(404)
 def resource_not_found(e):
     return make_response(jsonify(error='Not found!'), 404)
+
+@app.route("/create-index")
+def create_index():
+    create_index_from_documents()
+    return "Index created successfully", 200
