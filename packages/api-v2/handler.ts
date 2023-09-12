@@ -73,7 +73,7 @@ export const chat = async (
       ? decodeBase64(event.body)
       : event.body;
     const data = typeof decode === "string" ? JSON.parse(decode) : decode;
-    const { response } = await chatEngine.chat(data.query);
+    const { response } = await chatEngine.chat(data?.messages?.content);
 
     const result = {
       statusCode: 200,
