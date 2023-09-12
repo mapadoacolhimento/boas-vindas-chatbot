@@ -137,7 +137,7 @@ jobs:
           EOF
 
       - name: Copy .env file to api package
-        run: find packages/api -type d -exec cp .env {} \;
+        run: find packages/api packages/api-v2 -type d -exec cp .env {} \;
 
       - name: Install serverless globally
         run: pnpm add serverless --global

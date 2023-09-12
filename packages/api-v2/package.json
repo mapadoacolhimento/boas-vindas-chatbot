@@ -1,0 +1,30 @@
+{
+  "name": "api-v2",
+  "version": "0.0.1",
+  "description": "",
+  "main": "handler.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "dev": "serverless offline",
+    "deploy": "sls deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.120",
+    "@types/aws-sdk": "0.0.42",
+    "@types/dotenv-safe": "^8.1.2",
+    "@types/node": "^7.0.5",
+    "serverless": "^3.34.0",
+    "serverless-offline": "^12.0.4",
+    "serverless-plugin-typescript": "^2.1.5",
+    "tslint": "^5.5.0",
+    "tslint-config-standard": "^6.0.1",
+    "typescript": "^2.4.2"
+  },
+  "dependencies": {
+    "dotenv-safe": "^8.2.0"
+  }
+}
