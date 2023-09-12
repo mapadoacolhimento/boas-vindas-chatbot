@@ -3,6 +3,8 @@ import {
   storageContextFromDefaults,
   SimpleDirectoryReader,
   ContextChatEngine,
+  OpenAI,
+  serviceContextFromDefaults,
 } from "llamaindex";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { writeFileSync, existsSync, mkdirSync } from "fs";
@@ -55,8 +57,13 @@ export const chat = async (
     const secondStorageContext = await storageContextFromDefaults({
       persistDir,
     });
+
+    const openaiLLM = new OpenAI({ model: "gpt-3.5-turbo", temperature: 0 });
+    const serviceContext = serviceContextFromDefaults({ llm: openaiLLM });
+
     const loadedIndex = await VectorStoreIndex.init({
       storageContext: secondStorageContext,
+      serviceContext,
     });
     const retriever = loadedIndex.asRetriever();
     const chatEngine = new ContextChatEngine({
