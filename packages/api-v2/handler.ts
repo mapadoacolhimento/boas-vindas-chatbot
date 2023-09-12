@@ -6,13 +6,22 @@ import {
 } from "llamaindex";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
+function decodeBase64(encodedPayload) {
+  return Buffer.from(encodedPayload, "base64").toString("utf-8");
+}
+
 export const chat = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   try {
     console.log("event", JSON.stringify(event, null, 2));
+
+    const decode = event.isBase64Encoded
+      ? decodeBase64(event.body)
+      : event.body;
     const data =
-      typeof event.body === "string" ? JSON.parse(event.body) : event.body;
+      typeof decode === "string" ? JSON.parse(event.body) : event.body;
+
     const secondStorageContext = await storageContextFromDefaults({
       persistDir: "./storage",
     });

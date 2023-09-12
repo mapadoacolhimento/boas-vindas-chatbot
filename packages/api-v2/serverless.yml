@@ -22,9 +22,6 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: ${env:AWS_REGION}
-  apiGateway:
-    binaryMediaTypes:
-      - '*/*'
   iamRoleStatements:
   - Effect: Allow
     Action:
