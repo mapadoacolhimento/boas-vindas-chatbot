@@ -40,6 +40,10 @@ export const chat = async (
     return result;
   } catch (e) {
     console.log({ e });
+    return {
+      statusCode: 500,
+      body: JSON.stringify("Something went wrong"),
+    };
   }
 };
 
@@ -65,5 +69,9 @@ export const content = async (): Promise<APIGatewayProxyResult> => {
     return result;
   } catch (e) {
     console.log({ e });
+    return {
+      statusCode: 500,
+      body: JSON.stringify("Something went wrong"),
+    };
   }
 };
