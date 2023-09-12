@@ -5,6 +5,12 @@ import {
   ContextChatEngine,
 } from "llamaindex";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { writeFileSync, existsSync, mkdirSync } from "fs";
+import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
+
+const s3 = new S3Client({
+  region: process.env.AWS_REGION,
+});
 
 function decodeBase64(encodedPayload) {
   return Buffer.from(encodedPayload, "base64").toString("utf-8");
@@ -14,16 +20,40 @@ export const chat = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   try {
-    console.log("event", JSON.stringify(event, null, 2));
+    const vectorStoreCommand = new GetObjectCommand({
+      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Key: "vector_index/vector_store.json",
+    });
+    const vectorStoreRes = await s3.send(vectorStoreCommand);
+    const vectorStore = await vectorStoreRes.Body.transformToString();
 
-    const decode = event.isBase64Encoded
-      ? decodeBase64(event.body)
-      : event.body;
-    const data =
-      typeof decode === "string" ? JSON.parse(event.body) : event.body;
+    const indexStoreCommand = new GetObjectCommand({
+      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Key: "vector_index/index_store.json",
+    });
+    const indexStoreRes = await s3.send(indexStoreCommand);
+    const indexStore = await indexStoreRes.Body.transformToString();
+
+    const docStoreCommand = new GetObjectCommand({
+      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Key: "vector_index/doc_store.json",
+    });
+    const docStoreRes = await s3.send(docStoreCommand);
+    const docStore = await docStoreRes.Body.transformToString();
+
+    const isProd = process.env.NODE_ENV === "production";
+    const persistDir = isProd ? "/tmp" : "./tmp";
+
+    if (!existsSync(persistDir)) {
+      mkdirSync(persistDir);
+    }
+
+    writeFileSync(`${persistDir}/vector_store.json`, vectorStore);
+    writeFileSync(`${persistDir}/index_store.json`, indexStore);
+    writeFileSync(`${persistDir}/doc_store.json`, docStore);
 
     const secondStorageContext = await storageContextFromDefaults({
-      persistDir: "./storage",
+      persistDir,
     });
     const loadedIndex = await VectorStoreIndex.init({
       storageContext: secondStorageContext,
@@ -39,6 +69,10 @@ export const chat = async (
       ],
     });
 
+    const decode = event.isBase64Encoded
+      ? decodeBase64(event.body)
+      : event.body;
+    const data = typeof decode === "string" ? JSON.parse(decode) : decode;
     const { response } = await chatEngine.chat(data.query);
 
     const result = {

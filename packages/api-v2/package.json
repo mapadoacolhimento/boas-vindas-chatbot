@@ -27,6 +27,7 @@
     "typescript": "^2.4.2"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.410.0",
     "dotenv-safe": "^8.2.0",
     "llamaindex": "^0.0.27"
   }
