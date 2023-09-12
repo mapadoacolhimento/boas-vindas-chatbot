@@ -50,7 +50,6 @@ configure_llm()
 doc_summary_index = load_index_from_s3()
 
 chat_engine = create_chat_engine()
-chat_engine.reset()
 
 def chat_res(messages):
     try:
