@@ -151,4 +151,4 @@ jobs:
           if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
             args="--stage production"
           fi
-          pnpm run deploy $args
+          pnpm --filter api-v2 run deploy $args
