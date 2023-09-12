@@ -20,7 +20,7 @@ const InputMessage = ({
 }) => {
   const [isLargerThanMd] = useMediaQuery("(min-width: 768px)");
   const placeholder = isLargerThanMd
-    ? "Envie sua pergunta ou dúvida e a aIAna vai te ajudar"
+    ? "Envie sua pergunta ou dúvida e a IAna vai te ajudar"
     : "Envie sua pergunta ou dúvida";
 
   return (
