@@ -13,6 +13,8 @@ custom:
     watch:
       pattern: ['./handler.ts', 'src/**/*.ts'] # default .
       ignore: ['.serverless/**/*', '.build'] # default ['.build', 'dist', 'node_modules']
+  serverless-offline:
+    httpPort: 5000
 
 provider:
   name: aws
