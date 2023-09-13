@@ -35,8 +35,11 @@ async function loadIndex() {
     "index_store.json",
     "doc_store.json",
   ];
-  const persistDir = createPersistDir();
-  indexFilenames.map((filename) => readFromS3ToLocalFS(filename, persistDir));
+  const persistDir = getPersistDir();
+  const promises = indexFilenames.map((filename) =>
+    readFromS3ToLocalFS(filename, persistDir)
+  );
+  await Promise.all(promises);
 
   const storageContext = await storageContextFromDefaults({
     persistDir,
@@ -51,7 +54,7 @@ async function loadIndex() {
   return loadedIndex;
 }
 
-function createPersistDir() {
+function getPersistDir() {
   const isProd = process.env.NODE_ENV === "production";
   const persistDir = isProd ? "/tmp" : "./tmp";
 
