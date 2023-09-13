@@ -1,15 +1,14 @@
 /** @type {import('next').NextConfig} */
+
+const REST_API = process.env.NEXT_PUBLIC_AWS_REST_API || "http://localhost:5000/dev"
 const nextConfig = {
-  rewrites: async () => {
+  async rewrites() {
     return [
       {
-        source: '/api/:path*',
-        destination:
-          process.env.NODE_ENV === 'development'
-            ? 'http://127.0.0.1:5328/api/:path*'
-            : '/api/',
+        source: "/api/chat",
+        destination: `${REST_API}/chat`,
       },
-    ]
+    ];
   },
 }
 

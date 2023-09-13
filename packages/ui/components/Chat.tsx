@@ -17,6 +17,7 @@ export const initialMessages: ChatGPTMessage[] = [
       "Oie Ângela, Eu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
   },
 ];
+
 export default function Chat() {
   const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages);
   const [input, setInput] = useState("");
@@ -41,7 +42,7 @@ export default function Chat() {
     setMessages(newMessages);
     // const last10messages = newMessages.slice(-10); // remember last 10 messages
 
-    const response = await fetch(`/api`, {
+    const response = await fetch(`/api/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
