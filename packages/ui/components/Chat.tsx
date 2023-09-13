@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Box, VStack } from "@chakra-ui/react";
 
@@ -23,6 +23,17 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [cookie, setCookie] = useCookies([COOKIE_NAME]);
+  const messageEl = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messageEl && messageEl.current) {
+      messageEl.current.addEventListener("DOMNodeInserted", (event: any) => {
+        const { currentTarget: target } = event;
+        if (!target) return null;
+        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (!cookie[COOKIE_NAME]) {
@@ -74,7 +85,7 @@ export default function Chat() {
 
   return (
     <VStack boxSize={"full"} align={"flex-start"} justify={"flex-end"}>
-      <Box overflowY={"auto"} maxH={"lg"} w={"full"} minH={56}>
+      <Box overflowY={"auto"} maxH={"lg"} w={"full"} minH={56} ref={messageEl}>
         {messages.map(({ content, role }, index) => (
           <ChatLine key={index} role={role} content={content} />
         ))}
