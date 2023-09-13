@@ -42,16 +42,30 @@ export default function Chat() {
     setMessages(newMessages);
     // const last10messages = newMessages.slice(-10); // remember last 10 messages
 
-    const response = await fetch(`/api/chat`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        messages: { role: "user", content: message },
-        user: cookie[COOKIE_NAME],
-      }),
-    });
+    let response;
+    try {
+      response = await fetch(`/api/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: { role: "user", content: message },
+          user: cookie[COOKIE_NAME],
+        }),
+      });
+    } catch (error) {
+      const messagesWithError = [
+        ...newMessages,
+        { 
+          role: "assistant", 
+          content: "Parece que você está sem conexão! Verifique sua internet e tente novamente"
+        } as ChatGPTMessage,
+      ];
+      setMessages(messagesWithError);
+      setLoading(false);
+      return;
+    }
 
     console.log("Edge function returned.");
 
@@ -90,7 +104,7 @@ export default function Chat() {
   function handleClick(text: string) {
     setInput(text);
   }
-
+  console.log(messages)
   return (
     <VStack boxSize={"full"} align={"flex-start"} justify={"flex-end"}>
       <Box overflowY={"auto"} maxH={"lg"} w={"full"} minH={56}>
