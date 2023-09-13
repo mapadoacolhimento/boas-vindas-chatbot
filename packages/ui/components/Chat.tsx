@@ -35,11 +35,9 @@ export default function Chat() {
   // send message to API /api/chat endpoint
   const sendMessage = async (message: string) => {
     setLoading(true);
-    const newMessages = [
-      ...messages,
-      { role: "user", content: message } as ChatGPTMessage,
-    ];
-    setMessages(newMessages);
+    const newMessages = { role: "user", content: message } as ChatGPTMessage;
+    setMessages((prevMessages) => [...prevMessages, newMessages]);
+
     // const last10messages = newMessages.slice(-10); // remember last 10 messages
 
     const response = await fetch(`/api/chat`, {
@@ -53,38 +51,21 @@ export default function Chat() {
       }),
     });
 
-    console.log("Edge function returned.");
-
     if (!response.ok) {
       throw new Error(response.statusText);
     }
 
-    // This data is a ReadableStream
-    const data = response.body;
+    const data = await response.json();
     if (!data) {
       return;
     }
 
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { role: "assistant", content: data } as ChatGPTMessage,
+    ]);
 
-    let lastMessage = "";
-
-    while (!done) {
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      const chunkValue = decoder.decode(value);
-
-      lastMessage = lastMessage + chunkValue;
-
-      setMessages([
-        ...newMessages,
-        { role: "assistant", content: lastMessage } as ChatGPTMessage,
-      ]);
-
-      setLoading(false);
-    }
+    setLoading(false);
   };
 
   function handleClick(text: string) {
