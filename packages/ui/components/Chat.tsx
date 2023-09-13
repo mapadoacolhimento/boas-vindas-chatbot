@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Box, VStack } from "@chakra-ui/react";
 
@@ -23,6 +23,17 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [cookie, setCookie] = useCookies([COOKIE_NAME]);
+  const messageEl = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messageEl && messageEl.current) {
+      messageEl.current.addEventListener("DOMNodeInserted", (event: any) => {
+        const { currentTarget: target } = event;
+        if (!target) return null;
+        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (!cookie[COOKIE_NAME]) {
@@ -35,11 +46,9 @@ export default function Chat() {
   // send message to API /api/chat endpoint
   const sendMessage = async (message: string) => {
     setLoading(true);
-    const newMessages = [
-      ...messages,
-      { role: "user", content: message } as ChatGPTMessage,
-    ];
-    setMessages(newMessages);
+    const newMessages = { role: "user", content: message } as ChatGPTMessage;
+    setMessages((prevMessages) => [...prevMessages, newMessages]);
+
     // const last10messages = newMessages.slice(-10); // remember last 10 messages
 
     let response;
@@ -55,14 +64,11 @@ export default function Chat() {
         }),
       });
     } catch (error) {
-      const messagesWithError = [
-        ...newMessages,
-        { 
-          role: "assistant", 
-          content: "Parece que você está sem conexão! Verifique sua internet e tente novamente"
-        } as ChatGPTMessage,
-      ];
-      setMessages(messagesWithError);
+      const messageWithError = { 
+        role: "assistant", 
+        content: "Parece que você está sem conexão! Verifique sua internet e tente novamente"
+      } as ChatGPTMessage;
+      setMessages((prevMessages) => [...prevMessages, messageWithError]);
       setLoading(false);
       return;
     }
@@ -73,32 +79,17 @@ export default function Chat() {
       throw new Error(response.statusText);
     }
 
-    // This data is a ReadableStream
-    const data = response.body;
+    const data = await response.json();
     if (!data) {
       return;
     }
 
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { role: "assistant", content: data } as ChatGPTMessage,
+    ]);
 
-    let lastMessage = "";
-
-    while (!done) {
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      const chunkValue = decoder.decode(value);
-
-      lastMessage = lastMessage + chunkValue;
-
-      setMessages([
-        ...newMessages,
-        { role: "assistant", content: lastMessage } as ChatGPTMessage,
-      ]);
-
-      setLoading(false);
-    }
+    setLoading(false);
   };
 
   function handleClick(text: string) {
@@ -107,7 +98,7 @@ export default function Chat() {
   console.log(messages)
   return (
     <VStack boxSize={"full"} align={"flex-start"} justify={"flex-end"}>
-      <Box overflowY={"auto"} maxH={"lg"} w={"full"} minH={56}>
+      <Box overflowY={"auto"} maxH={"lg"} w={"full"} minH={56} ref={messageEl}>
         {messages.map(({ content, role }, index) => (
           <ChatLine key={index} role={role} content={content} />
         ))}
@@ -116,6 +107,7 @@ export default function Chat() {
       {loading && <LoadingChatLine />}
 
       {messages.length < 2 && <ChatSuggestions handleClick={handleClick} />}
+
       <InputMessage
         input={input}
         setInput={setInput}
