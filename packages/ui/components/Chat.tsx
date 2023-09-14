@@ -6,8 +6,6 @@ import { Box, VStack } from "@chakra-ui/react";
 
 import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
 import { ChatSuggestions, InputMessage } from "@/components";
-import { text } from "stream/consumers";
-import { Assistant } from "next/font/google";
 
 const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 
@@ -47,14 +45,13 @@ export default function Chat() {
 
   // send message to API /api/chat endpoint
   const sendMessage = async (message: string) => {
-    setLoading(true);
-    const newMessages = { role: "user", content: message } as ChatGPTMessage;
-    setMessages((prevMessages) => [...prevMessages, newMessages]);
-    // const last10messages = newMessages.slice(-10); // remember last 10 messages
-
-    let response;
     try {
-      response = await fetch(`/api/chat`, {
+      setLoading(true);
+      const newMessages = { role: "user", content: message } as ChatGPTMessage;
+      setMessages((prevMessages) => [...prevMessages, newMessages]);
+      // const last10messages = newMessages.slice(-10); // remember last 10 messages
+
+      const response = await fetch(`/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,52 +61,40 @@ export default function Chat() {
           user: cookie[COOKIE_NAME],
         }),
       });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const data = await response.json();
+
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { role: "assistant", content: data } as ChatGPTMessage,
+      ]);
+
+      setLoading(false);
     } catch (error) {
-      const messageWithError = { 
-        role: "assistant", 
-        content: "Parece que você está sem conexão! Verifique sua internet e tente novamente"
+      console.error(error);
+      // const messageWithError = {
+      //   role: "assistant",
+      //   content:
+      //     "Parece que você está sem conexão! Verifique sua internet e tente novamente",
+      // } as ChatGPTMessage;
+      const messageWithError = {
+        role: "assistant",
+        content:
+          "Ops... Algo deu errado!\n Não estamos conseguindo carregar o chat com a IAna. Por favor, tente novamente mais tarde!",
       } as ChatGPTMessage;
       setMessages((prevMessages) => [...prevMessages, messageWithError]);
       setLoading(false);
-      return;
     }
-
-    console.log(`Edge function returned.`);
-
-    if (!response.ok) {
-      setLoading(false);
-      const messageErrorUi = {
-        role: "assistant",
-        content: "Ops... Algo deu errado!\n Não estamos conseguindo carregar o chat com a IAna. Por favor, tente novamente mais tarde!"
-      } as ChatGPTMessage;
-      setMessages((prevMessages) => [...prevMessages, messageErrorUi]);
-      return;
-    }
-
-    const data = await response.json();
-    
-    if (!data || Object.keys(data).length === 0) {
-      setLoading(false);
-      const messageErrorResponse = {
-        role: "assistant",
-        content: "Ops... Algo deu errado!\n Não estamos conseguindo carregar o chat com a IAna. Por favor, tente novamente mais tarde!"
-      } as ChatGPTMessage;
-      setMessages((prevMessages) => [...prevMessages, messageErrorResponse]);
-      return;
-    }
-
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { role: "assistant", content: data } as ChatGPTMessage,
-    ]);
-
-    setLoading(false);
   };
 
   function handleClick(text: string) {
     setInput(text);
   }
-  
+
   return (
     <VStack boxSize={"full"} align={"flex-start"} justify={"flex-end"}>
       <Box overflowY={"auto"} maxH={"lg"} w={"full"} minH={56} ref={messageEl}>
