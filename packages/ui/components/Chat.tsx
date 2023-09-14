@@ -6,6 +6,8 @@ import { Box, VStack } from "@chakra-ui/react";
 
 import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
 import { ChatSuggestions, InputMessage } from "@/components";
+import { text } from "stream/consumers";
+import { Assistant } from "next/font/google";
 
 const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 
@@ -48,7 +50,6 @@ export default function Chat() {
     setLoading(true);
     const newMessages = { role: "user", content: message } as ChatGPTMessage;
     setMessages((prevMessages) => [...prevMessages, newMessages]);
-
     // const last10messages = newMessages.slice(-10); // remember last 10 messages
 
     let response;
@@ -73,10 +74,16 @@ export default function Chat() {
       return;
     }
 
-    console.log("Edge function returned.");
+    console.log(`Edge function returned.`);
 
     if (!response.ok) {
-      throw new Error(response.statusText);
+      setLoading(false);
+      const messageErrorUi = {
+        role: "assistant",
+        content: "Ops... Algo deu errado!\n Não estamos conseguindo carregar o chat com a IAna. Por favor, tente novamente mais tarde!"
+      } as ChatGPTMessage;
+      setMessages((prevMessages) => [...prevMessages, messageErrorUi]);
+      return;
     }
 
     const data = await response.json();
