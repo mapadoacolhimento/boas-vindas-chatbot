@@ -24,6 +24,40 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [cookie, setCookie] = useCookies([COOKIE_NAME]);
   const messageEl = useRef<HTMLDivElement | null>(null);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    // Update network status
+    const handleStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    // Listen to the online status
+    window.addEventListener("online", handleStatusChange);
+
+    // Listen to the offline status
+    window.addEventListener("offline", handleStatusChange);
+
+    // Specify how to clean up after this effect for performance improvment
+    return () => {
+      window.removeEventListener("online", handleStatusChange);
+      window.removeEventListener("offline", handleStatusChange);
+    };
+  }, [isOnline]);
+
+  useEffect(() => {
+    if (!isOnline) {
+      const messageWithNoConnectError = {
+        role: "assistant",
+        content:
+          "Parece que você está sem conexão! Verifique sua internet e tente novamente",
+      } as ChatGPTMessage;
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        messageWithNoConnectError,
+      ]);
+    }
+  }, [isOnline]);
 
   useEffect(() => {
     if (messageEl && messageEl.current) {
@@ -76,11 +110,6 @@ export default function Chat() {
       setLoading(false);
     } catch (error) {
       console.error(error);
-      // const messageWithError = {
-      //   role: "assistant",
-      //   content:
-      //     "Parece que você está sem conexão! Verifique sua internet e tente novamente",
-      // } as ChatGPTMessage;
       const messageWithError = {
         role: "assistant",
         content:
