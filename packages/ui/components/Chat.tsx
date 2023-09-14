@@ -104,7 +104,7 @@ export default function Chat() {
 
       setMessages((prevMessages) => [
         ...prevMessages,
-        { role: "assistant", content: data } as ChatGPTMessage,
+        { role: "assistant", content: data || "" } as ChatGPTMessage,
       ]);
 
       setLoading(false);
