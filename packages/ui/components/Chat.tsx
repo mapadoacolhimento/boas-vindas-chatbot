@@ -95,7 +95,7 @@ export default function Chat() {
   function handleClick(text: string) {
     setInput(text);
   }
-  console.log(messages)
+  
   return (
     <VStack boxSize={"full"} align={"flex-start"} justify={"flex-end"}>
       <Box overflowY={"auto"} maxH={"lg"} w={"full"} minH={56} ref={messageEl}>
