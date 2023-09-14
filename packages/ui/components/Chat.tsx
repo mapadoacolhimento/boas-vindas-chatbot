@@ -87,7 +87,14 @@ export default function Chat() {
     }
 
     const data = await response.json();
-    if (!data) {
+    
+    if (!data || Object.keys(data).length === 0) {
+      setLoading(false);
+      const messageErrorResponse = {
+        role: "assistant",
+        content: "Ops... Algo deu errado!\n Não estamos conseguindo carregar o chat com a IAna. Por favor, tente novamente mais tarde!"
+      } as ChatGPTMessage;
+      setMessages((prevMessages) => [...prevMessages, messageErrorResponse]);
       return;
     }
 
