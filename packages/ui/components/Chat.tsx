@@ -14,7 +14,7 @@ export const initialMessages: ChatGPTMessage[] = [
   {
     role: "assistant",
     content:
-      "Oie Ângela, Eu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
+      "Oie, Ângela! \n Eu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
   },
 ];
 
@@ -46,10 +46,9 @@ export default function Chat() {
   // send message to API /api/chat endpoint
   const sendMessage = async (message: string) => {
     setLoading(true);
+    // const last10messages = messages.slice(-10);
     const newMessages = { role: "user", content: message } as ChatGPTMessage;
     setMessages((prevMessages) => [...prevMessages, newMessages]);
-
-    // const last10messages = newMessages.slice(-10); // remember last 10 messages
 
     const response = await fetch(`/api/chat`, {
       method: "POST",
@@ -59,6 +58,7 @@ export default function Chat() {
       body: JSON.stringify({
         messages: { role: "user", content: message },
         user: cookie[COOKIE_NAME],
+        chatHistory: messages,
       }),
     });
 
