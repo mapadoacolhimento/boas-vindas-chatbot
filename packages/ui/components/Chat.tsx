@@ -14,7 +14,7 @@ export const initialMessages: ChatGPTMessage[] = [
   {
     role: "assistant",
     content:
-      "Oie Ângela, Eu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
+      "Oie, Ângela! \nEu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
   },
 ];
 
@@ -81,9 +81,8 @@ export default function Chat() {
   const sendMessage = async (message: string) => {
     try {
       setLoading(true);
-      const newMessages = { role: "user", content: message } as ChatGPTMessage;
-      setMessages((prevMessages) => [...prevMessages, newMessages]);
-      // const last10messages = newMessages.slice(-10); // remember last 10 messages
+      const newMessage = { role: "user", content: message } as ChatGPTMessage;
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
 
       const response = await fetch(`/api/chat`, {
         method: "POST",
@@ -91,8 +90,9 @@ export default function Chat() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          messages: { role: "user", content: message },
+          messages: newMessage,
           user: cookie[COOKIE_NAME],
+          chatHistory: messages,
         }),
       });
 
@@ -101,10 +101,15 @@ export default function Chat() {
       }
 
       const data = await response.json();
+      const noDataErrorMsg =
+        "Ops... um problema inesperado ocorreu. Aguarde alguns instantes e tente novamente.";
 
       setMessages((prevMessages) => [
         ...prevMessages,
-        { role: "assistant", content: data || "Ops... um problema inesperado     ocorreu. Aguarde alguns instantes e tente novamente." } as ChatGPTMessage,
+        {
+          role: "assistant",
+          content: data || noDataErrorMsg,
+        } as ChatGPTMessage,
       ]);
 
       setLoading(false);

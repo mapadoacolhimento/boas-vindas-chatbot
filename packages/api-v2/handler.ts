@@ -5,6 +5,7 @@ import {
 } from "llamaindex";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { createChatEngine } from "./src/createChatEngine";
+import { PROMPT } from "./src/prompt";
 
 function decodeBase64(encodedPayload) {
   return Buffer.from(encodedPayload, "base64").toString("utf-8");
@@ -16,7 +17,11 @@ createChatEngine().then((engine) => (chatEngine = engine));
 async function chatHandler(event: APIGatewayProxyEvent) {
   const decode = event.isBase64Encoded ? decodeBase64(event.body) : event.body;
   const data = typeof decode === "string" ? JSON.parse(decode) : decode;
-  const { response } = await chatEngine.chat(data?.messages?.content);
+  const chatHistory = [...PROMPT, ...data?.chatHistory];
+  const { response } = await chatEngine.chat(
+    data?.messages?.content,
+    chatHistory
+  );
 
   const result = {
     statusCode: 200,
