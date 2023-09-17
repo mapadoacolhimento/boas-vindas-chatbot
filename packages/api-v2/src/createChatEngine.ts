@@ -19,7 +19,7 @@ export const createChatEngine = async () => {
 
   const chatEngine = new ContextChatEngine({
     retriever,
-    chatHistory: PROMPT,
+    // chatHistory: PROMPT,
   });
 
   return chatEngine;
