@@ -1,7 +1,7 @@
 "use client";
 
 import { HStack, VStack, Heading, Center } from "@chakra-ui/react";
-import { Chat, ChatIcon } from "../components";
+import { Chat, ChatIcon } from "../../components";
 import { ChatGPTMessage } from "@/components/ChatLine";
 
 function ChatHeader() {
@@ -29,11 +29,11 @@ export const initialMessages: ChatGPTMessage[] = [
   {
     role: "assistant",
     content:
-      "Oie, Ângela! \nEu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
+      "Oie, Viviane! \nEu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
   },
 ];
 
-function Home() {
+function Assessment() {
   return (
     <VStack spacing="10em" justify={"center"} px={4} py={6}>
       <VStack
@@ -53,4 +53,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Assessment;

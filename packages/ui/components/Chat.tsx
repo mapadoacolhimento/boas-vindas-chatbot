@@ -9,16 +9,11 @@ import { ChatSuggestions, InputMessage } from "@/components";
 
 const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 
-// default first message to display in UI (not necessary to define the prompt)
-export const initialMessages: ChatGPTMessage[] = [
-  {
-    role: "assistant",
-    content:
-      "Oie, Ângela! \nEu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
-  },
-];
-
-export default function Chat() {
+export default function Chat({
+  initialMessages,
+}: {
+  initialMessages: ChatGPTMessage[];
+}) {
   const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
