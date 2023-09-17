@@ -6,7 +6,7 @@ import {
 } from "llamaindex";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { createChatEngine } from "./src/createChatEngine";
-import { PROMPT } from "./src/prompt";
+import { PROMPT, ASSESSMENT_PROMPT } from "./src/prompt";
 
 function decodeBase64(encodedPayload) {
   return Buffer.from(encodedPayload, "base64").toString("utf-8");
@@ -55,6 +55,26 @@ export const chat = async (
       return res;
     } else {
       const res = await waitForChatEngine(event, PROMPT);
+      return res;
+    }
+  } catch (e) {
+    console.log({ e });
+    return {
+      statusCode: 500,
+      body: JSON.stringify("Something went wrong"),
+    };
+  }
+};
+
+export const assessment = async (
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> => {
+  try {
+    if (chatEngine) {
+      const res = await chatHandler(event, ASSESSMENT_PROMPT);
+      return res;
+    } else {
+      const res = await waitForChatEngine(event, ASSESSMENT_PROMPT);
       return res;
     }
   } catch (e) {
