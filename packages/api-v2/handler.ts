@@ -25,11 +25,25 @@ async function chatHandler(event: APIGatewayProxyEvent, prompt: ChatMessage[]) {
     },
     {
       role: "assistant",
-      content: `Oie, Viviane! Agora vamos avaliar o seu aprendizado. Eu vou te perguntar EXATAMENTE "Como identificar se a mulher precisa ser encaminha para a rede de serviços públicos?" e vou aguardar sua resposta. Quando você me responder, eu vou te explicar essa a mesma pergunta, buscando EXATAMENTE as informações do contexto. Eu vou responder EXATAMENTEA as informações encontradas no context. Eu NÃO vou usar os meus conhecimentos prévios`,
-    },
-    {
-      role: "system",
-      content: `Lembre-se de usar EXATAMENTE as informações encontradas pelo contexto. NÃO use seu conhecimento prévio.`,
+      content: `Oie, Viviane! Agora vamos avaliar o seu aprendizado. Eu vou te perguntar EXATAMENTE "Como identificar se a mulher precisa ser encaminha para a rede de serviços públicos?" e vou aguardar sua resposta. 
+      
+      A resposta correta seria:
+
+      ---
+      "Para identificar se a mulher precisa ser encaminhada para a rede de serviços públicos, é importante considerar os fatores de vulnerabilidade social que estão associados ao caso. Esses fatores vão além do atendimento especializado e envolvem questões como autonomia financeira, empregabilidade, sexualidade, questões geracionais, condições de moradia, saúde mental ou física, direitos sexuais e reprodutivos, entre outros.
+
+      Para identificar esses fatores, você pode fazer algumas perguntas, como:
+
+      1. A pessoa acolhida necessita de abrigamento urgente ou temporário?
+      2. A pessoa acolhida necessita ser inserida em algum programa de transferência de renda?
+      3. A pessoa acolhida necessita ser inserida em algum programa de auxílio moradia?
+      4. A pessoa acolhida necessita ser inserida em um serviço de fortalecimento de vínculos?
+
+      Essas perguntas ajudam a identificar as necessidades específicas da mulher e indicam se é necessário encaminhá-la para a rede de serviços adequada. É importante lembrar que o acompanhamento deve ser de médio a longo prazo para lidar de forma integral com essas questões."
+      ---
+
+      Depois que você responder, eu vou complementar a sua resposta, utilizando EXATAMENTE as informações corretas acima.
+      `,
     },
     ...data?.chatHistory,
   ];
