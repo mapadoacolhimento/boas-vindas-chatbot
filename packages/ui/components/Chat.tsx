@@ -24,6 +24,40 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [cookie, setCookie] = useCookies([COOKIE_NAME]);
   const messageEl = useRef<HTMLDivElement | null>(null);
+  const [isOnline, setIsOnline] = useState(true);
+
+  useEffect(() => {
+    // Update network status
+    const handleStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    // Listen to the online status
+    window.addEventListener("online", handleStatusChange);
+
+    // Listen to the offline status
+    window.addEventListener("offline", handleStatusChange);
+
+    // Specify how to clean up after this effect for performance improvment
+    return () => {
+      window.removeEventListener("online", handleStatusChange);
+      window.removeEventListener("offline", handleStatusChange);
+    };
+  }, [isOnline]);
+
+  useEffect(() => {
+    if (!isOnline) {
+      const messageWithNoConnectError = {
+        role: "assistant",
+        content:
+          "Parece que você está sem conexão! Verifique sua internet e tente novamente",
+      } as ChatGPTMessage;
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        messageWithNoConnectError,
+      ]);
+    }
+  }, [isOnline]);
 
   useEffect(() => {
     if (messageEl && messageEl.current) {
@@ -45,38 +79,45 @@ export default function Chat() {
 
   // send message to API /api/chat endpoint
   const sendMessage = async (message: string) => {
-    setLoading(true);
-    const newMessages = { role: "user", content: message } as ChatGPTMessage;
-    setMessages((prevMessages) => [...prevMessages, newMessages]);
+    try {
+      setLoading(true);
+      const newMessages = { role: "user", content: message } as ChatGPTMessage;
+      setMessages((prevMessages) => [...prevMessages, newMessages]);
+      // const last10messages = newMessages.slice(-10); // remember last 10 messages
 
-    // const last10messages = newMessages.slice(-10); // remember last 10 messages
+      const response = await fetch(`/api/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: { role: "user", content: message },
+          user: cookie[COOKIE_NAME],
+        }),
+      });
 
-    const response = await fetch(`/api/chat`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        messages: { role: "user", content: message },
-        user: cookie[COOKIE_NAME],
-      }),
-    });
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
 
-    if (!response.ok) {
-      throw new Error(response.statusText);
+      const data = await response.json();
+
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { role: "assistant", content: data || "Ops... um problema inesperado     ocorreu. Aguarde alguns instantes e tente novamente." } as ChatGPTMessage,
+      ]);
+
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      const messageWithError = {
+        role: "assistant",
+        content:
+          "Ops... Algo deu errado!\n Não estamos conseguindo carregar o chat com a IAna. Por favor, tente novamente mais tarde!",
+      } as ChatGPTMessage;
+      setMessages((prevMessages) => [...prevMessages, messageWithError]);
+      setLoading(false);
     }
-
-    const data = await response.json();
-    if (!data) {
-      return;
-    }
-
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { role: "assistant", content: data } as ChatGPTMessage,
-    ]);
-
-    setLoading(false);
   };
 
   function handleClick(text: string) {
