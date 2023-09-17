@@ -2,6 +2,7 @@ import {
   VectorStoreIndex,
   storageContextFromDefaults,
   SimpleDirectoryReader,
+  ChatMessage,
 } from "llamaindex";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { createChatEngine } from "./src/createChatEngine";
@@ -14,10 +15,10 @@ function decodeBase64(encodedPayload) {
 let chatEngine = null;
 createChatEngine().then((engine) => (chatEngine = engine));
 
-async function chatHandler(event: APIGatewayProxyEvent) {
+async function chatHandler(event: APIGatewayProxyEvent, prompt: ChatMessage[]) {
   const decode = event.isBase64Encoded ? decodeBase64(event.body) : event.body;
   const data = typeof decode === "string" ? JSON.parse(decode) : decode;
-  const chatHistory = [...PROMPT, ...data?.chatHistory];
+  const chatHistory = [...prompt, ...data?.chatHistory];
   const { response } = await chatEngine.chat(
     data?.messages?.content,
     chatHistory
@@ -33,12 +34,15 @@ async function chatHandler(event: APIGatewayProxyEvent) {
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function waitForChatEngine(event: APIGatewayProxyEvent) {
+async function waitForChatEngine(
+  event: APIGatewayProxyEvent,
+  prompt: ChatMessage[]
+) {
   if (!chatEngine) {
     await sleep(150);
-    return waitForChatEngine(event);
+    return waitForChatEngine(event, prompt);
   } else {
-    return chatHandler(event);
+    return chatHandler(event, prompt);
   }
 }
 
@@ -47,10 +51,10 @@ export const chat = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     if (chatEngine) {
-      const res = await chatHandler(event);
+      const res = await chatHandler(event, PROMPT);
       return res;
     } else {
-      const res = await waitForChatEngine(event);
+      const res = await waitForChatEngine(event, PROMPT);
       return res;
     }
   } catch (e) {
