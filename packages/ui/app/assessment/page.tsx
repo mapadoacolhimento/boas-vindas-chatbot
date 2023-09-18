@@ -27,7 +27,7 @@ function ChatHeader() {
   );
 }
 
-export const initialMessages: ChatGPTMessage[] = [
+const initialMessages: ChatGPTMessage[] = [
   {
     role: "assistant",
     content: `Oie, Viviane! 
