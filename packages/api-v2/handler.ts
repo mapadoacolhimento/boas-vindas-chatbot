@@ -19,7 +19,6 @@ async function chatHandler(event: APIGatewayProxyEvent, prompt: ChatMessage[]) {
   const decode = event.isBase64Encoded ? decodeBase64(event.body) : event.body;
   const data = typeof decode === "string" ? JSON.parse(decode) : decode;
   const chatHistory = [...prompt, ...data?.chatHistory];
-  console.log({ chatHistory });
   const { response } = await chatEngine.chat(
     data?.messages?.content,
     chatHistory
