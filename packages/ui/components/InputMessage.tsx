@@ -85,7 +85,8 @@ const InputMessage = ({
         />
 
         <AutoResizeTextarea
-          display={{ base: "initial", md: "none" }}
+          display={{ base:"initial", md: "none" }}
+          maxRows={3}
           _hover={{
             borderWidth: "1px",
             borderStyle: "solid",
@@ -128,8 +129,10 @@ const InputMessage = ({
           pr={35}
         />
         <InputRightElement
-          display={{ base: "initial", md: "none" }}
+          display={{ base: "flex", md: "none" }}
+          p="5px"
           h="100%"
+          
         >
           <IconButton
             size={"xs"}
