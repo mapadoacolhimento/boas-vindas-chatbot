@@ -30,15 +30,17 @@ function ChatHeader() {
 const initialMessages: ChatGPTMessage[] = [
   {
     role: "assistant",
-    content:
-      "Oie, Ângela! \nEu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
+    content: `Oie, Viviane! 
+    Agora vamos avaliar o seu aprendizado. Eu vou te fazer uma pergunta e você me manda uma resposta bem completa.
+    Bora começar?`,
   },
 ];
 
 const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 
-function Home() {
+function Assessment() {
   const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages);
+
   const [loading, setLoading] = useState(false);
   const [cookie, setCookie] = useCookies([COOKIE_NAME]);
 
@@ -57,7 +59,7 @@ function Home() {
       const newMessage = { role: "user", content: message } as ChatGPTMessage;
       setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-      const response = await fetch(`/api/chat`, {
+      const response = await fetch(`/api/chat/assessment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +86,6 @@ function Home() {
           content: data || noDataErrorMsg,
         } as ChatGPTMessage,
       ]);
-
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -114,7 +115,7 @@ function Home() {
         <Chat
           loading={loading}
           sendMessage={sendMessage}
-          messages={messages}
+          messages={messages.filter((m) => m.role !== "system")}
           setMessages={setMessages}
         />
       </VStack>
@@ -122,4 +123,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Assessment;

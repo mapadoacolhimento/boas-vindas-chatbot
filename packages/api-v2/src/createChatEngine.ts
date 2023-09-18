@@ -7,7 +7,6 @@ import {
   serviceContextFromDefaults,
   storageContextFromDefaults,
 } from "llamaindex";
-import { PROMPT } from "./prompt";
 
 const s3 = new S3Client({
   region: process.env.AWS_REGION,
@@ -19,7 +18,6 @@ export const createChatEngine = async () => {
 
   const chatEngine = new ContextChatEngine({
     retriever,
-    chatHistory: PROMPT,
   });
 
   return chatEngine;

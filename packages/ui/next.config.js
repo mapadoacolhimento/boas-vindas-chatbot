@@ -8,6 +8,10 @@ const nextConfig = {
         source: "/api/chat",
         destination: `${REST_API}/chat`,
       },
+      {
+        source: "/api/chat/assessment",
+        destination: `${REST_API}/assessment`,
+      },
     ];
   },
 }

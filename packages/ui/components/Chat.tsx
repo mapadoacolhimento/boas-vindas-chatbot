@@ -1,28 +1,29 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useCookies } from "react-cookie";
+import {
+  type Dispatch,
+  type SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Box, VStack } from "@chakra-ui/react";
 
 import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
 import { ChatSuggestions, InputMessage } from "@/components";
 
-const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
-
-// default first message to display in UI (not necessary to define the prompt)
-export const initialMessages: ChatGPTMessage[] = [
-  {
-    role: "assistant",
-    content:
-      "Oie, Ângela! \nEu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?",
-  },
-];
-
-export default function Chat() {
-  const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages);
+export default function Chat({
+  messages,
+  setMessages,
+  sendMessage,
+  loading,
+}: {
+  messages: ChatGPTMessage[];
+  setMessages: Dispatch<SetStateAction<ChatGPTMessage[]>>;
+  sendMessage: (msg: string) => Promise<void>;
+  loading: boolean;
+}) {
   const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [cookie, setCookie] = useCookies([COOKIE_NAME]);
   const messageEl = useRef<HTMLDivElement | null>(null);
   const [isOnline, setIsOnline] = useState(true);
 
@@ -57,7 +58,7 @@ export default function Chat() {
         messageWithNoConnectError,
       ]);
     }
-  }, [isOnline]);
+  }, [isOnline, setMessages]);
 
   useEffect(() => {
     if (messageEl && messageEl.current) {
@@ -68,62 +69,6 @@ export default function Chat() {
       });
     }
   }, []);
-
-  useEffect(() => {
-    if (!cookie[COOKIE_NAME]) {
-      // generate a semi random short id
-      const randomId = Math.random().toString(36).substring(7);
-      setCookie(COOKIE_NAME, randomId);
-    }
-  }, [cookie, setCookie]);
-
-  // send message to API /api/chat endpoint
-  const sendMessage = async (message: string) => {
-    try {
-      setLoading(true);
-      const newMessage = { role: "user", content: message } as ChatGPTMessage;
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
-
-      const response = await fetch(`/api/chat`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messages: newMessage,
-          user: cookie[COOKIE_NAME],
-          chatHistory: messages,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-
-      const data = await response.json();
-      const noDataErrorMsg =
-        "Ops... um problema inesperado ocorreu. Aguarde alguns instantes e tente novamente.";
-
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          role: "assistant",
-          content: data || noDataErrorMsg,
-        } as ChatGPTMessage,
-      ]);
-
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      const messageWithError = {
-        role: "assistant",
-        content:
-          "Ops... Algo deu errado!\n Não estamos conseguindo carregar o chat com a IAna. Por favor, tente novamente mais tarde!",
-      } as ChatGPTMessage;
-      setMessages((prevMessages) => [...prevMessages, messageWithError]);
-      setLoading(false);
-    }
-  };
 
   function handleClick(text: string) {
     setInput(text);
