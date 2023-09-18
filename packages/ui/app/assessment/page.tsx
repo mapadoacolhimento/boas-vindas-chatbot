@@ -30,7 +30,9 @@ function ChatHeader() {
 export const initialMessages: ChatGPTMessage[] = [
   {
     role: "assistant",
-    content: `Oie, Viviane! Agora vamos avaliar o seu aprendizado. Eu vou te fazer uma pergunta e você me manda uma resposta bem completa. Bora começar?`,
+    content: `Oie, Viviane! 
+    Agora vamos avaliar o seu aprendizado. Eu vou te fazer uma pergunta e você me manda uma resposta bem completa.
+    Bora começar?`,
   },
 ];
 
@@ -38,12 +40,7 @@ const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
 
 function Assessment() {
   const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages);
-  const [chatHistory, setChatHistory] = useState<ChatGPTMessage[]>([
-    {
-      content: `IAna, me pergunte EXATAMENTE "quem é o harry potter?". Não responda a esta pergunta, apenas direcione a pergunta a mim. A minha próxima mensagem será a resposta para essa pergunta. Você deve aguardar a minha próxima mensagem e verificar se o que eu respondi está correto.`,
-      role: "system",
-    },
-  ]);
+
   const [loading, setLoading] = useState(false);
   const [cookie, setCookie] = useCookies([COOKIE_NAME]);
 
