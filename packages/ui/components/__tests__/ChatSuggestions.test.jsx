@@ -23,6 +23,7 @@ describe("<ChatSuggestions />", () => {
 
     fireEvent.click(button);
 
-    expect(handleClick).toHaveBeenCalled();
+    expect(handleClick).toHaveBeenCalledWith("Tipos de serviço público");
   })
+  
 })
