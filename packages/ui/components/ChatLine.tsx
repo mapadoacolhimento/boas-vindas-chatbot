@@ -60,6 +60,7 @@ export default function ChatLine({
             <UserQueryIcon boxSize={3.5} />
           )}
           <Text
+            data-testid="line-break"
             color={"text"}
             fontSize={"sm"}
             height={"fit-content"}
