@@ -13,7 +13,7 @@ describe("<ChatLine />", () => {
     expect(lineBreaks).toHaveLength(1);
   });
 
-  it("Ensure ChatLine is not rendered when the prop is empty", () => {
+  it("Ensures ChatLine is not rendered when the prop is empty", () => {
     render(<ChatLine content="" />);
 
     const component = screen.queryByTestId("chatLine-row");
