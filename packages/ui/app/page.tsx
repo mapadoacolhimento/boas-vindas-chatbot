@@ -37,6 +37,7 @@ const initialMessages = (name: string): ChatGPTMessage[] => [
 function Home() {
   const searchParams = useSearchParams();
   const name = useConst(searchParams.get("name") || "Voluntária");
+  const city = useConst(searchParams.get("city") || "");
   const [messages, setMessages] = useState<ChatGPTMessage[]>(
     initialMessages(name)
   );
@@ -111,6 +112,7 @@ function Home() {
           sendMessage={sendMessage}
           messages={messages}
           setMessages={setMessages}
+          city={city}
         />
       </VStack>
     </VStack>

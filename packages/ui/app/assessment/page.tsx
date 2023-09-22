@@ -39,6 +39,7 @@ const initialMessages = (name: string): ChatGPTMessage[] => [
 function Assessment() {
   const searchParams = useSearchParams();
   const name = useConst(searchParams.get("name") || "Voluntária");
+  const city = useConst(searchParams.get("city") || "");
   const [messages, setMessages] = useState<ChatGPTMessage[]>(
     initialMessages(name)
   );
@@ -112,6 +113,7 @@ function Assessment() {
           sendMessage={sendMessage}
           messages={messages.filter((m) => m.role !== "system")}
           setMessages={setMessages}
+          city={city}
         />
       </VStack>
     </VStack>
