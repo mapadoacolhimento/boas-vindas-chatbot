@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import { HStack, VStack, Heading, Center } from "@chakra-ui/react";
+import { useState } from "react";
+import { HStack, VStack, Heading, Center, useConst } from "@chakra-ui/react";
 import { Chat, ChatIcon } from "@/components";
 import { ChatGPTMessage } from "@/components/ChatLine";
+import { useSearchParams } from "next/navigation";
 
 function ChatHeader() {
   return (
@@ -27,30 +27,22 @@ function ChatHeader() {
   );
 }
 
-const initialMessages: ChatGPTMessage[] = [
+const initialMessages = (name: string): ChatGPTMessage[] => [
   {
     role: "assistant",
-    content: `Oie, Viviane! 
+    content: `Oie, ${name}! 
     Agora vamos avaliar o seu aprendizado. Eu vou te fazer uma pergunta e você me manda uma resposta bem completa.
     Bora começar?`,
   },
 ];
 
-const COOKIE_NAME = "nextjs-example-ai-chat-gpt3";
-
 function Assessment() {
-  const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages);
-
+  const searchParams = useSearchParams();
+  const name = useConst(searchParams.get("name") || "Voluntária");
+  const [messages, setMessages] = useState<ChatGPTMessage[]>(
+    initialMessages(name)
+  );
   const [loading, setLoading] = useState(false);
-  const [cookie, setCookie] = useCookies([COOKIE_NAME]);
-
-  useEffect(() => {
-    if (!cookie[COOKIE_NAME]) {
-      // generate a semi random short id
-      const randomId = Math.random().toString(36).substring(7);
-      setCookie(COOKIE_NAME, randomId);
-    }
-  }, [cookie, setCookie]);
 
   // send message to API /api/chat endpoint
   const sendMessage = async (message: string) => {
@@ -66,7 +58,10 @@ function Assessment() {
         },
         body: JSON.stringify({
           messages: newMessage,
-          user: cookie[COOKIE_NAME],
+          user: {
+            name,
+            city: searchParams.get("city"),
+          },
           chatHistory: messages,
         }),
       });
