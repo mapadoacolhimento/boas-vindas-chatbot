@@ -116,6 +116,7 @@ function Home() {
           sendMessage={sendMessage}
           messages={messages}
           setMessages={setMessages}
+          showSuggestions={true}
         />
       </VStack>
     </VStack>
