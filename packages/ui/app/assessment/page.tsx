@@ -96,7 +96,7 @@ function Assessment() {
   };
 
   return (
-    <VStack spacing="10em" justify={"center"} px={4} py={6}>
+    <VStack spacing="10em" justify={"center"}>
       <VStack
         w={{ base: "full", lg: "80%" }}
         maxH={"3xl"}
