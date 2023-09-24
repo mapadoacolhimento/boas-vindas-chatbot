@@ -113,6 +113,7 @@ function Home() {
           messages={messages}
           setMessages={setMessages}
           city={city}
+          showSuggestions
         />
       </VStack>
     </VStack>
