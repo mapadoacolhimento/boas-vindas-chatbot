@@ -23,7 +23,9 @@ describe("<ChatSuggestions />", () => {
 
     fireEvent.click(button);
 
-    expect(handleClick).toHaveBeenCalledWith("Tipos de serviço público");
+    expect(handleClick).toHaveBeenCalledWith(
+      "Quais são os tipos de serviços públicos disponíveis para mulheres vítimas de violência?"
+    );
   })
   
 })

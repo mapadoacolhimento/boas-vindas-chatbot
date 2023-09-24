@@ -1,27 +1,50 @@
 import { Box, Stack, Button, Text } from "@chakra-ui/react";
 
-const suggestions = [
-  {
-    text: "Tipos de serviço público",
-  },
-  {
-    text: "Mapa de serviços públicos",
-  },
-  {
-    text: "Como fazer para encaminhar?",
-  },
-  {
-    text: "Como denunciar?",
-  },
-  {
-    text: "Como fazer a articulação?",
-  },
-];
+const getSuggestions = (city: string | null) => {
+  const suggestions = [
+    {
+      text: "Tipos de serviço público",
+      query:
+        "Quais são os tipos de serviços públicos disponíveis para mulheres vítimas de violência?",
+    },
+    {
+      text: "Mapa de serviços públicos",
+      query:
+        "Qual a URL para acessar o mapa de serviços públicos do Mapa do Acolhimento?",
+    },
+    {
+      text: "Como fazer para encaminhar?",
+      query:
+        "Como encaminhar a mulher em situação de risco para a rede de serviços públicos?",
+    },
+    {
+      text: "Como denunciar?",
+      query:
+        "Como ajudar a mulher em situação de risco a fazer uma denúncia de violência de gênero?",
+    },
+    {
+      text: "Como fazer a articulação?",
+      query:
+        "Como fazer a articulação com os serviços públicos para os atendimentos?",
+    },
+  ];
+
+  if (city) {
+    suggestions.push({
+      text: "Serviços públicos do meu município",
+      query: `Quais são os serviços públicos de atendimento a mulher em situação de risco disponíveis no município de ${city}`,
+    });
+  }
+
+  return suggestions;
+};
 
 const ChatSuggestions = ({
   handleClick,
+  city,
 }: {
-  handleClick: (text: string) => void;
+  handleClick: (query: string) => void;
+  city: string | null;
 }) => (
   <Box px={6} pb={4} w={"full"}>
     <Text
@@ -46,13 +69,13 @@ const ChatSuggestions = ({
       alignItems="flex-start"
       pt={4}
     >
-      {suggestions.map(({ text }, index) => (
+      {getSuggestions(city).map(({ text, query }, index) => (
         <Button
           key={index}
           variant={"option"}
           size={"sm"}
           fontWeight="400"
-          onClick={() => handleClick(text)}
+          onClick={() => handleClick(query)}
         >
           {text}
         </Button>
