@@ -17,11 +17,13 @@ export default function Chat({
   setMessages,
   sendMessage,
   loading,
+  showSuggestions,
 }: {
   messages: ChatGPTMessage[];
   setMessages: Dispatch<SetStateAction<ChatGPTMessage[]>>;
   sendMessage: (msg: string) => Promise<void>;
   loading: boolean;
+  showSuggestions: boolean;
 }) {
   const [input, setInput] = useState("");
   const messageEl = useRef<HTMLDivElement | null>(null);
@@ -84,7 +86,9 @@ export default function Chat({
 
       {loading && <LoadingChatLine />}
 
-      {messages.length < 2 && <ChatSuggestions handleClick={handleClick} />}
+      {showSuggestions && messages.length < 2 && (
+        <ChatSuggestions handleClick={handleClick} />
+      )}
 
       <InputMessage
         input={input}

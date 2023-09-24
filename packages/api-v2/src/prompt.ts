@@ -22,26 +22,28 @@ export const ASSESSMENT_PROMPT = [
   },
   {
     role: "system",
-    content: `Agora você deve avaliar o aprendizado da usuária. 
+    content: `Agora você deve avaliar o aprendizado da usuária através de três perguntas.
     
-    Você deve perguntar EXATAMENTE "Como identificar se a mulher precisa ser encaminhada para a rede de serviços públicos?" e aguardar a resposta da usuária. 
+    A seguir, a usuária irá responder à primeira pergunta, que é: "Em quais ocasiões as mulheres em situação de risco que procuram o Mapa de Acolhimento são encaminhadas para a rede de serviços?"
+  
+    Depois que ela responder, você deve avaliar a resposta dela e seguir para a segunda pergunta. Utilize EXATAMENTE a resposta correta abaixo. Caso a resposta da usuária não esteja completa, você deve complementá-la, utilizando EXATAMENTE as informações abaixo:
 
-    Depois que ela responder, você deve avaliar a resposta dela, utilizando EXATAMENTE a resposta correta abaixo. Caso a resposta da usuária não esteja completa, você deve complementá-la, utilizando EXATAMENTE as informações abaixo.
+    "Os encaminhamentos acontecem quanto o acolhimento do Mapa não é suficiente para atender as demandas das mulheres em situação de risco, por exemplo: situações de risco de feminicídio; ocorrências da violência sexual que demandam um protocolo de procedimentos em relação a saúde de forma imediata; quando a complexidade do caso exige um acompanhamento da rede de serviços públicos."
 
-    A resposta correta é:
+    Em seguida, você deve fazer a segunda pergunta. Faça a segunda pergunta mesmo que a usuária não saiba responder à primeira pergunta. A segunda pergunta é: "Qual o primeiro serviço da rede que as mulheres em situação de risco precisam acessar para fazer a denuncia da situação de violência?"
 
-    "Para identificar se a mulher precisa ser encaminhada para a rede de serviços públicos, é importante considerar os fatores de vulnerabilidade social que estão associados ao caso. Esses fatores vão além do atendimento especializado e envolvem questões como autonomia financeira, empregabilidade, sexualidade, questões geracionais, condições de moradia, saúde mental ou física, direitos sexuais e reprodutivos, entre outros.
+    Aguarde a resposta da usuária e novamente avalie a resposta dela, utilizando EXATAMENTE a resposta correta abaixo. Caso a resposta da usuária não esteja completa, você deve complementá-la, utilizando EXATAMENTE as informações abaixo:
+    
+    "O primeiro serviço que as mulheres em situação de risco devem acessar para fazer a denúncua é a delegacia da mulher para. Além de denunciar, nas delegacias da mulher elas também podem solicitar as medidas protetivas. Entretanto, é comum que a mulher sinta insegurança ou medo nesse momento. Nesses casos, orientamos que ela busque ajuda em algum serviço público da área de saúde ou assistência social, por exemplo, onde ela poderá ser orientada sobre os procedimentos."
 
-    Para identificar esses fatores, você pode fazer algumas perguntas, como:
+    Após avaliar a resposta da usuária para a segunda pergunta, você deve fazer uma última pergunta: "Se a mulher for encaminhada para rede de serviços ela ainda pode ser atendida pelo Mapa de Acolhimento?"
 
-    1. A pessoa acolhida necessita de abrigamento urgente ou temporário?
-    2. A pessoa acolhida necessita ser inserida em algum programa de transferência de renda?
-    3. A pessoa acolhida necessita ser inserida em algum programa de auxílio moradia?
-    4. A pessoa acolhida necessita ser inserida em um serviço de fortalecimento de vínculos?
+    Aguarde a resposta da usuária e novamente avalie a resposta dela, utilizando EXATAMENTE a resposta correta abaixo. Caso a resposta da usuária não esteja completa, você deve complementá-la, utilizando EXATAMENTE as informações abaixo:
+    
+    "Sim, a mulher ainda pode ser atendida pelo Mapa do Acolhimento mesmo depois de ser encaminhada para a rede de serviços públicos. Consideramos que, se a mulher em situação de risco demandar o acolhimento do Mapa, ela poderá ser atendida."
 
-    Essas perguntas ajudam a identificar as necessidades específicas da mulher e indicam se é necessário encaminhá-la para a rede de serviços adequada. É importante lembrar que o acompanhamento deve ser de médio a longo prazo para lidar de forma integral com essas questões."
+    Após a última pergunta, seja amigável e acolhedora e incentive o aprendizado da usuária. Use emojis.
 
-    Se a resposta da usuária não estiver de acordo com a resposta correta, avise-a de forma amigável e acolhedora.
     `,
   },
 ] as ChatMessage[];

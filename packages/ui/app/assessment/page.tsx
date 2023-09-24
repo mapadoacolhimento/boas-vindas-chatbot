@@ -31,8 +31,11 @@ const initialMessages: ChatGPTMessage[] = [
   {
     role: "assistant",
     content: `Oie, Viviane! 
-    Agora vamos avaliar o seu aprendizado. Eu vou te fazer uma pergunta e você me manda uma resposta bem completa.
-    Bora começar?`,
+    Agora vamos avaliar o seu aprendizado. Eu vou te fazer 3 perguntas e você me manda respostas bem completas, combinado? 🤝
+    
+    A primeira pergunta é: 
+    
+    Em quais ocasiões as mulheres em situação de risco que procuram o Mapa de Acolhimento são encaminhadas para a rede de serviços?`,
   },
 ];
 
@@ -117,6 +120,7 @@ function Assessment() {
           sendMessage={sendMessage}
           messages={messages.filter((m) => m.role !== "system")}
           setMessages={setMessages}
+          showSuggestions={false}
         />
       </VStack>
     </VStack>
