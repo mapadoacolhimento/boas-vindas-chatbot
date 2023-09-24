@@ -23,7 +23,7 @@ export default function Chat({
   setMessages: Dispatch<SetStateAction<ChatGPTMessage[]>>;
   sendMessage: (msg: string) => Promise<void>;
   loading: boolean;
-  city: string;
+  city: string | null;
 }) {
   const [input, setInput] = useState<string>("");
   const messageEl = useRef<HTMLDivElement | null>(null);

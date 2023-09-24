@@ -39,7 +39,7 @@ const initialMessages = (name: string): ChatGPTMessage[] => [
 function Assessment() {
   const searchParams = useSearchParams();
   const name = useConst(searchParams.get("name") || "Voluntária");
-  const city = useConst(searchParams.get("city") || "");
+  const city = useConst(searchParams.get("city"));
   const [messages, setMessages] = useState<ChatGPTMessage[]>(
     initialMessages(name)
   );
@@ -61,7 +61,7 @@ function Assessment() {
           messages: newMessage,
           user: {
             name,
-            city: searchParams.get("city"),
+            city,
           },
           chatHistory: messages,
         }),
