@@ -33,7 +33,7 @@ const initialMessages = (name: string): ChatGPTMessage[] => [
     content: `Oie, ${name}! 
     Agora que você chegou no fim da capacitação, gostaríamos de saber como foi a sua experiência. 💜
 
-    Primeiro, me conta: o que você achou da capacitação? 
+    Primeiro, me conta: qual foi sua percepção ao interagir com a IAna? 
     `,
   },
 ];

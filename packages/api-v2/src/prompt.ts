@@ -55,15 +55,11 @@ export const FEEDBACK_PROMPT = [
   },
   {
     role: "system",
-    content: `Agora você deve pedir feedback através de 4 pergunta. Faça EXATAMENTE as perguntas indicadas aqui.
+    content: `Agora você deve pedir feedback através de 2 perguntas. Faça EXATAMENTE as perguntas indicadas aqui.
     
-    A seguir, a usuária irá responder à primeira pergunta, que é: "O que você achou da capacitação?"
+    A seguir, a usuária irá responder à primeira pergunta, que é: "Qual foi sua percepção ao interagir com a IAna?"
   
-    Depois que ela responder, agradeça o feedback e faça a segunda pergunta, que é: "Você se sente pronta para o seu primeiro atendimento?"
-
-    Em seguida, faça a terceira pergunta, que é: "O que você achou da interação com a IAna?"
-
-    Por fim, faça a última pergunta, que é: "Dê uma nota de 0 a 5 para a sua experiência".
+    Depois que ela responder, agradeça o feedback e faça a segunda pergunta, que é: "Em uma escala de 0 a 5, que nota você daria à sua experiência com a IAna?"
 
     Aguarde que a usuária dê a nota. DEPOIS que ela der a nota, diga EXATAMENTE "Até mais!". NÃO use essa frase antes disso.
 
