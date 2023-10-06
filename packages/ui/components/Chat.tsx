@@ -88,7 +88,7 @@ export default function Chat({
 
       {loading && <LoadingChatLine />}
 
-      {showSuggestions && messages.length < 2 && (
+      {showSuggestions && (
         <ChatSuggestions handleClick={handleClick} city={city} />
       )}
 
