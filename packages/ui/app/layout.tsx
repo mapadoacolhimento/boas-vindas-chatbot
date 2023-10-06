@@ -1,9 +1,9 @@
 import { Providers } from "./providers";
 
 export const metadata = {
-  title: "Chatbot - Mapa do Acolhimento",
-  description:
-    "Assistente virtual (IAna) criada pelo Mapa do Acolhimento para auxiliar na capacitação das voluntárias",
+  title: "IAna - Chatbot do Mapa do Acolhimento",
+  // description:
+  //   "Assistente virtual (IAna) criada pelo Mapa do Acolhimento para auxiliar na capacitação das voluntárias",
 };
 
 export default function RootLayout({
