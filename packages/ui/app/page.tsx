@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { useConst } from "@chakra-ui/react";
-import { Chat, ChatLayout } from "@/components";
-import { ChatGPTMessage } from "@/components/ChatLine";
 import { useSearchParams } from "next/navigation";
+
+import { Chat, ChatLayout } from "@/components";
+import { ChatGPTMessage } from "@/types";
 
 const initialMessages = (name: string): ChatGPTMessage[] => [
   {

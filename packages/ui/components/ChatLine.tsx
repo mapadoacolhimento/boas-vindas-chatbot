@@ -1,18 +1,9 @@
 import { Box, Divider, HStack, Text, VStack } from "@chakra-ui/react";
+
 import UserQueryIcon from "./UserQueryIcon";
 import ChatIcon from "./ChatIcon";
-
+import { ChatGPTMessage } from "@/types";
 import styles from "../styles/loadingState.module.css";
-
-// wrap Balancer to remove type errors :( - @TODO - fix this ugly hack
-// const BalancerWrapper = (props: any) => <Balancer {...props} />
-
-type ChatGPTAgent = "user" | "system" | "assistant";
-
-export interface ChatGPTMessage {
-  role: ChatGPTAgent;
-  content: string;
-}
 
 // loading placeholder animation for the chat line
 export const LoadingChatLine = () => (

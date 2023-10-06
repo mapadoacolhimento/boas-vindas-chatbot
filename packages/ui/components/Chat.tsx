@@ -9,8 +9,9 @@ import {
 } from "react";
 import { Box, VStack } from "@chakra-ui/react";
 
-import ChatLine, { type ChatGPTMessage, LoadingChatLine } from "./ChatLine";
+import ChatLine, { LoadingChatLine } from "./ChatLine";
 import { ChatSuggestions, InputMessage } from "@/components";
+import { ChatGPTMessage } from "@/types";
 
 export default function Chat({
   messages,

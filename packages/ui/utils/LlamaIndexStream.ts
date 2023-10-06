@@ -1,15 +1,9 @@
+import { ChatGPTMessage } from "@/types";
 import {
   createParser,
   ParsedEvent,
   ReconnectInterval,
 } from "eventsource-parser";
-
-export type ChatGPTAgent = "user" | "system" | "assistant";
-
-export interface ChatGPTMessage {
-  role: ChatGPTAgent;
-  content: string;
-}
 
 export interface OpenAIStreamPayload {
   messages: ChatGPTMessage[];
