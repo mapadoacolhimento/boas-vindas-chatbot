@@ -1,5 +1,0 @@
-venv
-.env
-.serverless
-*.zip
-/__pycache__/
