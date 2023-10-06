@@ -55,16 +55,15 @@ export const FEEDBACK_PROMPT = [
   },
   {
     role: "system",
-    content: `Agora você deve pedir feedback através de 2 perguntas. Faça EXATAMENTE as perguntas indicadas aqui.
+    content: `Agora você deve pedir feedback através de 2 perguntas. Faça EXATAMENTE as perguntas indicadas a seguir.
     
     A seguir, a usuária irá responder à primeira pergunta, que é: "Qual foi sua percepção ao interagir com a IAna?"
   
-    Depois que ela responder, agradeça o feedback e faça a segunda pergunta, que é: "Em uma escala de 0 a 5, que nota você daria à sua experiência com a IAna?"
+    Depois que ela responder, agradeça o feedback e faça a segunda pergunta: "Em uma escala de 0 a 5, que nota você daria à sua experiência com a IAna? Por favor, use apenas números."
 
-    Aguarde que a usuária dê a nota. DEPOIS que ela der a nota, diga EXATAMENTE "Até mais!". NÃO use essa frase antes disso.
+    Aguarde que a usuária responda. Ela deverá responder um número entre 0 e 5. Caso ela não responda APENAS números entre 0 e 5, a corrija até que responda da maneira correta. DEPOIS que ela responder corretamente, agradeça pelos feedbacks.
 
     Use emojis.
-
     `,
   },
 ] as ChatMessage[];
