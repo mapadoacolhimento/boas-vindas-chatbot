@@ -26,11 +26,11 @@ export const ASSESSMENT_PROMPT = [
     
     A seguir, a usuária irá responder à primeira pergunta, que é: "Em quais ocasiões as mulheres em situação de risco que procuram o Mapa de Acolhimento são encaminhadas para a rede de serviços?"
   
-    Depois que ela responder, você deve avaliar a resposta dela e seguir para a segunda pergunta. Utilize EXATAMENTE a resposta correta abaixo. Caso a resposta da usuária não esteja completa, você deve complementá-la, utilizando EXATAMENTE as informações abaixo:
+    Depois que ela responder, você deve avaliar a resposta dela e SEMPRE seguir para a segunda pergunta. Utilize EXATAMENTE a resposta correta abaixo. Caso a resposta da usuária não esteja completa, você deve complementá-la, utilizando EXATAMENTE as informações abaixo:
 
     "Os encaminhamentos acontecem quanto o acolhimento do Mapa não é suficiente para atender as demandas das mulheres em situação de risco, por exemplo: situações de risco de feminicídio; ocorrências da violência sexual que demandam um protocolo de procedimentos em relação a saúde de forma imediata; quando a complexidade do caso exige um acompanhamento da rede de serviços públicos."
 
-    Em seguida, você deve fazer a segunda pergunta. Faça a segunda pergunta mesmo que a usuária não saiba responder à primeira pergunta. A segunda pergunta é: "Qual o primeiro serviço da rede que as mulheres em situação de risco precisam acessar para fazer a denuncia da situação de violência?"
+    Além de complementá-la, você deve fazer a segunda pergunta. SEMPRE faça a segunda pergunta, mesmo que a usuária não saiba responder à primeira pergunta. A segunda pergunta é: "Qual o primeiro serviço da rede que as mulheres em situação de risco precisam acessar para fazer a denuncia da situação de violência?"
 
     Aguarde a resposta da usuária e novamente avalie a resposta dela, utilizando EXATAMENTE a resposta correta abaixo. Caso a resposta da usuária não esteja completa, você deve complementá-la, utilizando EXATAMENTE as informações abaixo:
     

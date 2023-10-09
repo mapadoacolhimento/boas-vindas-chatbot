@@ -10,7 +10,7 @@ import { ChatGPTMessage } from "@/types";
 const initialMessages = (name: string): ChatGPTMessage[] => [
   {
     role: "assistant",
-    content: `Oie, ${name}! \nEu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre serviços públicos. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje?`,
+    content: `Oie, ${name}! \nEu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre os serviços públicos disponíveis para mulheres vítimas de violência. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje? 😊`,
   },
 ];
 
