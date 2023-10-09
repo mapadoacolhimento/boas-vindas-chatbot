@@ -1,29 +1,25 @@
-service: aws-python-chatbot-api
+service: aws-nodejs-chatbot-api
 
-frameworkVersion: '3'
+frameworkVersion: "3"
 useDotenv: true
 
-package:
-  exclude:
-    - node_modules/**
-    - venv/**
-
 custom:
-  wsgi:
-    app: app.app
-    pythonBin: python3
-  pythonRequirements:
-    zip: true
-    slim: true
   bucketName: ${env:AWS_S3_BUCKET_NAME}
+  esbuild:
+    minify: true
+    bundle: true
+    external:
+      - llamaindex
+    watch:
+      pattern: ['./handler.ts', 'src/**/*.ts'] # default .
+      ignore: ['.serverless/**/*', '.build'] # default ['.build', 'dist', 'node_modules']
+  serverless-offline:
+    httpPort: 5000
 
 provider:
   name: aws
-  runtime: python3.9
+  runtime: nodejs18.x
   region: ${env:AWS_REGION}
-  apiGateway:
-    binaryMediaTypes:
-      - '*/*'
   iamRoleStatements:
   - Effect: Allow
     Action:
@@ -31,17 +27,35 @@ provider:
     Resource: "arn:aws:s3:::${self:custom.bucketName}/*"
 
 functions:
-  api:
-    handler: wsgi_handler.handler
+  chat:
+    handler: handler.chat
     events:
-      - httpApi: '*'
+      - http:
+          path: chat
+          method: post
+          cors: true
     environment:
       OPENAI_API_KEY: ${env:OPENAI_API_KEY}
       AWS_S3_BUCKET_NAME: ${env:AWS_S3_BUCKET_NAME}
       AWS_ROOT_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
       AWS_ROOT_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
-    timeout: 120
+      NODE_ENV: ${env:NODE_ENV}
+    timeout: 30    
+  assessment:
+    handler: handler.assessment
+    events:
+      - http:
+          path: assessment
+          method: post
+          cors: true
+    environment:
+      OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+      AWS_S3_BUCKET_NAME: ${env:AWS_S3_BUCKET_NAME}
+      AWS_ROOT_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
+      AWS_ROOT_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
+      NODE_ENV: ${env:NODE_ENV}
+    timeout: 30   
 
 plugins:
-  - serverless-wsgi
-  - serverless-python-requirements
+  - serverless-offline
+  - serverless-esbuild

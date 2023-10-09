@@ -35,7 +35,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
           run_install: false
 
       - name: Get pnpm store directory
@@ -106,7 +106,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
           run_install: false
 
       - name: Get pnpm store directory
@@ -138,7 +138,7 @@ jobs:
           EOF
 
       - name: Copy .env file to api package
-        run: find packages/api packages/api-v2 -type d -exec cp .env {} \;
+        run: find packages/api -type d -exec cp .env {} \;
 
       - name: Install serverless globally
         run: pnpm add serverless --global
@@ -152,4 +152,4 @@ jobs:
           if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
             args="--stage production"
           fi
-          pnpm --filter api-v2 run deploy $args
+          pnpm --filter api run deploy $args
