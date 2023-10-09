@@ -2,9 +2,15 @@
 
 import { useState } from "react";
 import { useConst } from "@chakra-ui/react";
-import { Chat, ChatLayout } from "@/components";
-import { ChatGPTMessage } from "@/components/ChatLine";
 import { useSearchParams } from "next/navigation";
+
+import { Chat, ChatLayout } from "@/components";
+import {
+  extractAnswersFromMessages,
+  getValueFromParams,
+  isLastFeedbackQuestion,
+} from "@/utils";
+import { ChatGPTMessage } from "@/types";
 
 const initialMessages = (name: string): ChatGPTMessage[] => [
   {
@@ -17,55 +23,59 @@ const initialMessages = (name: string): ChatGPTMessage[] => [
   },
 ];
 
-function Feedback() {
-  const searchParams = useSearchParams();
-  const name = useConst(searchParams.get("name") || "Voluntária");
-  const city = useConst(searchParams.get("city"));
-  const [messages, setMessages] = useState<ChatGPTMessage[]>(
-    initialMessages(name)
-  );
-  const [loading, setLoading] = useState(false);
+function shouldSaveVolunteerFeedback(messages: ChatGPTMessage[]) {
+  if (!isLastFeedbackQuestion(messages)) return false;
 
-  const extractAnswers = async (newMessage: ChatGPTMessage) => {
-    const extractAnswersInstruction = {
-      role: "system",
-      content:
-        "IAna, me retorne APENAS um array com 4 elementos, em que cada elemento é EXATAMENTE igual a resposta da usuária para cada uma das 4 perguntas, na ordem em que elas foram feitas. Os elementos do array devem ser EXATAMENTE a resposta da usuária, não acrescente nada. Você deve retornar APENAS o array na sua próxima mensagem, NÃO acrescente mais nada.",
-    } as ChatGPTMessage;
+  const { rating, firstAnswer } = extractAnswersFromMessages(messages);
 
-    const extractAnswersResponse = await fetch(`/api/chat/feedback`, {
+  return rating !== null && firstAnswer.length > 0;
+}
+
+async function saveVolunteerFeedback(
+  messages: ChatGPTMessage[],
+  userId: string
+) {
+  try {
+    const { rating, firstAnswer } = extractAnswersFromMessages(messages);
+
+    await fetch(`/api/feedback`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        messages: extractAnswersInstruction,
-        user: {
-          name,
-          city,
-        },
-        chatHistory: [...messages, newMessage],
+        firstAnswer: firstAnswer.join(" "),
+        rating,
+        userId,
       }),
     });
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-    if (!extractAnswersResponse.ok) {
-      throw new Error(extractAnswersResponse.statusText);
-    }
+function Feedback() {
+  const searchParams = useSearchParams();
+  const { name, city, userId } = useConst(getValueFromParams(searchParams));
+  const [messages, setMessages] = useState<ChatGPTMessage[]>(
+    initialMessages(name)
+  );
+  const [loading, setLoading] = useState(false);
 
-    const data = await extractAnswersResponse.json();
-    const answers = JSON.parse(data);
-    answers.map((answer: string, index: number) => {
-      console.log(`Resposta para a pergunta ${index}: ${answer}`);
-    });
-  };
-
-  // send message to API /api/chat endpoint
   const sendMessage = async (message: string) => {
     try {
       setLoading(true);
 
       const newMessage = { role: "user", content: message } as ChatGPTMessage;
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      setMessages((prevMessages) => {
+        const newMessages = [...prevMessages, newMessage];
+
+        if (shouldSaveVolunteerFeedback(newMessages)) {
+          saveVolunteerFeedback(newMessages, userId);
+        }
+
+        return newMessages;
+      });
 
       const response = await fetch(`/api/chat/feedback`, {
         method: "POST",
@@ -89,11 +99,6 @@ function Feedback() {
       const data = await response.json();
       const noDataErrorMsg =
         "Ops... um problema inesperado ocorreu. Aguarde alguns instantes e tente novamente.";
-
-      if (data.includes("Até mais!")) {
-        console.log("acabou a conversa");
-        extractAnswers(newMessage);
-      }
 
       setMessages((prevMessages) => [
         ...prevMessages,
