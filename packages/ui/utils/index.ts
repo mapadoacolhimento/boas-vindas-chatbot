@@ -1,3 +1,3 @@
-export { default as getNumberFromString } from "./getNumberFromString";
-export { default as isValidRating } from "./isValidRating";
-export { default as isLastAnswer } from "./isLastAnswer";
+export { default as isLastFeedbackQuestion } from "./isLastFeedbackQuestion";
+export { default as extractAnswersFromMessages } from "./extractAnswersFromMessages";
+export { default as getValueFromParams } from "./getValueFromParams";
