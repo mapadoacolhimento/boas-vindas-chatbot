@@ -1,11 +1,12 @@
 import { ChatGPTMessage } from "@/types";
 
 function getNumberFromString(msg: string) {
-  const regex = /\d+/;
-  const match = msg.match(regex);
-  const rating = match && match.length > 0 ? Number(match[0]) : null;
+  const msgWithDots = msg.replace(/,/, ".");
+  const regex = /[+-]?\d+(\.\d+)?/g;
+  const match = msgWithDots.match(regex);
+  const rating = match && match.length > 0 ? parseFloat(match[0]) : null;
 
-  return Number.isNaN(rating) ? null : rating;
+  return !rating || Number.isNaN(rating) ? null : rating;
 }
 
 function isValidRating(rating: number) {
