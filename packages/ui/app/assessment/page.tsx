@@ -5,6 +5,7 @@ import { useConst } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 
 import { Chat, ChatLayout } from "@/components";
+import { getValueFromParams } from "@/utils";
 import { ChatGPTMessage } from "@/types";
 
 const initialMessages = (name: string): ChatGPTMessage[] => [
@@ -21,8 +22,7 @@ const initialMessages = (name: string): ChatGPTMessage[] => [
 
 function Assessment() {
   const searchParams = useSearchParams();
-  const name = useConst(searchParams.get("name") || "Voluntária");
-  const city = useConst(searchParams.get("city"));
+  const { name, city } = useConst(getValueFromParams(searchParams));
   const [messages, setMessages] = useState<ChatGPTMessage[]>(
     initialMessages(name)
   );
