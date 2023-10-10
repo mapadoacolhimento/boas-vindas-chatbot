@@ -49,19 +49,17 @@ export default async function handler(
 
     const data = await graphqlApiRes.json();
 
-    if (data && data.errors && data.errors.lenght > 0) {
-      throw new Error(JSON.stringify(data.errors));
+    if (data && data.errors && data.errors.length > 0) {
+      throw new Error(data.errors.map((e: any) => e.message).join(" "));
     }
 
     return res.status(200).json(data);
-  } catch (e) {
+  } catch (e: any) {
     console.error(e);
     return res
       .status(500)
       .send(
-        `Something went wrong when saving the feedback answer: ${JSON.stringify(
-          e
-        )}`
+        `Something went wrong when saving the feedback answer: ${e.message}`
       );
   }
 }
