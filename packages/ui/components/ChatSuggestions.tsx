@@ -32,7 +32,7 @@ const getSuggestions = (city: string | null) => {
   if (city) {
     suggestions.push({
       text: "Serviços públicos do meu município",
-      query: `Quais são os endereços dos serviços publicos de atendimento a mulher vítima de violência no município de ${city}?`,
+      query: `Quais são os endereços dos serviços públicos de atendimento a mulher vítima de violência no município de ${city}?`,
     });
   }
 
