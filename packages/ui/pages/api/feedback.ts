@@ -29,7 +29,7 @@ export default async function handler(
 
     const answers = [
       { answer: firstAnswer, question: FIRST_QUESTION, user_id: userId },
-      { answer: rating, question: SECOND_QUESTION, user_id: userId },
+      { answer: `${rating}`, question: SECOND_QUESTION, user_id: userId },
     ];
     const graphqlQuery = {
       query: MUTATION,
@@ -48,6 +48,10 @@ export default async function handler(
     });
 
     const data = await graphqlApiRes.json();
+
+    if (data && data.errors && data.errors.lenght > 0) {
+      throw new Error(JSON.stringify(data.errors));
+    }
 
     return res.status(200).json(data);
   } catch (e) {
