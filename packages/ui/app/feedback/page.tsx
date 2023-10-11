@@ -5,32 +5,79 @@ import { useConst } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 
 import { Chat, ChatLayout } from "@/components";
-import { getValueFromParams } from "@/utils";
+import {
+  extractAnswersFromMessages,
+  getValueFromParams,
+  isLastFeedbackQuestion,
+} from "@/utils";
 import { ChatGPTMessage } from "@/types";
 
 const initialMessages = (name: string): ChatGPTMessage[] => [
   {
     role: "assistant",
-    content: `Oie, ${name}! \nEu sou a IAna, uma assistente criada para auxiliar seu treinamento, fornecendo informações e respostas sobre os serviços públicos disponíveis para mulheres vítimas de violência. Meu objetivo é oferecer um suporte acolhedor e informativo. Como posso ajudar você hoje? 😊`,
+    content: `Oie, ${name}! 
+    Agora que você chegou no fim da capacitação, gostaríamos de saber como foi a sua experiência. 💜
+
+    Primeiro, me conta: qual foi sua percepção ao interagir com a IAna? 
+    `,
   },
 ];
 
-function Home() {
+function shouldSaveVolunteerFeedback(messages: ChatGPTMessage[]) {
+  if (!isLastFeedbackQuestion(messages)) return false;
+
+  const { rating, firstAnswer } = extractAnswersFromMessages(messages);
+
+  return rating !== null && firstAnswer.length > 0;
+}
+
+async function saveVolunteerFeedback(
+  messages: ChatGPTMessage[],
+  userId: string
+) {
+  try {
+    const { rating, firstAnswer } = extractAnswersFromMessages(messages);
+
+    await fetch(`/api/feedback`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstAnswer: firstAnswer.join(" "),
+        rating,
+        userId,
+      }),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function Feedback() {
   const searchParams = useSearchParams();
-  const { name, city } = useConst(getValueFromParams(searchParams));
+  const { name, city, userId } = useConst(getValueFromParams(searchParams));
   const [messages, setMessages] = useState<ChatGPTMessage[]>(
     initialMessages(name)
   );
   const [loading, setLoading] = useState(false);
 
-  // send message to API /api/chat endpoint
   const sendMessage = async (message: string) => {
     try {
       setLoading(true);
-      const newMessage = { role: "user", content: message } as ChatGPTMessage;
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-      const response = await fetch(`/api/chat`, {
+      const newMessage = { role: "user", content: message } as ChatGPTMessage;
+      setMessages((prevMessages) => {
+        const newMessages = [...prevMessages, newMessage];
+
+        if (shouldSaveVolunteerFeedback(newMessages)) {
+          saveVolunteerFeedback(newMessages, userId);
+        }
+
+        return newMessages;
+      });
+
+      const response = await fetch(`/api/chat/feedback`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +107,6 @@ function Home() {
           content: data || noDataErrorMsg,
         } as ChatGPTMessage,
       ]);
-
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -79,13 +125,13 @@ function Home() {
       <Chat
         loading={loading}
         sendMessage={sendMessage}
-        messages={messages}
+        messages={messages.filter((m) => m.role !== "system")}
         setMessages={setMessages}
         city={city}
-        showSuggestions
+        showSuggestions={false}
       />
     </ChatLayout>
   );
 }
 
-export default Home;
+export default Feedback;
