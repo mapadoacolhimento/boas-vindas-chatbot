@@ -1,5 +1,8 @@
 name: Tests, Static Analysis and Deploy
 
+env:
+  IANA_STG_DOMAIN: iana-chatbot.staging.bonde.org
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -84,7 +87,10 @@ jobs:
           if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
             args="--prod"
           fi
-          cd packages/ui && vercel deploy $args --token=${{ secrets.VERCEL_TOKEN }}
+          cd packages/ui && vercel deploy $args --token=${{ secrets.VERCEL_TOKEN }} > domain.txt
+          if [[ ${GITHUB_REF} != "refs/heads/main" ]]; then
+            vercel alias --token=${{ secrets.VERCEL_TOKEN }} set `cat domain.txt` $IANA_STG_DOMAIN
+          fi
 
   api-deployment:
     runs-on: ubuntu-latest
