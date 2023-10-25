@@ -11,8 +11,8 @@ custom:
     external:
       - llamaindex
     watch:
-      pattern: ['./handler.ts', 'src/**/*.ts'] # default .
-      ignore: ['.serverless/**/*', '.build'] # default ['.build', 'dist', 'node_modules']
+      pattern: ["./handler.ts", "src/**/*.ts"] # default .
+      ignore: [".serverless/**/*", ".build"] # default ['.build', 'dist', 'node_modules']
   serverless-offline:
     httpPort: 5000
 
@@ -21,10 +21,10 @@ provider:
   runtime: nodejs18.x
   region: ${env:AWS_REGION}
   iamRoleStatements:
-  - Effect: Allow
-    Action:
-      - s3:*
-    Resource: "arn:aws:s3:::${self:custom.bucketName}/*"
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "arn:aws:s3:::${self:custom.bucketName}/*"
 
 functions:
   chat:
@@ -40,7 +40,7 @@ functions:
       AWS_ROOT_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
       AWS_ROOT_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
       NODE_ENV: ${env:NODE_ENV}
-    timeout: 30    
+    timeout: 30
   assessment:
     handler: handler.assessment
     events:
@@ -54,7 +54,7 @@ functions:
       AWS_ROOT_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
       AWS_ROOT_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
       NODE_ENV: ${env:NODE_ENV}
-    timeout: 30   
+    timeout: 30
   feedback:
     handler: handler.feedback
     events:
@@ -69,6 +69,20 @@ functions:
       AWS_ROOT_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
       NODE_ENV: ${env:NODE_ENV}
     timeout: 30
+  # content:
+  #   handler: handler.content
+  #   events:
+  #     - http:
+  #         path: content
+  #         method: post
+  #         cors: true
+  #   environment:
+  #     OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+  #     AWS_S3_BUCKET_NAME: ${env:AWS_S3_BUCKET_NAME}
+  #     AWS_ROOT_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
+  #     AWS_ROOT_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
+  #     NODE_ENV: ${env:NODE_ENV}
+  #   timeout: 30
 
 plugins:
   - serverless-offline

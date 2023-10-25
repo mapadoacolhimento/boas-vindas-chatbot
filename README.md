@@ -86,6 +86,36 @@ A API estará disponível em:
 
 - `http://localhost:5000/dev` com as respectivas rotas configuradas no arquivo `serverless.yml`.
 
+## Atualização do index da IAna
+
+Para atualizar o índice da "IAna", siga estas etapas. Este processo permite que você atualize o conteúdo que o chatbot "IAna" utiliza para fornecer respostas aos usuários.
+
+**Nota:** A atualização do índice da "IAna" envolve a geração de novos índices com base nos dados contidos na pasta `/data` e a posterior cópia desses índices para um Bucket S3 na AWS. A partir desse Bucket, o chatbot "IAna" acessa os índices para responder a perguntas dos usuários.
+
+### Passo 1: Geração do Novo Índice
+
+Dentro do pacote da API, temos um arquivo chamado `handler.ts`. Neste arquivo, você encontrará uma função chamada `content`. Esta função é responsável por gerar um novo índice com base nos dados contidos na pasta `/data`. A pasta `/data` deve ser criada e preenchida com o conteúdo desejado que você deseja incluir no índice.
+
+### Passo 2: Execução da Função `content`
+
+Para gerar o novo índice, siga estas etapas:
+
+1. Certifique-se de que a pasta `/data` contenha os dados que você deseja incluir no novo índice.
+
+2. Descomente o código relacionado à função `content` no arquivo `serverless.yml` dentro do pacote da API. Isso permitirá que você execute a função localmente.
+
+3. Execute a função `content` para gerar o novo índice. O novo índice será gerado e armazenado na pasta `/storage` dentro do pacote da API.
+
+### Passo 3: Cópia dos Índices para o Bucket S3
+
+Após a geração do novo índice na pasta `/storage`, você precisará copiá-lo manualmente para o Bucket S3 da Amazon. Os índices gerados vivem no Bucket S3 dentro da pasta `vector_index`. Certifique-se de que os novos índices sejam copiados para essa localização no Bucket S3. Os novos index devem ser trocados pelos anteriores, portanto, você deve apagar os index antigos - NÃO deixe o bucket com mais de um index simultaneamente.
+
+### Passo 4: Configuração do Chatbot "IAna"
+
+O chatbot "IAna" está configurado para acessar os índices no Bucket S3 da Amazon. Com os novos índices copiados para o Bucket S3, o chatbot será capaz de fornecer respostas atualizadas com base no novo conteúdo.
+
+Lembre-se de que este processo é manual e não é necessário implantar a função `content` na AWS, pois não é uma operação frequente.
+
 ## GitHub Actions
 
 O projeto está configurado com o GitHub Actions para automatizar a integração contínua e a implantação. A pipeline de integração inclui testes e build. Após a aprovação dos testes, a implantação é acionada para ambas as partes do projeto.
