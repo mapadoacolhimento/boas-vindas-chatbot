@@ -3,21 +3,35 @@ import {
   storageContextFromDefaults,
   SimpleDirectoryReader,
   ChatMessage,
-} from "llamaindex";
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { createChatEngine } from "./src/createChatEngine";
-import { QA_PROMPT, ASSESSMENT_PROMPT, FEEDBACK_PROMPT } from "./src/prompt";
+} from 'llamaindex';
+import {
+  APIGatewayProxyEvent,
+  APIGatewayProxyResult,
+} from 'aws-lambda';
+import { createChatEngine } from './src/createChatEngine';
+import {
+  QA_PROMPT,
+  ASSESSMENT_PROMPT,
+  FEEDBACK_PROMPT,
+} from './src/prompt';
+import getErrorMessage from './src/getErrorMessage';
 
 function decodeBase64(encodedPayload) {
-  return Buffer.from(encodedPayload, "base64").toString("utf-8");
+  return Buffer.from(encodedPayload, 'base64').toString('utf-8');
 }
 
 let chatEngine = null;
 createChatEngine().then((engine) => (chatEngine = engine));
 
-async function chatHandler(event: APIGatewayProxyEvent, prompt: ChatMessage[]) {
-  const decode = event.isBase64Encoded ? decodeBase64(event.body) : event.body;
-  const data = typeof decode === "string" ? JSON.parse(decode) : decode;
+async function chatHandler(
+  event: APIGatewayProxyEvent,
+  prompt: ChatMessage[]
+) {
+  const decode = event.isBase64Encoded
+    ? decodeBase64(event.body)
+    : event.body;
+  const data =
+    typeof decode === 'string' ? JSON.parse(decode) : decode;
   const chatHistory = [...prompt, ...data?.chatHistory];
   const { response } = await chatEngine.chat(
     data?.messages?.content,
@@ -32,7 +46,8 @@ async function chatHandler(event: APIGatewayProxyEvent, prompt: ChatMessage[]) {
   return result;
 }
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 async function waitForChatEngine(
   event: APIGatewayProxyEvent,
@@ -58,10 +73,11 @@ export const chat = async (
       return res;
     }
   } catch (e) {
-    console.log({ e });
+    const error = getErrorMessage(e);
+    console.error(`[chat] - [500]: ${error}`);
     return {
       statusCode: 500,
-      body: JSON.stringify("Something went wrong"),
+      body: JSON.stringify(error),
     };
   }
 };
@@ -78,10 +94,11 @@ export const assessment = async (
       return res;
     }
   } catch (e) {
-    console.log({ e });
+    const error = getErrorMessage(e);
+    console.error(`[assessment] - [500]: ${error}`);
     return {
       statusCode: 500,
-      body: JSON.stringify("Something went wrong"),
+      body: JSON.stringify(error),
     };
   }
 };
@@ -98,10 +115,11 @@ export const feedback = async (
       return res;
     }
   } catch (e) {
-    console.log({ e });
+    const error = getErrorMessage(e);
+    console.error(`[feedback] - [500]: ${error}`);
     return {
       statusCode: 500,
-      body: JSON.stringify("Something went wrong"),
+      body: JSON.stringify(error),
     };
   }
 };
@@ -109,11 +127,11 @@ export const feedback = async (
 export const content = async (): Promise<APIGatewayProxyResult> => {
   try {
     const documents = await new SimpleDirectoryReader().loadData({
-      directoryPath: "./data",
+      directoryPath: './data',
     });
 
     const storageContext = await storageContextFromDefaults({
-      persistDir: "./storage",
+      persistDir: './storage',
     });
 
     await VectorStoreIndex.fromDocuments(documents, {
@@ -122,15 +140,16 @@ export const content = async (): Promise<APIGatewayProxyResult> => {
 
     const result = {
       statusCode: 200,
-      body: JSON.stringify("Successfully updated the index!"),
+      body: JSON.stringify('Successfully updated the index!'),
     };
 
     return result;
   } catch (e) {
-    console.log({ e });
+    const error = getErrorMessage(e);
+    console.error(`[content] - [500]: ${error}`);
     return {
       statusCode: 500,
-      body: JSON.stringify("Something went wrong"),
+      body: JSON.stringify(error),
     };
   }
 };
