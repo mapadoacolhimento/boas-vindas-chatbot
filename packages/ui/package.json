@@ -12,6 +12,7 @@
     "pre-commit": "lint-staged"
   },
   "dependencies": {
+    "@amplitude/analytics-browser": "^2.4.0",
     "@chakra-ui/icons": "^2.1.0",
     "@chakra-ui/next-js": "^2.1.5",
     "@chakra-ui/react": "^2.8.0",
