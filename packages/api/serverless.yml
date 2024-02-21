@@ -1,4 +1,4 @@
-service: aws-nodejs-chatbot-api
+service: iana-chatbot-api
 
 frameworkVersion: "3"
 useDotenv: true
@@ -15,6 +15,12 @@ custom:
       ignore: [".serverless/**/*", ".build"] # default ['.build', 'dist', 'node_modules']
   serverless-offline:
     httpPort: 5000
+  newRelic:
+    accountId: ${env:NEW_RELIC_ACCOUNT_ID}
+    apiKey: ${env:NEW_RELIC_API_KEY}
+    cloudWatchFilter: "*"
+    nrRegion: 'eu'
+    enableFunctionLogs: true
 
 provider:
   name: aws
@@ -87,3 +93,4 @@ functions:
 plugins:
   - serverless-offline
   - serverless-esbuild
+  - serverless-newrelic-lambda-layers

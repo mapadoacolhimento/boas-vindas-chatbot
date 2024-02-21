@@ -57,6 +57,9 @@ importers:
       serverless-esbuild:
         specifier: ^1.46.0
         version: 1.46.0(esbuild@0.19.2)
+      serverless-newrelic-lambda-layers:
+        specifier: ^5.0.1
+        version: 5.0.1(@types/serverless@3.12.22)(https-proxy-agent@5.0.1)(lodash@4.17.21)(node-fetch@2.7.0)(path@0.12.7)(semver@7.5.4)(serverless@3.34.0)
       serverless-offline:
         specifier: ^12.0.4
         version: 12.0.4(serverless@3.34.0)
@@ -4048,6 +4051,10 @@ packages:
     resolution: {integrity: sha512-cJRQXpObxfNKkFAZbJl2yjWtJCqELQIdShsogr1d2MilP8dKD9TE/nEKHkJgUNHdGKCQaf9HbIynuV2csLGVLg==}
     dev: true
 
+  /@types/serverless@3.12.22:
+    resolution: {integrity: sha512-h6U8jv22T0N+9mcKBK2p/gVmcrKW7trUdVNhGemm8bct0lx3i/7svt1x0o/q87nMtOJMcqSvqFz63c7jM1X2Ew==}
+    dev: true
+
   /@types/stack-utils@2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
     dev: true
@@ -6981,6 +6988,10 @@ packages:
       wrappy: 1.0.2
     dev: true
 
+  /inherits@2.0.3:
+    resolution: {integrity: sha512-x00IRNXNy63jwGkJmzPigoySHbaqpNuzKbBOmzK+g2OdZpQ9w+sxCN+VSB3ja7IAge2OP2qpfxTjeNcyjmW1uw==}
+    dev: true
+
   /inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
     dev: true
@@ -8920,6 +8931,13 @@ packages:
     resolution: {integrity: sha512-TX+cz8Jk+ta7IvRy2FAej8rdlbrP0+uBIkP/5DTODez/AuL/vSb30KuAdDxGVREXzn8QfAiu5mJYJ1XjbOhEPA==}
     dev: true
 
+  /path@0.12.7:
+    resolution: {integrity: sha512-aXXC6s+1w7otVF9UletFkFcDsJeO7lSZBPUQhtb5O0xJe8LtYhj/GxldoL09bBj9+ZmE2hNoHqQSFMN5fikh4Q==}
+    dependencies:
+      process: 0.11.10
+      util: 0.10.4
+    dev: true
+
   /pdf-parse@1.1.1:
     resolution: {integrity: sha512-v6ZJ/efsBpGrGGknjtq9J/oC8tZWq0KWL5vQrk2GlzLEQPUDB1ex+13Rmidl1neNN358Jn9EHZw5y07FFtaC7A==}
     engines: {node: '>=6.8.1'}
@@ -9037,6 +9055,11 @@ packages:
       fs2: 0.3.9
       memoizee: 0.4.15
       type: 2.7.2
+    dev: true
+
+  /process@0.11.10:
+    resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
+    engines: {node: '>= 0.6.0'}
     dev: true
 
   /promise-queue@2.2.5:
@@ -9550,6 +9573,26 @@ packages:
       p-map: 4.0.0
       ramda: 0.28.0
       semver: 7.5.4
+    dev: true
+
+  /serverless-newrelic-lambda-layers@5.0.1(@types/serverless@3.12.22)(https-proxy-agent@5.0.1)(lodash@4.17.21)(node-fetch@2.7.0)(path@0.12.7)(semver@7.5.4)(serverless@3.34.0):
+    resolution: {integrity: sha512-+YqZhuF0E0aqO+UMt9CI0bi82MR03R70hilu8G59JE7tDpCJW2s/7SRFnLK8ix/6JmbgtylyDzwEdK137ks1vA==}
+    peerDependencies:
+      '@types/serverless': ^3.12.7
+      https-proxy-agent: ^5.0.0
+      lodash: ^4.17.21
+      node-fetch: ^2.6.7
+      path: ^0.12.7
+      semver: ^7.5.4
+      serverless: ^3.19.0
+    dependencies:
+      '@types/serverless': 3.12.22
+      https-proxy-agent: 5.0.1(supports-color@8.1.1)
+      lodash: 4.17.21
+      node-fetch: 2.7.0
+      path: 0.12.7
+      semver: 7.5.4
+      serverless: 3.34.0
     dev: true
 
   /serverless-offline@12.0.4(serverless@3.34.0):
@@ -10501,6 +10544,12 @@ packages:
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    dev: true
+
+  /util@0.10.4:
+    resolution: {integrity: sha512-0Pm9hTQ3se5ll1XihRic3FDIku70C+iHUdT/W926rSgHV5QgXsYbKZN8MSC3tJtSkhuROzvsQjAaFENRXr+19A==}
+    dependencies:
+      inherits: 2.0.3
     dev: true
 
   /util@0.12.5:

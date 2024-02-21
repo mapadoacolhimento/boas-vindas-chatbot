@@ -10,11 +10,11 @@ concurrency:
 on:
   pull_request:
     branches:
-      - "**"
+      - '**'
 
   push:
     branches:
-      - "main"
+      - 'main'
 
 jobs:
   integration:
@@ -47,7 +47,7 @@ jobs:
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
       - name: Setup pnpm cache
-        uses: actions/cache@v3  
+        uses: actions/cache@v3
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -102,7 +102,7 @@ jobs:
 
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.9' 
+          python-version: '3.9'
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -121,7 +121,7 @@ jobs:
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
       - name: Setup pnpm cache
-        uses: actions/cache@v3  
+        uses: actions/cache@v3
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -141,6 +141,8 @@ jobs:
           AWS_REGION=${{ secrets.AWS_REGION }}
           AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }}
           NODE_ENV="production"
+          NEW_RELIC_ACCOUNT_ID=${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+          NEW_RELIC_API_KEY=${{ secrets.NEW_RELIC_API_KEY }}
           EOF
 
       - name: Copy .env file to api package
