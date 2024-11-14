@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import  prisma  from './db';
 
 export const FIRST_QUESTION =
   'Qual foi sua percepção ao interagir com a IAna?';
@@ -40,34 +41,13 @@ export default async function handler(
         user_id: Number(userId),
       },
     ];
-    const graphqlQuery = {
-      query: MUTATION,
-      variables: {
-        answers: answers,
-      },
-    };
+   
+    const iana_feedbacks = await prisma.iana_feedback.createMany( {
+      data : answers
+      
+    }); 
 
-    const graphqlApiRes = await fetch(
-      `${process.env.GRAPHQL_HTTP_URL}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-hasura-admin-secret': `${process.env.HASURA_SECRET}`,
-        },
-        body: JSON.stringify(graphqlQuery),
-      }
-    );
-
-    const data = await graphqlApiRes.json();
-
-    if (data && data.errors && data.errors.length > 0) {
-      throw new Error(
-        data.errors.map((e: any) => e.message).join(' ')
-      );
-    }
-
-    return res.status(200).json(data);
+    return res.status(200).json(iana_feedbacks);
   } catch (e: any) {
     console.error(e);
     return res
