@@ -6,17 +6,6 @@ export const FIRST_QUESTION =
 export const SECOND_QUESTION =
   'Em uma escala de 0 a 5, que nota você daria à sua experiência com a IAna? Por favor, use apenas números.';
 
-const MUTATION = `mutation mapa_do_acolhimento_iana_feedback($answers: [mapa_do_acolhimento_iana_feedback_insert_input!]!) {
-  insert_mapa_do_acolhimento_iana_feedback(objects: $answers) {
-    returning {
-      id
-      user_id
-      answer
-      created_at
-      question
-    }
-  }
-}`;
 
 export default async function handler(
   req: NextApiRequest,
