@@ -42,9 +42,5 @@
     "eslint-plugin-jest-dom": "^5.0.2",
     "eslint-plugin-testing-library": "^6.0.1",
     "jest-environment-jsdom": "^29.6.4"
-  },
-  "resolutions": {
-    "@emotion/react": "^11.x",
-    "@emotion/styled": "^11.x"
   }
 }
