@@ -10,7 +10,8 @@
     "test:ci": "jest --ci",
     "test": "jest --watch",
     "pre-commit": "lint-staged",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.4.0",
