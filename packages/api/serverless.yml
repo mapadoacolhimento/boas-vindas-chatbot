@@ -1,6 +1,6 @@
 service: iana-chatbot-api
 
-frameworkVersion: "3"
+frameworkVersion: "3.4.0"
 useDotenv: true
 
 custom:
