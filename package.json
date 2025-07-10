@@ -30,6 +30,6 @@
   "homepage": "https://github.com/mapadoacolhimento/boas-vindas-chatbot#readme",
   "engines": {
     "node": ">=20",
-    "pnpm": ">=7"
+    "pnpm": ">=9"
   }
 }
