@@ -89,7 +89,7 @@ jobs:
         run: find packages/api -type d -exec cp .env {} \;
 
       - name: Install serverless globally
-        run: pnpm add serverless@3.40.0 --global
+        run: pnpm add serverless@3.38.0 --global
 
       - name: Serverless AWS authentication
         run: sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
