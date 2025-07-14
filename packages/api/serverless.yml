@@ -1,6 +1,6 @@
 service: iana-chatbot-api
 
-frameworkVersion: "3.4.0"
+frameworkVersion: "4.17.1"
 useDotenv: true
 
 custom:
@@ -24,7 +24,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs22.x
+  runtime: nodejs20.x
   region: ${env:AWS_REGION}
   iamRoleStatements:
     - Effect: Allow
