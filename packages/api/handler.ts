@@ -21,7 +21,12 @@ function decodeBase64(encodedPayload) {
 }
 
 let chatEngine = null;
-createChatEngine().then((engine) => (chatEngine = engine));
+
+async function ensureChatEngine() {
+  if (!chatEngine) {
+    chatEngine = await createChatEngine();
+  }
+}
 
 async function chatHandler(
   event: APIGatewayProxyEvent,
@@ -38,40 +43,18 @@ async function chatHandler(
     chatHistory
   );
 
-  const result = {
+  return {
     statusCode: 200,
     body: JSON.stringify(response),
   };
-
-  return result;
-}
-
-const sleep = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
-
-async function waitForChatEngine(
-  event: APIGatewayProxyEvent,
-  prompt: ChatMessage[]
-) {
-  if (!chatEngine) {
-    await sleep(150);
-    return waitForChatEngine(event, prompt);
-  } else {
-    return chatHandler(event, prompt);
-  }
 }
 
 export const chat = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   try {
-    if (chatEngine) {
-      const res = await chatHandler(event, QA_PROMPT);
-      return res;
-    } else {
-      const res = await waitForChatEngine(event, QA_PROMPT);
-      return res;
-    }
+    await ensureChatEngine();
+    return await chatHandler(event, QA_PROMPT);
   } catch (e) {
     const error = getErrorMessage(e);
     console.error(`[chat] - [500]: ${error}`);
@@ -86,13 +69,8 @@ export const assessment = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   try {
-    if (chatEngine) {
-      const res = await chatHandler(event, ASSESSMENT_PROMPT);
-      return res;
-    } else {
-      const res = await waitForChatEngine(event, ASSESSMENT_PROMPT);
-      return res;
-    }
+    await ensureChatEngine();
+    return await chatHandler(event, ASSESSMENT_PROMPT);
   } catch (e) {
     const error = getErrorMessage(e);
     console.error(`[assessment] - [500]: ${error}`);
@@ -107,13 +85,8 @@ export const feedback = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   try {
-    if (chatEngine) {
-      const res = await chatHandler(event, FEEDBACK_PROMPT);
-      return res;
-    } else {
-      const res = await waitForChatEngine(event, FEEDBACK_PROMPT);
-      return res;
-    }
+    await ensureChatEngine();
+    return await chatHandler(event, FEEDBACK_PROMPT);
   } catch (e) {
     const error = getErrorMessage(e);
     console.error(`[feedback] - [500]: ${error}`);
@@ -138,12 +111,10 @@ export const content = async (): Promise<APIGatewayProxyResult> => {
       storageContext,
     });
 
-    const result = {
+    return {
       statusCode: 200,
       body: JSON.stringify('Successfully updated the index!'),
     };
-
-    return result;
   } catch (e) {
     const error = getErrorMessage(e);
     console.error(`[content] - [500]: ${error}`);
