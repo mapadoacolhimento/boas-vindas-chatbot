@@ -24,7 +24,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs22.x
+  runtime: nodejs20.x
   region: ${env:AWS_REGION}
   iamRoleStatements:
     - Effect: Allow
