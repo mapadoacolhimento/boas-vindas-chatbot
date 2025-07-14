@@ -50,6 +50,11 @@ jobs:
 
   api-deployment:
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [20.x]
+
     needs:
       - integration
     if: always() && needs.integration.result == 'success'
