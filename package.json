@@ -28,6 +28,7 @@
     "url": "https://github.com/mapadoacolhimento/boas-vindas-chatbot/issues"
   },
   "homepage": "https://github.com/mapadoacolhimento/boas-vindas-chatbot#readme",
+  "type": "module",
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"

@@ -6,7 +6,8 @@ useDotenv: true
 custom:
   bucketName: ${env:AWS_S3_BUCKET_NAME}
   esbuild:
-    format: cjs
+    format: esm
+    target: "node20"  
     minify: true
     bundle: true
     external:
