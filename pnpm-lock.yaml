@@ -65,13 +65,13 @@ importers:
         version: 12.0.4(serverless@3.40.0)
       tslint:
         specifier: ^5.5.0
-        version: 5.20.1(typescript@2.9.2)
+        version: 5.20.1(typescript@4.9.5)
       tslint-config-standard:
         specifier: ^6.0.1
-        version: 6.0.1(tslint@5.20.1(typescript@2.9.2))(typescript@2.9.2)
+        version: 6.0.1(tslint@5.20.1(typescript@4.9.5))(typescript@4.9.5)
       typescript:
-        specifier: ^2.4.2
-        version: 2.9.2
+        specifier: ^4.9.5
+        version: 4.9.5
 
   packages/ui:
     dependencies:
@@ -5739,8 +5739,8 @@ packages:
   typed-array-length@1.0.4:
     resolution: {integrity: sha512-KjZypGq+I/H7HI5HlOoGHkWUUGq+Q0TPhQurLbyrVrvnKTBgzLhIJ7j6J/XTQOi0d1RjyZ0wdas8bKs2p0x3Ng==}
 
-  typescript@2.9.2:
-    resolution: {integrity: sha512-Gr4p6nFNaoufRIY4NMdpQRNmgxVIGMs4Fcu/ujdYk3nAZqk7supzBE9idmvfZIlH/Cuj//dvi+019qEue9lV0w==}
+  typescript@4.9.5:
+    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
     hasBin: true
 
@@ -13975,23 +13975,23 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tslint-config-standard@6.0.1(tslint@5.20.1(typescript@2.9.2))(typescript@2.9.2):
+  tslint-config-standard@6.0.1(tslint@5.20.1(typescript@4.9.5))(typescript@4.9.5):
     dependencies:
-      tslint-eslint-rules: 4.1.1(tslint@5.20.1(typescript@2.9.2))(typescript@2.9.2)
+      tslint-eslint-rules: 4.1.1(tslint@5.20.1(typescript@4.9.5))(typescript@4.9.5)
     transitivePeerDependencies:
       - tslint
       - typescript
 
-  tslint-eslint-rules@4.1.1(tslint@5.20.1(typescript@2.9.2))(typescript@2.9.2):
+  tslint-eslint-rules@4.1.1(tslint@5.20.1(typescript@4.9.5))(typescript@4.9.5):
     dependencies:
       doctrine: 0.7.2
       tslib: 1.14.1
-      tslint: 5.20.1(typescript@2.9.2)
-      tsutils: 1.9.1(typescript@2.9.2)
+      tslint: 5.20.1(typescript@4.9.5)
+      tsutils: 1.9.1(typescript@4.9.5)
     transitivePeerDependencies:
       - typescript
 
-  tslint@5.20.1(typescript@2.9.2):
+  tslint@5.20.1(typescript@4.9.5):
     dependencies:
       '@babel/code-frame': 7.22.10
       builtin-modules: 1.1.1
@@ -14005,17 +14005,17 @@ snapshots:
       resolve: 1.22.4
       semver: 5.7.2
       tslib: 1.14.1
-      tsutils: 2.29.0(typescript@2.9.2)
-      typescript: 2.9.2
+      tsutils: 2.29.0(typescript@4.9.5)
+      typescript: 4.9.5
 
-  tsutils@1.9.1(typescript@2.9.2):
+  tsutils@1.9.1(typescript@4.9.5):
     dependencies:
-      typescript: 2.9.2
+      typescript: 4.9.5
 
-  tsutils@2.29.0(typescript@2.9.2):
+  tsutils@2.29.0(typescript@4.9.5):
     dependencies:
       tslib: 1.14.1
-      typescript: 2.9.2
+      typescript: 4.9.5
 
   tsutils@3.21.0(typescript@5.0.4):
     dependencies:
@@ -14069,7 +14069,7 @@ snapshots:
       for-each: 0.3.3
       is-typed-array: 1.1.12
 
-  typescript@2.9.2: {}
+  typescript@4.9.5: {}
 
   typescript@5.0.4: {}
 
