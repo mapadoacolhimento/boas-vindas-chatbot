@@ -32,5 +32,10 @@
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
+  },
+  "pnpm": {
+    "overrides": {
+      "node-fetch": "2.6.7"
+    }
   }
 }

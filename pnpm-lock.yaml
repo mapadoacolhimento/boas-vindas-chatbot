@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  node-fetch: 2.6.7
+
 importers:
 
   .:
@@ -4675,8 +4678,8 @@ packages:
   node-ensure@0.0.0:
     resolution: {integrity: sha512-DRI60hzo2oKN1ma0ckc6nQWlHU69RH6xN0sjQTjMpChPfTYvKZdcQFfdYK2RWbJcKyUizSIy/l8OTGxMAM1QDw==}
 
-  node-fetch@2.7.0:
-    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+  node-fetch@2.6.7:
+    resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
       encoding: ^0.1.0
@@ -5317,7 +5320,7 @@ packages:
       '@types/serverless': ^3.12.7
       https-proxy-agent: ^5.0.0
       lodash: ^4.17.21
-      node-fetch: ^2.6.7
+      node-fetch: 2.6.7
       path: ^0.12.7
       semver: ^7.5.4
       serverless: ^3.19.0
@@ -6099,7 +6102,7 @@ snapshots:
       digest-fetch: 1.3.0
       form-data-encoder: 1.7.2
       formdata-node: 4.4.1
-      node-fetch: 2.7.0
+      node-fetch: 2.6.7
     transitivePeerDependencies:
       - encoding
 
@@ -8895,7 +8898,7 @@ snapshots:
   '@notionhq/client@2.2.13':
     dependencies:
       '@types/node-fetch': 2.6.4
-      node-fetch: 2.7.0
+      node-fetch: 2.6.7
     transitivePeerDependencies:
       - encoding
 
@@ -8945,7 +8948,7 @@ snapshots:
       memoizee: 0.4.15
       ncjsm: 4.3.2
       node-dir: 0.1.17
-      node-fetch: 2.7.0
+      node-fetch: 2.6.7
       open: 7.4.2
       semver: 7.6.2
       simple-git: 3.19.1(supports-color@8.1.1)
@@ -9015,7 +9018,7 @@ snapshots:
       memoizee: 0.4.15
       ms: 2.1.3
       ncjsm: 4.3.2
-      node-fetch: 2.7.0
+      node-fetch: 2.6.7
       open: 8.4.2
       p-event: 4.2.0
       supports-color: 8.1.1
@@ -9053,7 +9056,7 @@ snapshots:
       memoizee: 0.4.15
       ms: 2.1.3
       ncjsm: 4.3.2
-      node-fetch: 2.7.0
+      node-fetch: 2.6.7
       open: 8.4.2
       p-event: 4.2.0
       supports-color: 8.1.1
@@ -12870,7 +12873,7 @@ snapshots:
 
   node-ensure@0.0.0: {}
 
-  node-fetch@2.7.0:
+  node-fetch@2.6.7:
     dependencies:
       whatwg-url: 5.0.0
 
@@ -12906,7 +12909,7 @@ snapshots:
       ext: 1.7.0
       fs2: 0.3.9
       memoizee: 0.4.15
-      node-fetch: 2.7.0
+      node-fetch: 2.6.7
       semver: 7.6.2
       type: 2.7.2
       validate-npm-package-name: 3.0.0
@@ -13005,7 +13008,7 @@ snapshots:
       digest-fetch: 1.3.0
       form-data-encoder: 1.7.2
       formdata-node: 4.4.1
-      node-fetch: 2.7.0
+      node-fetch: 2.6.7
     transitivePeerDependencies:
       - encoding
 
@@ -13547,7 +13550,7 @@ snapshots:
       jsonschema: 1.4.1
       jszip: 3.10.1
       luxon: 3.4.3
-      node-fetch: 3.3.2
+      node-fetch: 2.6.7
       node-schedule: 2.1.1
       object.hasown: 1.1.3
       p-memoize: 7.1.1
@@ -13606,7 +13609,7 @@ snapshots:
       lodash: 4.17.21
       memoizee: 0.4.15
       micromatch: 4.0.7
-      node-fetch: 2.7.0
+      node-fetch: 2.6.7
       npm-registry-utilities: 1.0.0
       object-hash: 3.0.0
       open: 8.4.2
