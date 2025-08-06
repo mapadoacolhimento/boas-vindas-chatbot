@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
 
     steps:
       - name: Checkout repository
@@ -30,7 +30,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 9
           run_install: false
 
       - name: Install Node.js
@@ -49,6 +49,11 @@ jobs:
         run: pnpm run build
 
   api-deployment:
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
     runs-on: ubuntu-latest
     needs:
       - integration
@@ -59,7 +64,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 9
           run_install: false
 
       - name: Install Node.js
@@ -89,7 +94,7 @@ jobs:
         run: find packages/api -type d -exec cp .env {} \;
 
       - name: Install serverless globally
-        run: pnpm add serverless@3.38.0 --global
+        run: pnpm add serverless@3.40.0 --global
 
       - name: Serverless AWS authentication
         run: sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
