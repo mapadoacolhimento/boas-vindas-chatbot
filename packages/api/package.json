@@ -30,6 +30,12 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.410.0",
     "dotenv-safe": "^8.2.0",
-    "llamaindex": "^0.0.27"
+    "llamaindex": "^0.0.27",
+    "node-fetch": "2.7.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "node-fetch": "2.7.0"
+    }
   }
 }
