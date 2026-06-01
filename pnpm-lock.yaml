@@ -61,11 +61,11 @@ importers:
         specifier: ^1.55.1
         version: 1.55.1(esbuild@0.19.2)
       serverless-newrelic-lambda-layers:
-        specifier: ^5.4.0
-        version: 5.4.0(@types/serverless@3.12.22)(https-proxy-agent@5.0.1)(lodash@4.17.21)(node-fetch@2.7.0)(path@0.12.7)(semver@7.7.2)(serverless@3.40.0)
+        specifier: ^5.15.0
+        version: 5.15.0(@types/serverless@3.12.22)(https-proxy-agent@5.0.1)(lodash@4.17.21)(node-fetch@2.7.0)(path@0.12.7)(semver@7.7.2)(serverless@3.40.0)
       serverless-offline:
-        specifier: ^13.2.1
-        version: 13.2.1(serverless@3.40.0)
+        specifier: ^13.9.0
+        version: 13.9.0(serverless@3.40.0)
       tslint:
         specifier: ^5.5.0
         version: 5.20.1(typescript@2.9.2)
@@ -1674,6 +1674,18 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@jsep-plugin/assignment@1.3.0':
+    resolution: {integrity: sha512-VVgV+CXrhbMI3aSusQyclHkenWSAm95WaiKrMxRFam3JSUiIaQjoMIw2sEs/OX4XifnqeQUN4DYbJjlA8EfktQ==}
+    engines: {node: '>= 10.16.0'}
+    peerDependencies:
+      jsep: ^0.4.0||^1.0.0
+
+  '@jsep-plugin/regex@1.0.4':
+    resolution: {integrity: sha512-q7qL4Mgjs1vByCaTnDFcBnV9HS7GVPJX5vyVoCgZHNSC9rjwIlmbXG5sUuorR5ndfHAIlJ8pVStxvjXHbNvtUg==}
+    engines: {node: '>= 10.16.0'}
+    peerDependencies:
+      jsep: ^0.4.0||^1.0.0
+
   '@kwsites/file-exists@1.1.1':
     resolution: {integrity: sha512-m9/5YGR18lIwxSFDwfE3oA7bWuq9kdau6ugN4H2rJeyhFQZcG9AgSHkQtSD15a8WvTgfz9aikZMrKPHvbpqFiw==}
 
@@ -2461,9 +2473,6 @@ packages:
 
   '@types/responselike@1.0.0':
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
-
-  '@types/retry@0.12.2':
-    resolution: {integrity: sha512-XISRgDJ2Tc5q4TRqvgJtzsRkFYNJzZrhTdtMoGVBttwzzQJkPnS3WWTFc7kuDRoPtPakl+T+OfdEUjYJj7Jbow==}
 
   '@types/scheduler@0.16.3':
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
@@ -4397,10 +4406,6 @@ packages:
     resolution: {integrity: sha512-5KoIu2Ngpyek75jXodFvnafB6DJgr3u8uuK0LEZJjrU19DrMD3EVERaR8sjz8CCGgpZvxPl9SuE1GMVPFHx1mw==}
     engines: {node: '>= 0.4'}
 
-  is-network-error@1.1.0:
-    resolution: {integrity: sha512-tUdRRAnhT+OtCZR/LxZelH/C7QtjtFrTu5tXCA8pl55eTUElUHT+GPYV8MBMBvea/j+NxQqVt3LbWMRir7Gx9g==}
-    engines: {node: '>=16'}
-
   is-number-object@1.0.7:
     resolution: {integrity: sha512-k1U0IRzLMo7ZlYIfzRu23Oh6MiIFasgpb9X76eqfFZAqwH44UI4KTBvBYIZ1dSL9ZzChTB9ShHfLkR4pdW5krQ==}
     engines: {node: '>= 0.4'}
@@ -4750,6 +4755,10 @@ packages:
       canvas:
         optional: true
 
+  jsep@1.4.0:
+    resolution: {integrity: sha512-B7qPcEVE3NVkmSJbaYxvv4cHkVW7DQsZz13pUMrfS8z8Q/BuShN+gcTXrUlPiGqM2/t/EEaI030bpxMqY8gMlw==}
+    engines: {node: '>= 10.16.0'}
+
   jsesc@2.5.2:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==}
     engines: {node: '>=4'}
@@ -4797,9 +4806,10 @@ packages:
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
 
-  jsonpath-plus@7.2.0:
-    resolution: {integrity: sha512-zBfiUPM5nD0YZSBT/o/fbCUlCcepMIdP0CJZxM1+KgA4f2T206f6VAg9e7mX35+KlMaIc5qXW34f3BnwJ3w+RA==}
-    engines: {node: '>=12.0.0'}
+  jsonpath-plus@10.4.0:
+    resolution: {integrity: sha512-T92WWatJXmhBbKsgH/0hl+jxjdXrifi5IKeMY02DWggRxX0UElcbVzPlmgLTbvsPeW1PasQ6xE2Q75stkhGbsA==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
 
   jsonschema@1.5.0:
     resolution: {integrity: sha512-K+A9hhqbn0f3pJX17Q/7H6yQfD/5OXgdrR5UE12gMXCiN9D5Xq2o5mddV2QEcX/bjla99ASsAAQUyMCCRWAEhw==}
@@ -5314,10 +5324,6 @@ packages:
     resolution: {integrity: sha512-DZ/bONJILHkQ721hSr/E9wMz5Am/OTJ9P6LhLFo2Tu+jL8044tgc9LwHO8g4PiaYePnlVVRAJcKmgy8J9MVFrA==}
     engines: {node: '>=14.16'}
 
-  p-retry@6.2.1:
-    resolution: {integrity: sha512-hEt02O4hUct5wtwg4H4KcWgDdm+l1bOaEy/hWzd8xtXB9BqxTWBBhb+2ImAtH4Cv4rPjV76xN3Zumqk3k3AhhQ==}
-    engines: {node: '>=16.17'}
-
   p-timeout@3.2.0:
     resolution: {integrity: sha512-rhIwUycgwwKcP9yTOOFK/AKsAopjjCakVqLHePO3CC6Mir1Z99xT+R63jZxAT5lFZLa2inS5h+ZS2GvR99/FBg==}
     engines: {node: '>=8'}
@@ -5715,10 +5721,6 @@ packages:
     resolution: {integrity: sha512-I9fPXU9geO9bHOt9pHHOhOkYerIMsmVaWB0rA2AI9ERh/+x/i7MV5HKBNrg+ljO5eoPVgCcnFuRjJ9uH6I/3eg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  retry@0.13.1:
-    resolution: {integrity: sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==}
-    engines: {node: '>= 4'}
-
   reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
@@ -5818,8 +5820,9 @@ packages:
       esbuild-node-externals:
         optional: true
 
-  serverless-newrelic-lambda-layers@5.4.0:
-    resolution: {integrity: sha512-DG4kh5uoxL05u4skJt5iBT1a1BPztPtTmDXCIsrVm2/IoEmwfmnLcWXFVW1qxN0zDKTFpdstQ/ABjPssG55V3w==}
+  serverless-newrelic-lambda-layers@5.15.0:
+    resolution: {integrity: sha512-InWitXntsKtXflv+pGwyTr52UYPVmrYHK9YQyq3tofmB+yoHMfVpbKOJDlKqCap/w7YlmmvVKkcuxTWHpQtM2A==}
+    engines: {node: '>=16.0.0'}
     peerDependencies:
       '@types/serverless': ^3.12.7
       https-proxy-agent: ^5.0.0
@@ -5827,10 +5830,10 @@ packages:
       node-fetch: ^2.6.7
       path: ^0.12.7
       semver: ^7.5.4
-      serverless: ^3.19.0
+      serverless: 4.x || 3.x
 
-  serverless-offline@13.2.1:
-    resolution: {integrity: sha512-LN8TDVJ0Yjzwnte5aOADzjINmhFUvLqnhDYdymaaVykwpSkcR1BEBa/IESWTgzpG7SMrW7GS4hGCq0ZPF0dDHg==}
+  serverless-offline@13.9.0:
+    resolution: {integrity: sha512-r/GU1FcgUbrhUzPJ5BOpni6JXhHVhxksYQH8d3S4alx4IZQo3E9Q8fT2z8Mvh+d0rfQ1Y0kHvyeKJ126rleGfg==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       serverless: ^3.2.0
@@ -7261,7 +7264,7 @@ snapshots:
       '@smithy/util-defaults-mode-node': 2.0.9
       '@smithy/util-retry': 2.0.0
       '@smithy/util-utf8': 2.0.0
-      tslib: 2.6.2
+      tslib: 2.8.1
     transitivePeerDependencies:
       - aws-crt
 
@@ -7863,7 +7866,7 @@ snapshots:
       '@smithy/util-defaults-mode-node': 2.0.9
       '@smithy/util-retry': 2.0.0
       '@smithy/util-utf8': 2.0.0
-      tslib: 2.6.2
+      tslib: 2.8.1
     transitivePeerDependencies:
       - aws-crt
 
@@ -9503,6 +9506,14 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
+  '@jsep-plugin/assignment@1.3.0(jsep@1.4.0)':
+    dependencies:
+      jsep: 1.4.0
+
+  '@jsep-plugin/regex@1.0.4(jsep@1.4.0)':
+    dependencies:
+      jsep: 1.4.0
+
   '@kwsites/file-exists@1.1.1(supports-color@8.1.1)':
     dependencies:
       debug: 4.4.1(supports-color@8.1.1)
@@ -9846,7 +9857,7 @@ snapshots:
       '@aws-crypto/crc32': 3.0.0
       '@smithy/types': 2.3.0
       '@smithy/util-hex-encoding': 2.0.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@smithy/eventstream-codec@4.0.4':
     dependencies:
@@ -10354,7 +10365,7 @@ snapshots:
 
   '@smithy/util-uri-escape@2.0.0':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@smithy/util-uri-escape@4.0.0':
     dependencies:
@@ -10391,7 +10402,7 @@ snapshots:
 
   '@swc/helpers@0.4.14':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@swc/helpers@0.4.36':
     dependencies:
@@ -10577,8 +10588,6 @@ snapshots:
   '@types/responselike@1.0.0':
     dependencies:
       '@types/node': 7.10.14
-
-  '@types/retry@0.12.2': {}
 
   '@types/scheduler@0.16.3': {}
 
@@ -12967,8 +12976,6 @@ snapshots:
 
   is-negative-zero@2.0.3: {}
 
-  is-network-error@1.1.0: {}
-
   is-number-object@1.0.7:
     dependencies:
       has-tostringtag: 1.0.0
@@ -13606,6 +13613,8 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  jsep@1.4.0: {}
+
   jsesc@2.5.2: {}
 
   json-buffer@3.0.1: {}
@@ -13654,7 +13663,11 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
-  jsonpath-plus@7.2.0: {}
+  jsonpath-plus@10.4.0:
+    dependencies:
+      '@jsep-plugin/assignment': 1.3.0(jsep@1.4.0)
+      '@jsep-plugin/regex': 1.0.4(jsep@1.4.0)
+      jsep: 1.4.0
 
   jsonschema@1.5.0: {}
 
@@ -14229,12 +14242,6 @@ snapshots:
       mimic-fn: 4.0.0
       type-fest: 3.13.1
 
-  p-retry@6.2.1:
-    dependencies:
-      '@types/retry': 0.12.2
-      is-network-error: 1.1.0
-      retry: 0.13.1
-
   p-timeout@3.2.0:
     dependencies:
       p-finally: 1.0.0
@@ -14619,8 +14626,6 @@ snapshots:
       onetime: 5.1.2
       signal-exit: 3.0.7
 
-  retry@0.13.1: {}
-
   reusify@1.0.4: {}
 
   rfdc@1.3.0: {}
@@ -14730,7 +14735,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  serverless-newrelic-lambda-layers@5.4.0(@types/serverless@3.12.22)(https-proxy-agent@5.0.1)(lodash@4.17.21)(node-fetch@2.7.0)(path@0.12.7)(semver@7.7.2)(serverless@3.40.0):
+  serverless-newrelic-lambda-layers@5.15.0(@types/serverless@3.12.22)(https-proxy-agent@5.0.1)(lodash@4.17.21)(node-fetch@2.7.0)(path@0.12.7)(semver@7.7.2)(serverless@3.40.0):
     dependencies:
       '@types/serverless': 3.12.22
       https-proxy-agent: 5.0.1(supports-color@8.1.1)
@@ -14740,13 +14745,12 @@ snapshots:
       semver: 7.7.2
       serverless: 3.40.0
 
-  serverless-offline@13.2.1(serverless@3.40.0):
+  serverless-offline@13.9.0(serverless@3.40.0):
     dependencies:
       '@aws-sdk/client-lambda': 3.859.0
       '@hapi/boom': 10.0.1
       '@hapi/h2o2': 10.0.4
       '@hapi/hapi': 21.4.2
-      '@serverless/utils': 6.15.0
       array-unflat-js: 0.1.3
       boxen: 7.1.1
       chalk: 5.5.0
@@ -14757,20 +14761,18 @@ snapshots:
       java-invoke-local: 0.0.6
       jose: 5.10.0
       js-string-escape: 1.0.1
-      jsonpath-plus: 7.2.0
+      jsonpath-plus: 10.4.0
       jsonschema: 1.5.0
       jszip: 3.10.1
       luxon: 3.7.1
       node-schedule: 2.1.1
       p-memoize: 7.1.1
-      p-retry: 6.2.1
       serverless: 3.40.0
       velocityjs: 2.1.5
       ws: 8.18.3
     transitivePeerDependencies:
       - aws-crt
       - bufferutil
-      - encoding
       - supports-color
       - utf-8-validate
 

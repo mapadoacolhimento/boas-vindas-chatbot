@@ -21,8 +21,8 @@
     "esbuild": "^0.19.2",
     "serverless": "^3.40.0",
     "serverless-esbuild": "^1.55.1",
-    "serverless-newrelic-lambda-layers": "^5.4.0",
-    "serverless-offline": "^13.2.1",
+    "serverless-newrelic-lambda-layers": "^5.15.0",
+    "serverless-offline": "^13.9.0",
     "tslint": "^5.5.0",
     "tslint-config-standard": "^6.0.1",
     "typescript": "^2.4.2"
